@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>星の翼 攻略ガイド</title>
+    <meta
+      name="description"
+      content="星の翼を始めた人からキャラを深掘りしたい人まで使える、初心者ガイド兼キャラデータベースです。"
+    />
+    <link rel="stylesheet" href="styles.css?v=20260603publicsplit1" />
+  </head>
+  <body>
+    <header class="site-header" id="top">
+      <a class="brand" href="#top" aria-label="星の翼ガイド トップへ">
+        <span class="brand-mark">S</span>
+        <span>星の翼ガイド</span>
+      </a>
+      <nav class="nav" aria-label="主要ナビゲーション">
+        <a href="#contributors">ご協力様</a>
+        <a href="streamers.html">配信者</a>
+        <a href="characters.html">キャラDB</a>
+        <a href="videos.html">動画</a>
+        <a href="#channels">チャンネル</a>
+        <a href="tools.html">ツール</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero guide-hero" aria-labelledby="hero-title">
+        <img src="assets/hero-starward-guide.webp" alt="" class="hero-image" />
+        <div class="hero-shade"></div>
+        <div class="hero-content">
+          <p class="eyebrow">Guide + Wiki + Database</p>
+          <h1 id="hero-title">星の翼、まず勝ち方から読む。</h1>
+          <p class="hero-copy">
+            初心者向けの判断基準、キャラ別の武装表、動画への導線をまとめた非公式攻略HPです。
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="characters.html">キャラDBを見る</a>
+            <a class="button ghost" href="tools.html">ツール</a>
+            <a class="button ghost" href="#contributors">ご協力様</a>
+            <a class="button ghost" href="streamers.html">配信者紹介</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="home-dashboard" aria-label="攻略入口">
+        <a href="characters.html">
+          <span>DB</span>
+          <strong>キャラを探す</strong>
+          <small>コスト別・検索・武装表</small>
+        </a>
+        <a href="videos.html">
+          <span>Video</span>
+          <strong>動画で確認</strong>
+          <small>公式・キャラ別検索</small>
+        </a>
+        <a href="streamers.html">
+          <span>Live</span>
+          <strong>配信者を見る</strong>
+          <small>配信メインのチャンネル紹介</small>
+        </a>
+        <a href="tools.html">
+          <span>Tools</span>
+          <strong>攻略ツール</strong>
+          <small>更新まとめ・抽選・2v2・Pick/Ban</small>
+        </a>
+      </section>
+
+      <section class="section tight channel-section" id="channels">
+        <div class="section-heading">
+          <p class="eyebrow">Video Channels</p>
+          <h2>動画チャンネル</h2>
+          <p class="section-copy">
+            公式PV、更新告知、キャラ解説、対戦動画を探す入口です。
+          </p>
+        </div>
+        <div class="official-feed-grid">
+          <article class="official-feed-card">
+            <div class="section-heading compact-heading">
+              <p class="eyebrow">Official YouTube</p>
+              <h3>公式最新動画</h3>
+            </div>
+            <div class="latest-video-frame compact" id="official-latest-video-card">
+              <a class="latest-video-card-link" href="https://www.youtube.com/watch?v=A6jKYp6uxY8" target="_blank" rel="noreferrer">
+                <img src="https://i.ytimg.com/vi/A6jKYp6uxY8/hqdefault.jpg" alt="" />
+                <span>Youtubeで開く</span>
+              </a>
+            </div>
+            <p id="official-latest-card-title">『星の翼』【星導使の日常】ヴォイドセーバー編</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section tight tools-section" id="tools">
+        <div class="section-heading">
+          <p class="eyebrow">Tools</p>
+          <h2>攻略ツール</h2>
+          <p class="section-copy">
+            キャラ別アップデート、ランダム抽選、2v2確認、Pick/BanをこのHPから開けます。
+            重いページは別ページで開くので、トップは軽いままです。
+          </p>
+        </div>
+        <div class="tool-grid">
+          <a class="tool-card" data-block-key="tool-updates" href="tools/starward_updates_by_character.html">
+            <img src="tools/assets/hub-thumbs/updates.webp" alt="" />
+            <span class="tool-card-body">
+              <small>Update</small>
+              <strong>キャラ別アップデート</strong>
+              <span>公式更新内容をキャラごとに整理。</span>
+            </span>
+          </a>
+          <a class="tool-card" data-block-key="tool-roulette" href="tools/apps/allstar/index.html">
+            <img src="tools/assets/hub-thumbs/roulette.webp" alt="" />
+            <span class="tool-card-body">
+              <small>Random</small>
+              <strong>STARWARD ROULETTE</strong>
+              <span>キャラ抽選やランダム選出に使うルーレット。</span>
+            </span>
+          </a>
+          <a class="tool-card" data-block-key="tool-babel" href="tools/apps/babel/index.html">
+            <img src="tools/assets/hub-thumbs/babel.webp" alt="" />
+            <span class="tool-card-body">
+              <small>2v2</small>
+              <strong>Starward 2v2</strong>
+              <span>チーム構成や2v2の確認に使うツール。</span>
+            </span>
+          </a>
+          <a class="tool-card" data-block-key="tool-banpick" href="tools/apps/banpick/index.html">
+            <img src="tools/assets/hub-thumbs/banpick.webp" alt="" />
+            <span class="tool-card-body">
+              <small>Ban/Pick</small>
+              <strong>Pick/Ban Board</strong>
+              <span>対戦前のPick/Banを盤面で管理できます。</span>
+            </span>
+          </a>
+        </div>
+        <div class="section-link">
+          <a class="button ghost" href="tools/starward_updates_by_character_summary.html">概要まとめを見る</a>
+          <a class="button ghost" href="tools/starward_updates_by_character_2024plus.html">テキストまとめを見る</a>
+        </div>
+      </section>
+
+      <section class="section split-band" id="contributors">
+        <div class="section-heading">
+          <p class="eyebrow">Special Thanks</p>
+          <h2>ご協力様</h2>
+          <p class="section-copy">攻略動画、検証、情報提供でお世話になっている方のYouTubeチャンネルです。</p>
+        </div>
+        <div class="video-grid channel-grid" id="contributors-list"></div>
+        <div class="contributor-manager" id="contributors-manager" aria-label="ご協力様チャンネル管理" data-admin-panel>
+          <div class="contributor-manager-head">
+            <div>
+              <p class="eyebrow">Edit Special Thanks</p>
+              <h3>ご協力様チャンネル管理</h3>
+            </div>
+            <button type="button" data-contributor-clear>入力クリア</button>
+          </div>
+          <form class="contributor-form">
+            <label>
+              チャンネル名
+              <input type="text" name="name" placeholder="例: 投稿者名 / チャンネル名" required />
+            </label>
+            <label>
+              チャンネルURL
+              <input type="url" name="url" placeholder="https://www.youtube.com/@..." required />
+            </label>
+            <label>
+              アイコンURL
+              <input type="url" name="iconUrl" placeholder="未入力なら自動アイコン" />
+            </label>
+            <button type="submit" data-contributor-submit>追加</button>
+          </form>
+          <div class="contributor-edit-list" data-contributor-edit-list></div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="footer">
+      <p>
+        Fan-made guide. データ参照:
+        <a href="https://w.atwiki.jp/starward/" target="_blank" rel="noreferrer">星の翼(Starward) 日本語wiki</a>
+      </p>
+    </footer>
+    <script src="home-feed.js?v=20260602nox1"></script>
+    <script src="script.js?v=20260603publicsplit1"></script>
+  </body>
+</html>
+
+
+
+
+
+
+
+

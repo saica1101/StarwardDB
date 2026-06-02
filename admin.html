@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>管理入口 | 星の翼ガイド</title>
+    <meta name="robots" content="noindex,nofollow" />
+    <link rel="stylesheet" href="styles.css?v=20260603publicsplit1" />
+  </head>
+  <body class="site-admin admin-locked">
+    <div class="admin-gate" id="admin-gate">
+      <div class="notice-card">
+        <p class="eyebrow">Admin Only</p>
+        <h1>管理入口</h1>
+        <p>公開ページとは別の編集用入口です。管理パスワードを入力してください。</p>
+        <form id="admin-gate-form">
+          <label>
+            パスワード
+            <input id="admin-gate-password" type="password" autocomplete="current-password" />
+          </label>
+          <button class="button primary" type="submit">開く</button>
+        </form>
+      </div>
+    </div>
+    <header class="site-header" id="top">
+      <a class="brand" href="index.html" aria-label="星の翼ガイド トップへ">
+        <span class="brand-mark">S</span>
+        <span>星の翼ガイド</span>
+      </a>
+      <nav class="nav" aria-label="管理ナビゲーション">
+        <a href="index.html">公開トップ</a>
+        <a href="editor.html">武装編集</a>
+        <a href="tools/starward_updates_by_character.html?admin=1">アプデ編集</a>
+        <a href="videos.html?admin=1">動画管理</a>
+        <a href="streamers.html?admin=1">配信者管理</a>
+        <a href="index.html?admin=1#contributors">ご協力様管理</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="page-hero compact">
+        <div class="page-hero-inner">
+          <p class="eyebrow">Admin</p>
+          <h1>管理入口</h1>
+          <p>公開ページに管理UIを常時出さないための入口です。公開時はこのページをリンクしない運用にしてください。</p>
+        </div>
+      </section>
+
+      <section class="section tight">
+        <div class="section-heading">
+          <p class="eyebrow">Public Data Editors</p>
+          <h2>公開データ編集</h2>
+          <p class="section-copy">公開ページに表示される3つのデータを編集します。保存すると対応するJSONへ反映されます。</p>
+        </div>
+        <div class="tool-grid">
+          <a class="tool-card" href="index.html?admin=1#contributors">
+            <span class="tool-card-body">
+              <small>contributors-data.json</small>
+              <strong>ご協力様</strong>
+              <span>トップページのご協力様チャンネル欄を編集します。</span>
+            </span>
+          </a>
+          <a class="tool-card" href="streamers.html?admin=1">
+            <span class="tool-card-body">
+              <small>streamers-data.json</small>
+              <strong>配信者紹介</strong>
+              <span>配信中心の方を紹介するページを編集します。</span>
+            </span>
+          </a>
+          <a class="tool-card" href="videos.html?admin=1">
+            <span class="tool-card-body">
+              <small>video-library-data.json</small>
+              <strong>動画リンク集</strong>
+              <span>キャラ別動画、投稿者、チャンネル情報を編集します。</span>
+            </span>
+          </a>
+        </div>
+
+        <div class="notice-card">
+          <p class="eyebrow">Data Sync</p>
+          <h2>公開JSON同期</h2>
+          <p id="admin-sync-status">ブラウザ内の編集データを確認しています。</p>
+          <pre id="admin-storage-debug" class="code-preview"></pre>
+          <button class="button ghost" type="button" id="admin-sync-button">ブラウザ保存を公開JSONへ反映</button>
+        </div>
+        <div class="section-heading">
+          <p class="eyebrow">Other Editors</p>
+          <h2>その他の編集</h2>
+        </div>
+        <div class="tool-grid">
+          <a class="tool-card" href="editor.html">
+            <span class="tool-card-body">
+              <small>Character</small>
+              <strong>武装データ編集</strong>
+              <span>キャラ個別ページ用の武装表JSONを編集します。</span>
+            </span>
+          </a>
+          <a class="tool-card" href="tools/starward_updates_by_character.html?admin=1">
+            <span class="tool-card-body">
+              <small>Update</small>
+              <strong>アップデート編集</strong>
+              <span>キャラ別アップデートまとめの編集モードを開きます。</span>
+            </span>
+          </a>
+          <a class="tool-card" href="videos.html?admin=1">
+            <span class="tool-card-body">
+              <small>Video</small>
+              <strong>動画リンク管理</strong>
+              <span>動画・チャンネル登録UIを開きます。</span>
+            </span>
+          </a>
+          <a class="tool-card" href="streamers.html?admin=1">
+            <span class="tool-card-body">
+              <small>Live</small>
+              <strong>配信者管理</strong>
+              <span>配信者紹介の登録UIを開きます。</span>
+            </span>
+          </a>
+          <a class="tool-card" href="index.html?admin=1#contributors">
+            <span class="tool-card-body">
+              <small>Thanks</small>
+              <strong>ご協力様管理</strong>
+              <span>トップのご協力様チャンネル欄を編集します。</span>
+            </span>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>静的HTMLの管理入口です。公開サーバー側でアクセス制限できる場合は、このページを制限してください。</p>
+      <a href="index.html">公開トップへ戻る</a>
+    </footer>
+    <script>
+      (() => {
+        const key = "starward-site-admin";
+        const gate = document.querySelector("#admin-gate");
+        const form = document.querySelector("#admin-gate-form");
+        const input = document.querySelector("#admin-gate-password");
+        const unlock = () => {
+          document.body.classList.remove("admin-locked");
+          try {
+            sessionStorage.setItem(key, "1");
+            sessionStorage.setItem("starward-video-admin", "1");
+          } catch {}
+        };
+        try {
+          if (sessionStorage.getItem(key) === "1") unlock();
+        } catch {}
+        form?.addEventListener("submit", (event) => {
+          event.preventDefault();
+          if (input?.value !== "xzyjp") {
+            input?.focus();
+            return;
+          }
+          unlock();
+          gate?.remove();
+        });
+      })();
+
+      (() => {
+        const status = document.querySelector("#admin-sync-status");
+        const debug = document.querySelector("#admin-storage-debug");
+        const button = document.querySelector("#admin-sync-button");
+        const keys = [
+          {
+            label: "ご協力様",
+            key: "starward-guide-contributors",
+            endpoint: "/api/save/contributors",
+            valid: (value) => Array.isArray(value) && value.some((item) => (
+              item?.name &&
+              item.name !== "チャンネル名" &&
+              item?.url &&
+              item.url !== "https://www.youtube.com/"
+            )),
+          },
+          {
+            label: "配信者紹介",
+            key: "starward-guide-streamers",
+            endpoint: "/api/save/streamers",
+            valid: (value) => Array.isArray(value) && value.some((item) => (
+              item?.name &&
+              item.name !== "チャンネル名" &&
+              item?.channelUrl
+            )),
+          },
+          {
+            label: "動画リンク集",
+            key: "starward-character-video-links-v1",
+            endpoint: "/api/save/videos",
+            valid: (value) => Boolean(
+              value &&
+              Array.isArray(value.channels) &&
+              value.videos &&
+              (
+                value.channels.length > 0 ||
+                Object.values(value.videos).some((entries) => Array.isArray(entries) && entries.length > 0)
+              )
+            ),
+            normalize: (value) => value?.channels && value?.videos ? value : { channels: [], videos: value || {} },
+          },
+        ];
+
+        const readStored = () => keys.map((item) => {
+          try {
+            const value = JSON.parse(localStorage.getItem(item.key) || "null");
+            const normalized = item.normalize ? item.normalize(value) : value;
+            return { ...item, value: normalized, hasData: item.valid(normalized) };
+          } catch {
+            return { ...item, value: null, hasData: false };
+          }
+        });
+
+        const setStatus = (rows) => {
+          const summary = rows.map((row) => `${row.label}: ${row.hasData ? "保存あり" : "未検出"}`).join(" / ");
+          status.textContent = summary || "ブラウザ保存を確認できませんでした。";
+          if (debug) {
+            const storageRows = [];
+            for (let i = 0; i < localStorage.length; i += 1) {
+              const key = localStorage.key(i);
+              if (!key || !key.includes("starward")) continue;
+              const value = localStorage.getItem(key) || "";
+              storageRows.push(`${key}: ${value.length}文字`);
+            }
+            debug.textContent = storageRows.length
+              ? storageRows.join("\n")
+              : "starward系のブラウザ保存キーは未検出";
+          }
+        };
+
+        const sync = async () => {
+          const rows = readStored();
+          setStatus(rows);
+          const targets = rows.filter((row) => row.hasData);
+          if (!targets.length) return;
+          const results = [];
+          for (const row of targets) {
+            try {
+              const response = await fetch(row.endpoint, {
+                method: "POST",
+                headers: { "Content-Type": "application/json; charset=utf-8" },
+                body: JSON.stringify(row.value),
+              });
+              results.push(`${row.label}: ${response.ok ? "反映済み" : "失敗"}`);
+            } catch {
+              results.push(`${row.label}: 失敗`);
+            }
+          }
+          status.textContent = results.join(" / ");
+        };
+
+        button?.addEventListener("click", sync);
+        setStatus(readStored());
+      })();
+    </script>
+  </body>
+</html>
+
+
+

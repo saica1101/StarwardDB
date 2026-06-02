@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>配信者紹介 | 星の翼ガイド</title>
+    <meta name="description" content="星の翼を配信中心に扱っているチャンネルを紹介するページです。" />
+    <link rel="stylesheet" href="styles.css?v=20260603publicsplit1" />
+  </head>
+  <body>
+    <header class="site-header" id="top">
+      <a class="brand" href="index.html" aria-label="星の翼ガイド トップへ">
+        <span class="brand-mark">S</span>
+        <span>星の翼ガイド</span>
+      </a>
+      <nav class="nav" aria-label="主要ナビゲーション">
+        <a href="index.html#contributors">ご協力様</a>
+        <a href="streamers.html" aria-current="page">配信者</a>
+        <a href="characters.html">キャラDB</a>
+        <a href="videos.html">動画</a>
+        <a href="tools.html">ツール</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="page-hero compact">
+        <div class="page-hero-inner">
+          <p class="eyebrow">Live Streamers</p>
+          <h1>配信者紹介</h1>
+          <p>動画投稿よりも配信を中心に活動している方のチャンネルをまとめるページです。</p>
+        </div>
+      </section>
+
+      <section class="section tight">
+        <div class="section-heading">
+          <p class="eyebrow">Streaming Channels</p>
+          <h2>配信チャンネル</h2>
+          <p class="section-copy">YouTubeチャンネル、Twitch、配信アーカイブ、固定のライブ枠などを登録できます。</p>
+        </div>
+
+        <div class="streamer-grid" id="streamer-list"></div>
+
+        <div class="streamer-manager" id="streamer-manager" aria-label="配信者管理" data-admin-panel>
+          <div class="contributor-manager-head">
+            <div>
+              <p class="eyebrow">Edit Streamers</p>
+              <h3>配信者管理</h3>
+            </div>
+            <button type="button" data-streamer-clear>入力クリア</button>
+          </div>
+          <form class="streamer-form" id="streamer-form">
+            <label>
+              表示名
+              <input id="streamer-name" type="text" placeholder="例: 投稿者名 / 配信者名" required />
+            </label>
+            <label>
+              チャンネルURL
+              <input id="streamer-channel-url" type="url" placeholder="https://www.youtube.com/@... / https://www.twitch.tv/..." required />
+            </label>
+            <label>
+              アイコンURL
+              <input id="streamer-icon-url" type="url" placeholder="未入力なら自動アイコン" />
+            </label>
+            <label>
+              埋め込み・配信URL
+              <input id="streamer-embed-url" type="url" placeholder="YouTube動画URL、ライブURLなど" />
+            </label>
+            <label class="wide">
+              紹介文
+              <textarea id="streamer-description" rows="3" placeholder="配信内容、主な時間帯、見どころなど"></textarea>
+            </label>
+            <button type="submit" data-streamer-submit>追加</button>
+          </form>
+          <div class="streamer-edit-list" id="streamer-edit-list"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>配信者紹介は公開チャンネルへのリンク集です。</p>
+      <a href="index.html">星の翼ガイドへ戻る</a>
+    </footer>
+    <script src="script.js?v=20260603publicsplit1"></script>
+    <script src="streamers.js?v=20260603publicsplit1"></script>
+  </body>
+</html>
+
+
+
