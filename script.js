@@ -623,7 +623,7 @@ characterSearch?.addEventListener("input", () => {
   })();
 
   if (shouldLoadPublicContributors) {
-    fetch("contributors-data.json?v=20260603jsonsave2")
+    fetch("contributors-data.json?v=20260603icons1")
       .then((response) => response.json())
       .then((contributors) => {
         publicContributors = Array.isArray(contributors) ? contributors : [];
