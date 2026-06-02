@@ -108,7 +108,7 @@ const header = (current = "characters.html", base = "") => `
       </a>
       <nav class="nav" aria-label="主要ナビゲーション">
         <a href="${base}index.html">基本</a>
-        <a href="${base}index.html#contributors">ご協力様</a>
+        <a href="${base}index.html#contributors">ご協力者様</a>
         <a href="${base}characters.html"${current === "characters.html" ? ' aria-current="page"' : ""}>キャラ</a>
         <a href="${base}videos.html"${current === "videos.html" ? ' aria-current="page"' : ""}>動画</a>
       </nav>

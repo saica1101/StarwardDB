@@ -11,6 +11,7 @@ class GuideHandler(SimpleHTTPRequestHandler):
         "/api/save/contributors": "contributors-data.json",
         "/api/save/streamers": "streamers-data.json",
         "/api/save/videos": "video-library-data.json",
+        "/api/save/page-edits": "page-edits-data.json",
     }
 
     def do_GET(self):
@@ -40,6 +41,12 @@ class GuideHandler(SimpleHTTPRequestHandler):
         self.send_header("Access-Control-Allow-Headers", "Content-Type")
         self.end_headers()
 
+    def end_headers(self):
+        self.send_header("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0")
+        self.send_header("Pragma", "no-cache")
+        self.send_header("Expires", "0")
+        super().end_headers()
+
     def handle_save_json(self, path):
         length = int(self.headers.get("Content-Length", "0") or "0")
         if length <= 0 or length > 5 * 1024 * 1024:
@@ -63,6 +70,10 @@ class GuideHandler(SimpleHTTPRequestHandler):
                 not isinstance(payload.get("videos"), dict)
             ):
                 self.write_json({"ok": False, "error": "expected video library"}, status=400)
+                return
+        elif path == "/api/save/page-edits":
+            if not isinstance(payload, dict):
+                self.write_json({"ok": False, "error": "expected page edit map"}, status=400)
                 return
 
         filename = self.SAVE_TARGETS[path]

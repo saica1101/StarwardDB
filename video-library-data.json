@@ -1,4 +1,618 @@
 {
-  "channels": [],
-  "videos": {}
+  "channels": [
+    {
+      "id": "1780302927852-nsdho4",
+      "name": "mahiru",
+      "url": "https://www.youtube.com/@mahiru_357",
+      "icon": "https://yt3.googleusercontent.com/Uc7sYQWdIEc_SW5FdsKR23SSoOLKoucogfxDV8jxOpy2n9toMPk0VzdR77BmVDGd2orj1WsPtOg=s160-c-k-c0x00ffffff-no-rj"
+    },
+    {
+      "id": "1780302964366-4be6cn",
+      "name": "クロノ",
+      "url": "https://www.youtube.com/@kurono_tubasa/videos",
+      "icon": "https://yt3.googleusercontent.com/t6i0X01X8f_8zgJOiRUPOeruhlQ3NuSezAYkNIYw6g5z5HzkR0vh_rmUPk6RzAVTXlVbeJpvh-I=s160-c-k-c0x00ffffff-no-rj"
+    },
+    {
+      "id": "1780302998162-2aeks7",
+      "name": "みみのこのみみ(アゴアリアゴナシ)",
+      "url": "https://www.youtube.com/@%E3%81%BF%E3%81%BF%E3%81%AE%E3%81%93%E3%81%AE%E3%81%BF%E3%81%BF",
+      "icon": "https://yt3.googleusercontent.com/ZjA-3TgoBEjFybiUgNMC3IvTGXtr0rGIfx4kWGtjchJK5mVEG0BuS3lN0yHX80HYr3FvJT3a=s160-c-k-c0x00ffffff-no-rj"
+    },
+    {
+      "id": "1780303334803-8i4xua",
+      "name": "ひりゅう",
+      "url": "https://www.youtube.com/@%E3%81%B2%E3%82%8A%E3%82%85%E3%81%86-l3y",
+      "icon": "https://yt3.googleusercontent.com/ytc/AIdro_mEP6SWf846K9w2zsareQcfEHUOs9rgIxHfuBL6VLB0Pg=s160-c-k-c0x00ffffff-no-rj"
+    },
+    {
+      "id": "1780305502713-1fd1pg",
+      "name": "makipon",
+      "url": "https://www.youtube.com/@makipon39/featured",
+      "icon": "https://yt3.googleusercontent.com/P3s3TmLVWG9Xir64RyOCBs-l8RPtfZ_SFYPpcgCPV_RZEwNPD4tPssKHY07pq7MFYQ96iw5r8g=s160-c-k-c0x00ffffff-no-rj"
+    },
+    {
+      "id": "1780305530923-cs3sx9",
+      "name": "ごっど遊び",
+      "url": "https://www.youtube.com/@%E3%81%94%E3%81%A3%E3%81%A9-314",
+      "icon": "https://yt3.googleusercontent.com/k_zRcHl9XvA_wvzaJyaDR-BymshydOHJc_qwL6MTZhS89PVfM8VbMk_UdRwMFs3Wp5BXT1ez=s160-c-k-c0x00ffffff-no-rj"
+    },
+    {
+      "id": "1780400579987-io4pw5",
+      "name": "Milk tea",
+      "url": "https://www.youtube.com/@milktea1053",
+      "icon": "https://yt3.googleusercontent.com/ytc/AIdro_l3zWRY9qvESDWfg-jFrd8KeBat2jtR52kKkYLm1pIYig=s160-c-k-c0x00ffffff-no-rj"
+    }
+  ],
+  "videos": {
+    "rota": [
+      {
+        "id": "1780303813234-mtqkyv",
+        "title": "まるちーず視点",
+        "url": "https://www.youtube.com/watch?v=botHKb8UQAc",
+        "note": "",
+        "channelId": "1780302927852-nsdho4",
+        "createdAt": "2026-06-01T08:50:13.234Z",
+        "publishedAt": "2026-05-31"
+      }
+    ],
+    "no-18": [
+      {
+        "id": "1780304071110-iwz7ee",
+        "title": "【星の翼】１８号視点【１８号】【Starward】",
+        "url": "https://www.youtube.com/watch?v=nG1rWyFm34M",
+        "note": "",
+        "channelId": "1780302927852-nsdho4",
+        "createdAt": "2026-06-01T08:54:31.110Z",
+        "publishedAt": "2026-05-12"
+      },
+      {
+        "id": "1780303842266-5zb0k9",
+        "title": "18号視点",
+        "url": "https://www.youtube.com/watch?v=hT6iazaF5jY&t=1s",
+        "note": "",
+        "channelId": "1780302927852-nsdho4",
+        "createdAt": "2026-06-01T08:50:42.266Z",
+        "publishedAt": "2026-05-26"
+      }
+    ],
+    "line": [
+      {
+        "id": "1780400912937-63gyju",
+        "title": "ランクマ ライン視点8",
+        "url": "https://www.youtube.com/watch?v=wL23x8tbrZk",
+        "note": "",
+        "publishedAt": "",
+        "channelId": "1780400579987-io4pw5",
+        "createdAt": "2026-06-02T11:48:32.937Z"
+      },
+      {
+        "id": "1780303897437-xvxtqa",
+        "title": "CPランキング1位ライン視点",
+        "url": "https://www.youtube.com/watch?v=ofRhC1oZaSc&t",
+        "note": "",
+        "channelId": "1780302927852-nsdho4",
+        "createdAt": "2026-06-01T08:51:37.437Z",
+        "publishedAt": "2026-05-25"
+      }
+    ],
+    "aida": [
+      {
+        "id": "1780304087326-wk4f37",
+        "title": "【星の翼】ブラホ帯アイーダ視点【アイーダ】【Starward】",
+        "url": "https://www.youtube.com/watch?v=OzdsIpMHU3w&t=15s",
+        "note": "",
+        "channelId": "1780302927852-nsdho4",
+        "createdAt": "2026-06-01T08:54:47.326Z"
+      },
+      {
+        "id": "1780303982891-6xoyjx",
+        "title": "【星の翼】恒常キャラ最強！？アイーダ視点【アイーダ】【Starward】",
+        "url": "https://www.youtube.com/watch?v=PMK2r4TzzUM",
+        "note": "",
+        "channelId": "1780302927852-nsdho4",
+        "createdAt": "2026-06-01T08:53:02.891Z"
+      },
+      {
+        "id": "1780303939546-xu7t9v",
+        "title": "【星の翼】毎日アイーダ【アイーダ】【Starward】",
+        "url": "https://www.youtube.com/watch?v=qAJmf4Be3HA",
+        "note": "",
+        "channelId": "1780302927852-nsdho4",
+        "createdAt": "2026-06-01T08:52:19.546Z"
+      }
+    ],
+    "darkstar": [
+      {
+        "id": "1780304047558-tvbc40",
+        "title": "【星の翼】ダークスター視点【ダークスター】【Starward】",
+        "url": "https://www.youtube.com/watch?v=m9zS1dhSNes",
+        "note": "",
+        "channelId": "1780302927852-nsdho4",
+        "createdAt": "2026-06-01T08:54:07.558Z",
+        "publishedAt": "2026-05-14"
+      },
+      {
+        "id": "1780303958086-1kf8o8",
+        "title": "【星の翼】ブラホ帯ダークスター視点【ダークスター】【Starward】",
+        "url": "https://www.youtube.com/watch?v=U9Z42eRqFf8",
+        "note": "",
+        "channelId": "1780302927852-nsdho4",
+        "createdAt": "2026-06-01T08:52:38.086Z",
+        "publishedAt": "2026-05-21"
+      }
+    ],
+    "hikari": [
+      {
+        "id": "1780304125982-sdp5wl",
+        "title": "【星の翼】初投稿！ヒカリ視点【ヒカリ】【Starward】",
+        "url": "https://www.youtube.com/watch?v=fCKgvy5FN9o&t",
+        "note": "",
+        "channelId": "1780302927852-nsdho4",
+        "createdAt": "2026-06-01T08:55:25.982Z",
+        "publishedAt": "2026-05-08"
+      },
+      {
+        "id": "1780304003520-41euqg",
+        "title": "【星の翼】ヒカリ視点【ヒカリ】【Starward】",
+        "url": "https://www.youtube.com/watch?v=q3_y7eZPvhg&t=3s",
+        "note": "",
+        "channelId": "1780302927852-nsdho4",
+        "createdAt": "2026-06-01T08:53:23.520Z",
+        "publishedAt": "2026-05-17"
+      }
+    ],
+    "akatsuki": [
+      {
+        "id": "1780305868320-2yxl7m",
+        "title": "【星の翼】S12/アカツキ視点7【StarWard】",
+        "url": "https://www.youtube.com/watch?v=qV5w7f4yfR8",
+        "note": "",
+        "channelId": "1780305530923-cs3sx9",
+        "createdAt": "2026-06-01T09:24:28.320Z"
+      },
+      {
+        "id": "1780304156810-brgsqa",
+        "title": "【星の翼】ブラホ帯アカツキ視点【アカツキ】【Starward】",
+        "url": "https://www.youtube.com/watch?v=HDbAff3yJLI&t",
+        "note": "",
+        "channelId": "1780302927852-nsdho4",
+        "createdAt": "2026-06-01T08:55:56.810Z"
+      },
+      {
+        "id": "1780304018406-kbwbkc",
+        "title": "【星の翼】アカツキ視点【アカツキ】【Starward】",
+        "url": "https://www.youtube.com/watch?v=1tyFAPsd76w&t=1s",
+        "note": "",
+        "channelId": "1780302927852-nsdho4",
+        "createdAt": "2026-06-01T08:53:38.406Z"
+      },
+      {
+        "id": "1780306856519-9vmz5s",
+        "title": "ハイテンポ(多分)星の翼；だいぶ殺意が高いアカツキ",
+        "url": "https://www.youtube.com/watch?v=Er4bPadt1IA",
+        "note": "",
+        "channelId": "1780302998162-2aeks7",
+        "createdAt": "2026-06-01T09:40:56.519Z"
+      }
+    ],
+    "seiren": [
+      {
+        "id": "1780308618197-xtmc2d",
+        "title": "【星の翼】バグ修正が思ったよりも大きかった女【セイレン 銘刻30】",
+        "url": "https://www.youtube.com/watch?v=nARzK-tXrh0",
+        "note": "",
+        "channelId": "1780303334803-8i4xua",
+        "createdAt": "2026-06-01T10:10:18.197Z"
+      },
+      {
+        "id": "1780304310868-354my8",
+        "title": "【星の翼】気づいたら半年経たずに4000戦以上使ってた女【セイレン 銘刻30】",
+        "url": "https://www.youtube.com/watch?v=hrkpb1zxsj8&t",
+        "note": "",
+        "channelId": "1780303334803-8i4xua",
+        "createdAt": "2026-06-01T08:58:30.868Z"
+      },
+      {
+        "id": "1780304282198-x24wbs",
+        "title": "【星の翼】変なマップと変なキャラに対して妙に強い女【セイレン 銘刻30】",
+        "url": "https://www.youtube.com/watch?v=yAjkjPx8FCg",
+        "note": "",
+        "channelId": "1780303334803-8i4xua",
+        "createdAt": "2026-06-01T08:58:02.198Z"
+      }
+    ],
+    "cammy": [
+      {
+        "id": "1780305606308-ch9tio",
+        "title": "【星の翼】S13/キャミィ視点18【StarWard】",
+        "url": "https://www.youtube.com/watch?v=Zzehl4pDeKU",
+        "note": "",
+        "channelId": "1780302927852-nsdho4",
+        "createdAt": "2026-06-01T09:20:06.308Z"
+      },
+      {
+        "id": "1780305557650-purbr0",
+        "title": "【星の翼】S13/キャミィ視点19【StarWard】",
+        "url": "https://www.youtube.com/watch?v=kiOubI1HN_E",
+        "note": "",
+        "channelId": "1780305530923-cs3sx9",
+        "createdAt": "2026-06-01T09:19:17.650Z"
+      }
+    ],
+    "void-saber": [
+      {
+        "id": "1780306023059-dy42rr",
+        "title": "【星の翼】ヴォイドセーバー視点レート20000↑　大会7連続入賞者視点【makipon】",
+        "url": "https://www.youtube.com/watch?v=KM13uGpEdUY",
+        "note": "",
+        "channelId": "1780305502713-1fd1pg",
+        "createdAt": "2026-06-01T09:27:03.059Z"
+      },
+      {
+        "id": "1780305593487-0hi1ym",
+        "title": "【星の翼】S13/ヴォイドセイバー視点1【StarWard】",
+        "url": "https://www.youtube.com/watch?v=6A-Q2TTnX2A",
+        "note": "",
+        "channelId": "1780305530923-cs3sx9",
+        "createdAt": "2026-06-01T09:19:53.488Z"
+      },
+      {
+        "id": "1780305579064-mjoqta",
+        "title": "【星の翼】S13/ヴォイドセイバー視点2【StarWard】",
+        "url": "https://www.youtube.com/watch?v=RDlNq95CEF8",
+        "note": "",
+        "channelId": "1780305530923-cs3sx9",
+        "createdAt": "2026-06-01T09:19:39.064Z"
+      }
+    ],
+    "black-rock-shooter": [
+      {
+        "id": "1780306373634-wbcir9",
+        "title": "【星の翼】大会7連続入賞中の男によるブラックロックシュータ視点、実用的で高火力な透かしコン紹介あり【makipon】【実況動画】",
+        "url": "https://www.youtube.com/watch?v=Vpc7PE5Lhrc",
+        "note": "",
+        "channelId": "1780305502713-1fd1pg",
+        "createdAt": "2026-06-01T09:32:53.634Z"
+      },
+      {
+        "id": "1780305725072-8jfzdr",
+        "title": "【星の翼】S13/ブラック★ロックシューター視点1【StarWard】",
+        "url": "https://www.youtube.com/watch?v=QRZCeap8dJk",
+        "note": "",
+        "channelId": "1780305530923-cs3sx9",
+        "createdAt": "2026-06-01T09:22:05.072Z",
+        "publishedAt": "2026-04-17"
+      },
+      {
+        "id": "1780306349831-lxb45h",
+        "title": "【星の翼】大会7連入賞プレイヤーによるブラックロックシューター視点【makipon】",
+        "url": "https://www.youtube.com/watch?v=0UKxUD0vVRk",
+        "note": "",
+        "channelId": "1780305502713-1fd1pg",
+        "createdAt": "2026-06-01T09:32:29.831Z"
+      },
+      {
+        "id": "1780305625337-dgyku2",
+        "title": "【星の翼】S13/ブラック★ロックシューター視点2【StarWard】",
+        "url": "https://www.youtube.com/watch?v=dTDjYRKctz8",
+        "note": "",
+        "channelId": "1780305530923-cs3sx9",
+        "createdAt": "2026-06-01T09:20:25.337Z",
+        "publishedAt": "2026-04-18"
+      },
+      {
+        "id": "1780306270057-4nd15s",
+        "title": "【星の翼】帰りの切符がないアグロ？いいやミッドレンジブラックロックシューターだね！【makipon】【実況付き】",
+        "url": "https://www.youtube.com/watch?v=CYF7Lowo-CI",
+        "note": "",
+        "channelId": "1780305502713-1fd1pg",
+        "createdAt": "2026-06-01T09:31:10.057Z",
+        "updatedAt": "2026-06-02T02:10:51.451Z"
+      }
+    ],
+    "cavalry": [
+      {
+        "id": "1780305649024-ga7eqv",
+        "title": "【星の翼】S13/キャヴァリー視点1【StarWard】",
+        "url": "https://www.youtube.com/watch?v=c5wQTVyuLdM",
+        "note": "",
+        "channelId": "1780305530923-cs3sx9",
+        "createdAt": "2026-06-01T09:20:49.024Z",
+        "publishedAt": "2026-05-11"
+      }
+    ],
+    "dead-master": [
+      {
+        "id": "1780306289059-rjni1h",
+        "title": "【星の翼】初の移動照射メインデッドマスター視点　運営さんひよったな！？【makipon】",
+        "url": "https://www.youtube.com/watch?v=tudrqqQtPio",
+        "note": "",
+        "channelId": "1780305502713-1fd1pg",
+        "createdAt": "2026-06-01T09:31:29.059Z"
+      },
+      {
+        "id": "1780305672109-32bs1q",
+        "title": "【星の翼】S13/デッドマスター視点1【StarWard】",
+        "url": "https://www.youtube.com/watch?v=pobrMw_0i2Y",
+        "note": "",
+        "channelId": "1780305530923-cs3sx9",
+        "createdAt": "2026-06-01T09:21:12.109Z",
+        "publishedAt": "2026-05-10"
+      }
+    ],
+    "kage": [
+      {
+        "id": "1780306973087-4lvcxu",
+        "title": "【星の翼】アプデにより今までと真逆の立ち回りを要求されるようになったリワーク後影プチ解説",
+        "url": "https://www.youtube.com/watch?v=mtu_H0HMHMU",
+        "note": "",
+        "channelId": "1780302998162-2aeks7",
+        "createdAt": "2026-06-01T09:42:53.087Z",
+        "publishedAt": "2025-09-02"
+      },
+      {
+        "id": "1780305758797-onkn77",
+        "title": "【星の翼】S12/影視点36【StarWard】",
+        "url": "https://www.youtube.com/watch?v=V8ie3fncAU4",
+        "note": "",
+        "channelId": "1780305530923-cs3sx9",
+        "createdAt": "2026-06-01T09:22:38.797Z",
+        "publishedAt": "2026-04-09"
+      },
+      {
+        "id": "1780305698254-9kqixh",
+        "title": "【星の翼】SAC世界3位による影解説動画【ビヨンド記念】",
+        "url": "https://www.youtube.com/watch?v=SQGz0l8Up_Y",
+        "note": "",
+        "channelId": "1780305530923-cs3sx9",
+        "createdAt": "2026-06-01T09:21:38.254Z",
+        "publishedAt": "2026-04-29"
+      }
+    ],
+    "griffin": [
+      {
+        "id": "1780401752436-oub2ut",
+        "title": "【星の翼】 ランクマ 相方グリフィン視点8",
+        "url": "https://www.youtube.com/watch?v=BOt-ouKOLLo",
+        "note": "",
+        "publishedAt": "",
+        "channelId": "1780400579987-io4pw5",
+        "createdAt": "2026-06-02T12:02:32.436Z",
+        "updatedAt": "2026-06-02T12:04:09.927Z"
+      },
+      {
+        "id": "1780308603825-k49088",
+        "title": "【星の翼】全武装の使い道から対面と相方のキャラ相性、果ては新しいセットプレイまでも詰め込んだリメイク版グリフィン解説！！！",
+        "url": "https://www.youtube.com/watch?v=ut8jxdQG7k8&t",
+        "note": "",
+        "channelId": "1780302998162-2aeks7",
+        "createdAt": "2026-06-01T10:10:03.825Z",
+        "updatedAt": "2026-06-01T15:48:14.420Z",
+        "publishedAt": "2025-08-13"
+      },
+      {
+        "id": "1780305788486-bb9tub",
+        "title": "【星の翼】S12/グリフィン視点7【StarWard】",
+        "url": "https://www.youtube.com/watch?v=ozhcc9k2M30",
+        "note": "",
+        "channelId": "1780305530923-cs3sx9",
+        "createdAt": "2026-06-01T09:23:08.486Z",
+        "publishedAt": "2026-04-06"
+      }
+    ],
+    "phoebe": [
+      {
+        "id": "1780305916325-oxyfkn",
+        "title": "【星の翼】S12/フィービー(緊急修正後)視点1【StarWard】",
+        "url": "https://www.youtube.com/watch?v=WB1TkgEitJM",
+        "note": "",
+        "channelId": "1780305530923-cs3sx9",
+        "createdAt": "2026-06-01T09:25:16.325Z",
+        "publishedAt": "2026-03-26"
+      },
+      {
+        "id": "1780305900382-t3z10j",
+        "title": "【星の翼】S12/フィービー視点2【StarWard】",
+        "url": "https://www.youtube.com/watch?v=tNPH_ea7ED8",
+        "note": "",
+        "channelId": "1780305530923-cs3sx9",
+        "createdAt": "2026-06-01T09:25:00.382Z",
+        "publishedAt": "2026-03-26"
+      },
+      {
+        "id": "1780305837744-7pvyzs",
+        "title": "【星の翼】S12/フィービー視点3【StarWard】",
+        "url": "https://www.youtube.com/watch?v=q33G1-6jGGI",
+        "note": "",
+        "channelId": "1780305530923-cs3sx9",
+        "createdAt": "2026-06-01T09:23:57.744Z",
+        "publishedAt": "2026-03-29"
+      }
+    ],
+    "sharp": [
+      {
+        "id": "1780305976111-v5ppn6",
+        "title": "【星の翼】S12/シャープ視点2【StarWard】",
+        "url": "https://www.youtube.com/watch?v=uWD9kYmmeko",
+        "note": "",
+        "channelId": "1780305530923-cs3sx9",
+        "createdAt": "2026-06-01T09:26:16.111Z",
+        "publishedAt": "2026-03-25"
+      }
+    ],
+    "mumei": [
+      {
+        "id": "1780306204002-5mc0se",
+        "title": "【星の翼】数多の修正を経て換装キャラになった無銘、相手のキャラを見て形態を使い分けよう【makipon】【実況】",
+        "url": "https://www.youtube.com/watch?v=sZd5anrtYLY",
+        "note": "",
+        "channelId": "1780305502713-1fd1pg",
+        "createdAt": "2026-06-01T09:30:04.002Z"
+      },
+      {
+        "id": "1780306784451-ldunye",
+        "title": "【星の翼】特殊移動に頼らず真心を込めて扱えば最強格の性能と理論値をしてる丁寧系高コ中衛！無銘プチ解説！",
+        "url": "https://www.youtube.com/watch?v=r_GkFoUtVNc&t=285s",
+        "note": "",
+        "channelId": "1780302998162-2aeks7",
+        "createdAt": "2026-06-01T09:39:44.451Z"
+      },
+      {
+        "id": "1780306243421-82yus8",
+        "title": "【星の翼】トップランカーガチ戦無銘視点　【makipon】【実況付き】",
+        "url": "https://www.youtube.com/watch?v=SlZci-DRixQ",
+        "note": "",
+        "channelId": "1780305502713-1fd1pg",
+        "createdAt": "2026-06-01T09:30:43.421Z"
+      }
+    ],
+    "borzoi": [
+      {
+        "id": "1780306222401-cfwl22",
+        "title": "【星の翼】低コスト迷ったらボルゾイ、覚えておくといい簡単でクッソ強いです【makipon】【実況付き】",
+        "url": "https://www.youtube.com/watch?v=l5SiPOuD5YY",
+        "note": "",
+        "channelId": "1780305502713-1fd1pg",
+        "createdAt": "2026-06-01T09:30:22.401Z"
+      }
+    ],
+    "valkia": [
+      {
+        "id": "1780306305073-dyqblt",
+        "title": "【星の翼】ヴァルキア視点　大会７連続入賞者視点　【makipon】",
+        "url": "https://www.youtube.com/watch?v=rcfTA6PlHo4",
+        "note": "",
+        "channelId": "1780305502713-1fd1pg",
+        "createdAt": "2026-06-01T09:31:45.073Z"
+      }
+    ],
+    "crysta": [
+      {
+        "id": "1780306438627-tcnugk",
+        "title": "【星の翼】正式実装版クリスタ視点　レート20000　【makipon】",
+        "url": "https://www.youtube.com/watch?v=EhgicuNYLa8",
+        "note": "",
+        "channelId": "1780305502713-1fd1pg",
+        "createdAt": "2026-06-01T09:33:58.627Z"
+      }
+    ],
+    "aki-gumo": [
+      {
+        "id": "1780306823613-k7i72u",
+        "title": "【星の翼】低コに対しては最強！何だったら高コも破壊できる！前に出ながら被弾せず期待値をばら撒ける怜悧な踊り子！秋雲解説！！！",
+        "url": "https://www.youtube.com/watch?v=Dej-vDLF3rg",
+        "note": "",
+        "channelId": "1780302998162-2aeks7",
+        "createdAt": "2026-06-01T09:40:23.613Z",
+        "publishedAt": "2026-03-27"
+      }
+    ],
+    "alice": [
+      {
+        "id": "1780307028643-krse0m",
+        "title": "【星の翼】格闘が強い代わりに射撃が強くその代償に時限強化が最強な常に準環境の一番上に居続けるキャラ！アリス解説！！！",
+        "url": "https://www.youtube.com/watch?v=7j6QYCa4QQw",
+        "note": "",
+        "channelId": "1780302998162-2aeks7",
+        "createdAt": "2026-06-01T09:43:48.643Z"
+      }
+    ],
+    "dragner": [
+      {
+        "id": "1780400821038-0815hj",
+        "title": "【星の翼】 ランクマ ドラグナー視点2",
+        "url": "https://www.youtube.com/watch?v=zBxH2X7dmTQ",
+        "note": "",
+        "publishedAt": "",
+        "channelId": "1780400579987-io4pw5",
+        "createdAt": "2026-06-02T11:47:01.038Z"
+      }
+    ],
+    "haruka": [
+      {
+        "id": "1780400871896-8skahv",
+        "title": "ハルカ視点",
+        "url": "https://www.youtube.com/watch?v=WlrVaGeck-c",
+        "note": "",
+        "publishedAt": "",
+        "channelId": "1780400579987-io4pw5",
+        "createdAt": "2026-06-02T11:47:51.896Z"
+      }
+    ],
+    "galahad-akatsuki": [
+      {
+        "id": "1780401103048-935276",
+        "title": "【星の翼】 ランクマ ガラハッド暁視点2",
+        "url": "https://www.youtube.com/watch?v=l1D9siItwYw",
+        "note": "",
+        "publishedAt": "",
+        "channelId": "1780400579987-io4pw5",
+        "createdAt": "2026-06-02T11:51:43.049Z"
+      },
+      {
+        "id": "1780400973470-7e4h4r",
+        "title": "【星の翼】 ランクマ ガラハッド暁視点3",
+        "url": "https://www.youtube.com/watch?v=jhGU-437wNs",
+        "note": "",
+        "publishedAt": "",
+        "channelId": "1780400579987-io4pw5",
+        "createdAt": "2026-06-02T11:49:33.470Z"
+      }
+    ],
+    "sky-saber": [
+      {
+        "id": "1780400998044-veys7t",
+        "title": "【星の翼】 スカイセーバー視点",
+        "url": "https://www.youtube.com/watch?v=iRSyY4KXlqo",
+        "note": "",
+        "publishedAt": "",
+        "channelId": "1780400579987-io4pw5",
+        "createdAt": "2026-06-02T11:49:58.044Z"
+      }
+    ],
+    "cherubim": [
+      {
+        "id": "1780401066273-2xl509",
+        "title": "【星の翼】 ランクマ 相方ケルビム視点",
+        "url": "https://www.youtube.com/watch?v=_5SP9Kvu9y4",
+        "note": "",
+        "publishedAt": "",
+        "channelId": "1780400579987-io4pw5",
+        "createdAt": "2026-06-02T11:51:06.273Z"
+      }
+    ],
+    "ether": [
+      {
+        "id": "1780401131711-og3tks",
+        "title": "【星の翼】 ランクマ イーザー視点2",
+        "url": "https://www.youtube.com/watch?v=Ixt45ALvNpk",
+        "note": "",
+        "publishedAt": "",
+        "channelId": "1780400579987-io4pw5",
+        "createdAt": "2026-06-02T11:52:11.711Z"
+      }
+    ],
+    "qinni": [
+      {
+        "id": "1780401172452-8o94zu",
+        "title": "【星の翼】 ランクマ 相方チンニ視点",
+        "url": "https://www.youtube.com/watch?v=ehbkcHHeiuI",
+        "note": "",
+        "publishedAt": "",
+        "channelId": "1780302964366-4be6cn",
+        "createdAt": "2026-06-02T11:52:52.452Z"
+      }
+    ],
+    "ina": [
+      {
+        "id": "1780401588382-ryre1z",
+        "title": "【星の翼】ランクマ稲稲　相方稲視点",
+        "url": "https://www.youtube.com/watch?v=J-NfBu9PI8c",
+        "note": "",
+        "publishedAt": "",
+        "channelId": "1780400579987-io4pw5",
+        "createdAt": "2026-06-02T11:59:48.382Z"
+      }
+    ]
+  }
 }

@@ -1,0 +1,42 @@
+{
+  "/characters.html": {
+    "text": {
+      "p-2": "キャラ別の武装や凸効果を載せています。<br>各ページに凸効果情報あり",
+      "p-162": "\n        キャラ詳細の参照元:\n        <a href=\"https://w.atwiki.jp/starward/\" target=\"_blank\" rel=\"noreferrer\" data-edit-key=\"a-163\" data-edit-original=\"星の翼(Starward) 日本語wiki\" contenteditable=\"true\" spellcheck=\"false\">星の翼(Starward) 日本語wiki</a>\n      "
+    },
+    "hidden": {
+      "block-7": true
+    },
+    "added": []
+  },
+  "/tools.html": {
+    "text": {},
+    "hidden": {},
+    "added": []
+  },
+  "/index.html": {
+    "text": {
+      "p-0": "<br>",
+      "p-2": "キャラ情報、歴代のアップデート情報、最高ランク帯の動画等<br>星の翼の様々な情報を知識的に見るための非公式サイトです。",
+      "p-17": "\n            公式PV、更新告知等の動画",
+      "p-23": "\n            キャラ別アップデート、ランダム抽選、2v2座学用ツール、Pick/BanをこのHPから開けます。 別ページで開きます。",
+      "a-36": "<br>",
+      "a-37": "<br>",
+      "p-43": "\n        Fan-made guide. データ参照:\n        <a href=\"https://w.atwiki.jp/starward/\" target=\"_blank\" rel=\"noreferrer\" data-edit-key=\"a-44\" data-edit-original=\"星の翼(Starward) 日本語wiki\" contenteditable=\"true\" spellcheck=\"false\">星の翼(Starward) 日本語wiki</a>\n      "
+    },
+    "hidden": {},
+    "added": []
+  },
+  "/streamers.html": {
+    "text": {},
+    "hidden": {},
+    "added": []
+  },
+  "/videos.html": {
+    "text": {
+      "h3-12": "アカツキ"
+    },
+    "hidden": {},
+    "added": []
+  }
+}

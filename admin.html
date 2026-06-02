@@ -33,7 +33,7 @@
         <a href="tools/starward_updates_by_character.html?admin=1">アプデ編集</a>
         <a href="videos.html?admin=1">動画管理</a>
         <a href="streamers.html?admin=1">配信者管理</a>
-        <a href="index.html?admin=1#contributors">ご協力様管理</a>
+        <a href="index.html?admin=1#contributors">ご協力者様管理</a>
       </nav>
     </header>
 
@@ -56,8 +56,8 @@
           <a class="tool-card" href="index.html?admin=1#contributors">
             <span class="tool-card-body">
               <small>contributors-data.json</small>
-              <strong>ご協力様</strong>
-              <span>トップページのご協力様チャンネル欄を編集します。</span>
+              <strong>ご協力者様</strong>
+              <span>トップページのご協力者様チャンネル欄を編集します。</span>
             </span>
           </a>
           <a class="tool-card" href="streamers.html?admin=1">
@@ -119,8 +119,8 @@
           <a class="tool-card" href="index.html?admin=1#contributors">
             <span class="tool-card-body">
               <small>Thanks</small>
-              <strong>ご協力様管理</strong>
-              <span>トップのご協力様チャンネル欄を編集します。</span>
+              <strong>ご協力者様管理</strong>
+              <span>トップのご協力者様チャンネル欄を編集します。</span>
             </span>
           </a>
         </div>
@@ -164,7 +164,7 @@
         const button = document.querySelector("#admin-sync-button");
         const keys = [
           {
-            label: "ご協力様",
+            label: "ご協力者様",
             key: "starward-guide-contributors",
             endpoint: "/api/save/contributors",
             valid: (value) => Array.isArray(value) && value.some((item) => (
@@ -199,11 +199,52 @@
             ),
             normalize: (value) => value?.channels && value?.videos ? value : { channels: [], videos: value || {} },
           },
+          {
+            label: "ページ編集",
+            key: "starward-guide-page-edits:*",
+            endpoint: "/api/save/page-edits",
+            read: () => {
+              const editsByPage = {};
+              for (let i = 0; i < localStorage.length; i += 1) {
+                const storageKey = localStorage.key(i);
+                if (!storageKey?.startsWith("starward-guide-page-edits:")) continue;
+                try {
+                  const value = JSON.parse(localStorage.getItem(storageKey) || "null");
+                  if (!value || (!value.text && !value.hidden && !value.added)) continue;
+                  const page = normalizePagePath(storageKey.slice("starward-guide-page-edits:".length));
+                  editsByPage[page] = value;
+                } catch {}
+              }
+              return editsByPage;
+            },
+            valid: (value) => Boolean(
+              value &&
+              Object.values(value).some((edits) => (
+                edits &&
+                (
+                  Object.keys(edits.text || {}).length > 0 ||
+                  Object.keys(edits.hidden || {}).length > 0 ||
+                  (edits.added || []).length > 0
+                )
+              ))
+            ),
+          },
         ];
+
+        const apiUrl = (endpoint) => {
+          if (location.protocol === "file:") return `http://127.0.0.1:8766${endpoint}`;
+          return endpoint;
+        };
+
+        const normalizePagePath = (path) => {
+          const value = String(path || "").replace(/\\/g, "/").split(/[?#]/)[0];
+          const match = value.match(/\/([^/]+\.html)$/i);
+          return match ? `/${match[1]}` : value || "/index.html";
+        };
 
         const readStored = () => keys.map((item) => {
           try {
-            const value = JSON.parse(localStorage.getItem(item.key) || "null");
+            const value = item.read ? item.read() : JSON.parse(localStorage.getItem(item.key) || "null");
             const normalized = item.normalize ? item.normalize(value) : value;
             return { ...item, value: normalized, hasData: item.valid(normalized) };
           } catch {
@@ -236,14 +277,23 @@
           const results = [];
           for (const row of targets) {
             try {
-              const response = await fetch(row.endpoint, {
+              const response = await fetch(apiUrl(row.endpoint), {
                 method: "POST",
                 headers: { "Content-Type": "application/json; charset=utf-8" },
                 body: JSON.stringify(row.value),
               });
-              results.push(`${row.label}: ${response.ok ? "反映済み" : "失敗"}`);
-            } catch {
-              results.push(`${row.label}: 失敗`);
+              let detail = "";
+              if (!response.ok) {
+                try {
+                  const body = await response.json();
+                  detail = body?.error ? ` (${response.status}: ${body.error})` : ` (${response.status})`;
+                } catch {
+                  detail = ` (${response.status})`;
+                }
+              }
+              results.push(`${row.label}: ${response.ok ? "反映済み" : `失敗${detail}`}`);
+            } catch (error) {
+              results.push(`${row.label}: 失敗 (${error?.message || "送信できませんでした"})`);
             }
           }
           status.textContent = results.join(" / ");
