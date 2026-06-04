@@ -43,11 +43,123 @@ const scrollToHashTarget = () => {
   requestAnimationFrame(() => target.scrollIntoView({ block: "start" }));
 };
 
+const pageEditSelectors = {
+  editable: [
+    "main h1",
+    "main h2",
+    "main h3",
+    "main p",
+    "main li",
+    "main dt",
+    "main dd",
+    "main strong",
+    "main small",
+    "main .hero-copy",
+    "main .eyebrow",
+    "main .button",
+    "main .tool-card-body span",
+    "main .tool-card-body small",
+    "footer p",
+    "footer a",
+  ].join(","),
+  block: [
+    ".page-hero",
+    ".page-hero-inner",
+    "main > .section",
+    ".quick-strip article",
+    ".home-dashboard article",
+    ".tool-card",
+    ".timeline article",
+    ".character-card",
+    ".video-card",
+    ".note-grid article",
+    ".source-note",
+    ".roster-card",
+    ".steps li",
+    ".editor-shell",
+    ".editor-title",
+    ".editor-section",
+    ".editor-table-wrap",
+    ".editor-sidebar",
+    ".editor-main",
+    ".page-edit-block",
+  ].join(","),
+};
+
+const normalizePagePath = (pathname = location.pathname) => {
+  let page = pathname.split("?")[0].split("#")[0] || "/";
+  page = page.replace(/\\/g, "/");
+  if (page.endsWith("/")) page += "index.html";
+  if (page === "/") page = "/index.html";
+  return page;
+};
+
+const pageEditKeyCandidates = () => {
+  const page = normalizePagePath();
+  const withoutRepo = page.replace(/^\/[^/]+(?=\/)/, "");
+  const candidates = new Set([page, withoutRepo]);
+  if (withoutRepo === "/index.html") candidates.add("/");
+  return [...candidates];
+};
+
+const assignPageEditKeys = () => {
+  const blocks = [...document.querySelectorAll(pageEditSelectors.block)].filter((el) => {
+    if (el.closest(".site-editor")) return false;
+    return !el.closest("script, style, .nav");
+  });
+  blocks.forEach((el, index) => {
+    if (!el.dataset.blockKey) el.dataset.blockKey = `block-${index}`;
+  });
+
+  const editables = [...document.querySelectorAll(pageEditSelectors.editable)].filter((el) => {
+    if (el.closest(".site-editor")) return false;
+    if (el.closest("script, style, .nav")) return false;
+    return el.textContent.trim().length > 0;
+  });
+  editables.forEach((el, index) => {
+    if (!el.dataset.editKey) el.dataset.editKey = `${el.tagName.toLowerCase()}-${index}`;
+    if (!el.dataset.editOriginal) el.dataset.editOriginal = el.innerHTML;
+  });
+
+  return { blocks, editables };
+};
+
+const applyPageEdits = (edits) => {
+  if (!edits || typeof edits !== "object") return;
+  (edits.added || []).forEach((block) => {
+    if (!block?.id || document.querySelector(`[data-added-block="${CSS.escape(block.id)}"]`)) return;
+    const template = document.createElement("template");
+    template.innerHTML = block.html || "";
+    const node = template.content.firstElementChild;
+    if (node) document.querySelector("main .section, main")?.append(node);
+  });
+  const { blocks, editables } = assignPageEditKeys();
+  editables.forEach((el) => {
+    if (Object.prototype.hasOwnProperty.call(edits.text || {}, el.dataset.editKey)) {
+      el.innerHTML = edits.text[el.dataset.editKey];
+    }
+  });
+  blocks.forEach((el) => {
+    el.classList.toggle("is-user-hidden", !!edits.hidden?.[el.dataset.blockKey]);
+  });
+};
+
 setHeaderState();
 window.addEventListener("scroll", setHeaderState, { passive: true });
 window.addEventListener("load", scrollToHashTarget);
 window.addEventListener("hashchange", scrollToHashTarget);
 scrollToHashTarget();
+
+(() => {
+  if (siteAdmin || typeof fetch !== "function") return;
+  fetch("page-edits-data.json?v=20260604pageedits1")
+    .then((response) => response.ok ? response.json() : {})
+    .then((allEdits) => {
+      const key = pageEditKeyCandidates().find((candidate) => allEdits?.[candidate]);
+      if (key) applyPageEdits(allEdits[key]);
+    })
+    .catch(() => {});
+})();
 
 (() => {
   const hero = document.querySelector("[data-random-namecard-hero]");
@@ -178,6 +290,22 @@ characterSearch?.addEventListener("input", () => {
   let editables = [];
   let blocks = [];
   let activeElement = null;
+  let publishTimer = 0;
+
+  const publishPageEdits = (edits) => {
+    if (typeof fetch !== "function") return;
+    window.clearTimeout(publishTimer);
+    publishTimer = window.setTimeout(() => {
+      fetch("/api/save/page-edit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json; charset=utf-8" },
+        body: JSON.stringify({
+          page: normalizePagePath(),
+          edits,
+        }),
+      }).catch((error) => console.warn("page-edits-data.json の保存に失敗しました", error));
+    }, 350);
+  };
 
   const loadEdits = () => {
     try {
@@ -191,6 +319,7 @@ characterSearch?.addEventListener("input", () => {
 
   const saveEdits = (edits) => {
     localStorage.setItem(pageKey, JSON.stringify(edits));
+    publishPageEdits(edits);
     updateCount();
   };
 
