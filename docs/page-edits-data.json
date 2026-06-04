@@ -1,0 +1,22 @@
+{
+  "/index.html": {
+    "text": {},
+    "hidden": {},
+    "added": []
+  },
+  "/videos.html": {
+    "text": {
+      "h3-6": "グリフィン"
+    },
+    "hidden": {},
+    "added": []
+  },
+  "/editor.html": {
+    "text": {
+      "p-5": "読み込み完了。セルを編集すると即データに反映されます。",
+      "h2-7": "ヴォイドセーバー / Cost 3.0"
+    },
+    "hidden": {},
+    "added": []
+  }
+}

@@ -1,8 +1,30 @@
 # GitHub Pages 公開メモ
 
-このフォルダは一般公開用サイトをルートに置く構成です。
+このフォルダは編集用の元フォルダです。
+GitHub Pagesで公開するファイルは `docs/` に分けています。
 
-## 一般ユーザーが見るページ
+## Gitに上げる公開用フォルダ
+
+`docs/` がGitHub Pages公開用です。
+
+`build-publish-folder.bat` を実行すると、HPフォルダ内の公開に必要なファイルだけを `docs/` にコピーします。
+
+GitHubに公開したいときは、基本的に以下を上げればOKです。
+
+- `docs/**`
+- `.gitignore`
+- `PUBLISHING.md`
+
+サイト生成や編集をGitHubにも残したい場合だけ、以下も一緒に上げます。
+
+- `generate-character-pages.js`
+- `generate-character-pages.bat`
+- `build-publish-folder.js`
+- `build-publish-folder.bat`
+- `publish-tool.js`
+- `publish-tool.bat`
+
+## `docs/` に入る一般公開ページ
 
 - `index.html`
 - `characters.html`
@@ -14,17 +36,20 @@
 - `contributors-data.json`
 - `streamers-data.json`
 - `video-library-data.json`
+- `character-sheet-data.json`
+- `wiki-move-data.json`
 
 通常ナビゲーションから管理ページへのリンクは出しません。
 
-## 管理者用ページ
+## `docs/` に入れないローカル用ファイル
 
 - `admin.html`
 - `editor.html`
-- `index.html?admin=1#contributors`
-- `streamers.html?admin=1`
-- `videos.html?admin=1`
-- `tools/starward_updates_by_character.html?admin=1`
+- `server.py`
+- `publish-tool.js`
+- `import-*.js`
+- `*.csv`
+- `*.bak`
 
 管理パスワードは `xzyjp` です。
 
@@ -39,15 +64,29 @@
    - `contributors-data.json`
    - `streamers-data.json`
    - `video-library-data.json`
-5. GitにコミットしてGitHubへpushする。
+5. `build-publish-folder.bat` を実行して `docs/` を更新する。
+6. GitにコミットしてGitHubへpushする。
+
+## Git公開ツール
+
+`publish-tool.bat` をダブルクリックすると、ローカル公開ツールが起動します。
+
+1. `publish-tool.bat` を起動する。
+2. `http://127.0.0.1:8790/` を開く。
+3. Gitに上げるファイルをチェックする。
+4. 公開先URL、ブランチ、GitHubユーザー名、Token、コミット文を入力する。
+5. `公開する` を押す。
+
+Tokenは保存されません。GitHubの通常パスワードではなく、Personal Access Tokenを使ってください。
+`チェック状態を無視して、すべての変更を追加する` をオンにすると、ファイル選択を使わず全変更を公開対象にします。
 
 ## GitHub Pages
 
 1. GitHubでリポジトリを作る。
-2. このフォルダの中身をリポジトリのルートへ置く。
+2. このフォルダをリポジトリのルートへ置く。
 3. `Settings > Pages` を開く。
 4. `Deploy from a branch` を選ぶ。
-5. `main` / `/root` を選ぶ。
+5. `main` / `/docs` を選ぶ。
 6. `https://ユーザー名.github.io/リポジトリ名/` で公開される。
 
 ## 公開前チェック

@@ -1,0 +1,439 @@
+[
+  {
+    "name": "グリフィン",
+    "cost": "3.0",
+    "slug": "griffin",
+    "url": "https://starward.wikiru.jp/?グリフィン"
+  },
+  {
+    "name": "ヒカリ",
+    "cost": "3.0",
+    "slug": "hikari",
+    "url": "https://starward.wikiru.jp/?ヒカリ"
+  },
+  {
+    "name": "エルフィン",
+    "cost": "3.0",
+    "slug": "elfin",
+    "url": "https://starward.wikiru.jp/?エルフィン"
+  },
+  {
+    "name": "ケルビム",
+    "cost": "3.0",
+    "slug": "cherubim",
+    "url": "https://starward.wikiru.jp/?ケルビム"
+  },
+  {
+    "name": "シュウウ",
+    "cost": "3.0",
+    "slug": "shuuu",
+    "url": "https://starward.wikiru.jp/?シュウウ"
+  },
+  {
+    "name": "スズラン",
+    "cost": "3.0",
+    "slug": "suzuran",
+    "url": "https://starward.wikiru.jp/?スズラン"
+  },
+  {
+    "name": "キャヴァリー",
+    "cost": "3.0",
+    "slug": "cavalry",
+    "url": "https://starward.wikiru.jp/?キャヴァリー"
+  },
+  {
+    "name": "ラジエル",
+    "cost": "3.0",
+    "slug": "raziel",
+    "url": "https://starward.wikiru.jp/?ラジエル"
+  },
+  {
+    "name": "影",
+    "cost": "3.0",
+    "slug": "kage",
+    "url": "https://starward.wikiru.jp/?影"
+  },
+  {
+    "name": "ライン",
+    "cost": "3.0",
+    "slug": "line",
+    "url": "https://starward.wikiru.jp/?ライン"
+  },
+  {
+    "name": "ロタ",
+    "cost": "3.0",
+    "slug": "rota",
+    "url": "https://starward.wikiru.jp/?ロタ"
+  },
+  {
+    "name": "イーザー",
+    "cost": "3.0",
+    "slug": "ether",
+    "url": "https://starward.wikiru.jp/?イーザー"
+  },
+  {
+    "name": "秋雲",
+    "cost": "3.0",
+    "slug": "aki-gumo",
+    "url": "https://starward.wikiru.jp/?秋雲"
+  },
+  {
+    "name": "ベータ-ロンギヌス",
+    "cost": "3.0",
+    "slug": "beta-longinus",
+    "url": "https://starward.wikiru.jp/?ベータ-ロンギヌス"
+  },
+  {
+    "name": "キャミィ",
+    "cost": "3.0",
+    "slug": "cammy",
+    "url": "https://starward.wikiru.jp/?キャミィ"
+  },
+  {
+    "name": "セイレン",
+    "cost": "3.0",
+    "slug": "seiren",
+    "url": "https://starward.wikiru.jp/?セイレン"
+  },
+  {
+    "name": "無銘",
+    "cost": "3.0",
+    "slug": "mumei",
+    "url": "https://starward.wikiru.jp/?無銘"
+  },
+  {
+    "name": "アカツキ",
+    "cost": "3.0",
+    "slug": "akatsuki",
+    "url": "https://starward.wikiru.jp/?アカツキ"
+  },
+  {
+    "name": "ヴォイドセーバー",
+    "cost": "3.0",
+    "slug": "void-saber",
+    "note": "期間限定",
+    "url": "https://starward.wikiru.jp/?ヴォイドセーバー"
+  },
+  {
+    "name": "フリード",
+    "cost": "2.5",
+    "slug": "freed",
+    "url": "https://starward.wikiru.jp/?フリード"
+  },
+  {
+    "name": "カゼ",
+    "cost": "2.5",
+    "slug": "kaze",
+    "url": "https://starward.wikiru.jp/?カゼ"
+  },
+  {
+    "name": "シャオリン",
+    "cost": "2.5",
+    "slug": "shaolin",
+    "url": "https://starward.wikiru.jp/?シャオリン"
+  },
+  {
+    "name": "シャープ",
+    "cost": "2.5",
+    "slug": "sharp",
+    "url": "https://starward.wikiru.jp/?シャープ"
+  },
+  {
+    "name": "アリス",
+    "cost": "2.5",
+    "slug": "alice",
+    "url": "https://starward.wikiru.jp/?アリス"
+  },
+  {
+    "name": "スカイセーバー",
+    "cost": "2.5",
+    "slug": "sky-saber",
+    "url": "https://starward.wikiru.jp/?スカイセーバー"
+  },
+  {
+    "name": "十八号",
+    "cost": "2.5",
+    "slug": "no-18",
+    "url": "https://starward.wikiru.jp/?十八号"
+  },
+  {
+    "name": "シグナス",
+    "cost": "2.5",
+    "slug": "cygnus",
+    "url": "https://starward.wikiru.jp/?シグナス"
+  },
+  {
+    "name": "アンジェリス",
+    "cost": "2.5",
+    "slug": "angelis",
+    "url": "https://starward.wikiru.jp/?アンジェリス"
+  },
+  {
+    "name": "ヴァルキア",
+    "cost": "2.5",
+    "slug": "valkia",
+    "url": "https://starward.wikiru.jp/?ヴァルキア_通常時"
+  },
+  {
+    "name": "エヴァ",
+    "cost": "2.5",
+    "slug": "eva",
+    "url": "https://starward.wikiru.jp/?エヴァ"
+  },
+  {
+    "name": "轟雷改",
+    "cost": "2.5",
+    "slug": "gourai-kai",
+    "note": "コラボ",
+    "url": "https://starward.wikiru.jp/?轟雷改"
+  },
+  {
+    "name": "稲",
+    "cost": "2.5",
+    "slug": "ina",
+    "url": "https://starward.wikiru.jp/?稲"
+  },
+  {
+    "name": "バーゼラルド",
+    "cost": "2.5",
+    "slug": "baselard",
+    "note": "コラボ",
+    "url": "https://starward.wikiru.jp/?バーゼラルド"
+  },
+  {
+    "name": "ノーラ",
+    "cost": "2.5",
+    "slug": "nora",
+    "url": "https://starward.wikiru.jp/?ノーラ"
+  },
+  {
+    "name": "ランスロット",
+    "cost": "2.5",
+    "slug": "lancelot",
+    "url": "https://starward.wikiru.jp/?ランスロット"
+  },
+  {
+    "name": "サンダーボルト・OTOME",
+    "cost": "2.5",
+    "slug": "thunderbolt-otome",
+    "note": "コラボ",
+    "url": "https://starward.wikiru.jp/?サンダーボルト・OTOME"
+  },
+  {
+    "name": "ガラハッド・暁",
+    "cost": "2.5",
+    "slug": "galahad-akatsuki",
+    "note": "コラボ",
+    "url": "https://starward.wikiru.jp/?ガラハッド・暁"
+  },
+  {
+    "name": "デッド・アライブ",
+    "cost": "2.5",
+    "slug": "dead-alive",
+    "note": "コラボ",
+    "url": "https://starward.wikiru.jp/?デッド・アライブ"
+  },
+  {
+    "name": "ハルカ",
+    "cost": "2.5",
+    "slug": "haruka",
+    "url": "https://starward.wikiru.jp/?ハルカ"
+  },
+  {
+    "name": "ドラグナー",
+    "cost": "2.5",
+    "slug": "dragner",
+    "url": "https://starward.wikiru.jp/?ドラグナー"
+  },
+  {
+    "name": "レキ",
+    "cost": "2.5",
+    "slug": "reki",
+    "note": "コラボ",
+    "url": "https://starward.wikiru.jp/?レキ"
+  },
+  {
+    "name": "ブラック★ロックシューター",
+    "cost": "2.5",
+    "slug": "black-rock-shooter",
+    "note": "コラボ",
+    "url": "https://starward.wikiru.jp/?ブラック★ロックシューター"
+  },
+  {
+    "name": "デッドマスター",
+    "cost": "2.5",
+    "slug": "dead-master",
+    "note": "コラボ",
+    "url": "https://starward.wikiru.jp/?デッドマスター"
+  },
+  {
+    "name": "ベータ",
+    "cost": "2.0",
+    "slug": "beta",
+    "url": "https://starward.wikiru.jp/?ベータ"
+  },
+  {
+    "name": "デュカリオン",
+    "cost": "2.0",
+    "slug": "deucalion",
+    "url": "https://starward.wikiru.jp/?デュカリオン"
+  },
+  {
+    "name": "セラフィム",
+    "cost": "2.0",
+    "slug": "seraphim",
+    "url": "https://starward.wikiru.jp/?セラフィム_巡遊状態"
+  },
+  {
+    "name": "アイーダ",
+    "cost": "2.0",
+    "slug": "aida",
+    "url": "https://starward.wikiru.jp/?アイーダ"
+  },
+  {
+    "name": "パラス",
+    "cost": "2.0",
+    "slug": "pallas",
+    "url": "https://starward.wikiru.jp/?パラス"
+  },
+  {
+    "name": "スコーピオン",
+    "cost": "2.0",
+    "slug": "scorpion",
+    "url": "https://starward.wikiru.jp/?スコーピオン"
+  },
+  {
+    "name": "ヴァーチェ",
+    "cost": "2.0",
+    "slug": "virtue",
+    "url": "https://starward.wikiru.jp/?ヴァーチェ"
+  },
+  {
+    "name": "ザハロワ",
+    "cost": "2.0",
+    "slug": "zaharowa",
+    "url": "https://starward.wikiru.jp/?ザハロワ"
+  },
+  {
+    "name": "咲迦",
+    "cost": "2.0",
+    "slug": "sakuya",
+    "url": "https://starward.wikiru.jp/?咲迦"
+  },
+  {
+    "name": "チンニ",
+    "cost": "2.0",
+    "slug": "qinni",
+    "url": "https://starward.wikiru.jp/?チンニ"
+  },
+  {
+    "name": "ダークスター",
+    "cost": "2.0",
+    "slug": "darkstar",
+    "url": "https://starward.wikiru.jp/?ダークスター"
+  },
+  {
+    "name": "ヒビキ",
+    "cost": "2.0",
+    "slug": "hibiki",
+    "url": "https://starward.wikiru.jp/?ヒビキ"
+  },
+  {
+    "name": "スティレット",
+    "cost": "2.0",
+    "slug": "stylet",
+    "note": "コラボ",
+    "url": "https://starward.wikiru.jp/?スティレット"
+  },
+  {
+    "name": "ボルゾイ",
+    "cost": "2.0",
+    "slug": "borzoi",
+    "note": "シーズンパス",
+    "url": "https://starward.wikiru.jp/?ボルゾイ"
+  },
+  {
+    "name": "キャッティ",
+    "cost": "2.0",
+    "slug": "catty",
+    "url": "https://starward.wikiru.jp/?キャッティ"
+  },
+  {
+    "name": "ブリーカー",
+    "cost": "2.0",
+    "slug": "breaker",
+    "note": "シーズンパス",
+    "url": "https://starward.wikiru.jp/?ブリーカー"
+  },
+  {
+    "name": "ガラハッド",
+    "cost": "2.0",
+    "slug": "galahad",
+    "note": "コラボ",
+    "url": "https://starward.wikiru.jp/?ガラハッド"
+  },
+  {
+    "name": "フランカー",
+    "cost": "2.0",
+    "slug": "flanker",
+    "note": "シーズンパス",
+    "url": "https://starward.wikiru.jp/?フランカー"
+  },
+  {
+    "name": "アイスリン",
+    "cost": "2.0",
+    "slug": "icelin",
+    "note": "シーズンパス",
+    "url": "https://starward.wikiru.jp/?アイスリン"
+  },
+  {
+    "name": "クリスタ",
+    "cost": "2.0",
+    "slug": "crysta",
+    "url": "https://starward.wikiru.jp/?クリスタ"
+  },
+  {
+    "name": "タチアナ",
+    "cost": "2.0",
+    "slug": "tatiana",
+    "note": "シーズンパス",
+    "url": "https://starward.wikiru.jp/?タチアナ"
+  },
+  {
+    "name": "フィービー",
+    "cost": "2.0",
+    "slug": "phoebe",
+    "note": "期間限定",
+    "url": "https://starward.wikiru.jp/?フィービー"
+  },
+  {
+    "name": "オーキッド",
+    "cost": "1.5",
+    "slug": "orchid",
+    "url": "https://starward.wikiru.jp/?オーキッド"
+  },
+  {
+    "name": "スノーウォル",
+    "cost": "1.5",
+    "slug": "snow-wal",
+    "url": "https://starward.wikiru.jp/?スノーウォル"
+  },
+  {
+    "name": "カタリナ",
+    "cost": "1.5",
+    "slug": "katarina",
+    "url": "https://starward.wikiru.jp/?カタリナ"
+  },
+  {
+    "name": "ローランド",
+    "cost": "1.5",
+    "slug": "roland",
+    "url": "https://starward.wikiru.jp/?ローランド"
+  },
+  {
+    "name": "ヤミン",
+    "cost": "1.5",
+    "slug": "yamin",
+    "url": "https://starward.wikiru.jp/?ヤミン"
+  }
+]
