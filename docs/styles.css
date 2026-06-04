@@ -1616,6 +1616,12 @@ body:not(.video-admin) .video-channel-panel {
   align-items: center;
   justify-content: space-between;
   gap: 16px;
+  min-height: 170px;
+  padding: 22px 24px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(7, 9, 13, 0.38);
+  overflow: hidden;
 }
 
 .video-selected-head h3 {
@@ -1623,9 +1629,26 @@ body:not(.video-admin) .video-channel-panel {
   font-size: clamp(2rem, 4vw, 3rem);
 }
 
+.video-selected-art {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  flex: 0 0 112px;
+  align-self: stretch;
+  margin: -14px 0 -22px auto;
+  pointer-events: none;
+}
+
+.video-selected-art img {
+  width: 132px;
+  max-height: 168px;
+  object-fit: contain;
+  object-position: center bottom;
+  filter: drop-shadow(0 16px 24px rgba(0, 0, 0, 0.5));
+}
+
 body:not(.video-admin) .video-selected-head {
-  padding-bottom: 12px;
-  border-bottom: 1px solid var(--line);
+  border-color: rgba(84, 216, 255, 0.22);
 }
 
 body:not(.video-admin) .video-selected-head h3 {
@@ -1743,7 +1766,7 @@ body:not(.video-admin) .video-selected-head h3 {
 
 .registered-video-card {
   display: grid;
-  grid-template-columns: 58px minmax(0, 1fr) minmax(220px, 320px);
+  grid-template-columns: 58px minmax(0, 1fr);
   align-items: center;
   gap: 18px;
   padding: 18px;
@@ -1791,6 +1814,7 @@ body:not(.video-admin) .video-selected-head h3 {
 }
 
 .registered-video-thumb {
+  grid-column: 1 / -1;
   display: block;
   position: relative;
   overflow: hidden;
@@ -2392,6 +2416,22 @@ body.page-editing .page-edit-block:hover {
   .nav {
     gap: 16px;
     font-size: 0.88rem;
+  }
+
+  .video-selected-head {
+    align-items: flex-start;
+    min-height: 140px;
+    padding: 18px;
+  }
+
+  .video-selected-art {
+    flex-basis: 76px;
+    margin: -8px 0 -18px auto;
+  }
+
+  .video-selected-art img {
+    width: 86px;
+    max-height: 126px;
   }
 
   .button {

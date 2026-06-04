@@ -1,20 +1,38 @@
 {
+  "/characters.html": {
+    "text": {
+      "p-2": "キャラ別の武装や凸効果を載せています。<br>各ページに凸効果情報あり",
+      "p-162": "\n        キャラ詳細の参照元:\n        <a href=\"https://w.atwiki.jp/starward/\" target=\"_blank\" rel=\"noreferrer\" data-edit-key=\"a-163\" data-edit-original=\"星の翼(Starward) 日本語wiki\" contenteditable=\"true\" spellcheck=\"false\">星の翼(Starward) 日本語wiki</a>\n      "
+    },
+    "hidden": {
+      "block-7": true
+    },
+    "added": []
+  },
+  "/tools.html": {
+    "text": {},
+    "hidden": {},
+    "added": []
+  },
   "/index.html": {
+    "text": {
+      "p-0": "<br>",
+      "p-2": "キャラ情報、歴代のアップデート情報、最高ランク帯の動画等<br>星の翼の様々な情報を知識的に見るための非公式サイトです。",
+      "p-17": "\n            公式PV、更新告知等の動画",
+      "p-23": "\n            キャラ別アップデート、ランダム抽選、2v2座学用ツール、Pick/BanをこのHPから開けます",
+      "index-tools-copy": "\n            キャラ別アップデート、ランダム抽選、2v2座学用ツール、Pick/BanをこのHPから開けます\n          "
+    },
+    "hidden": {},
+    "added": []
+  },
+  "/streamers.html": {
     "text": {},
     "hidden": {},
     "added": []
   },
   "/videos.html": {
     "text": {
-      "h3-6": "グリフィン"
-    },
-    "hidden": {},
-    "added": []
-  },
-  "/editor.html": {
-    "text": {
-      "p-5": "読み込み完了。セルを編集すると即データに反映されます。",
-      "h2-7": "ヴォイドセーバー / Cost 3.0"
+      "h3-6": "咲迦"
     },
     "hidden": {},
     "added": []

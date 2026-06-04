@@ -8,6 +8,79 @@
   const COSTS = ["3.0", "2.5", "2.0", "1.5"];
   const FALLBACK_CHARACTERS = [{"name":"グリフィン","cost":"3.0","slug":"griffin","url":""},{"name":"ヒカリ","cost":"3.0","slug":"hikari","url":""},{"name":"エルフィン","cost":"3.0","slug":"elfin","url":""},{"name":"ケルビム","cost":"3.0","slug":"cherubim","url":""},{"name":"シュウウ","cost":"3.0","slug":"shuuu","url":""},{"name":"スズラン","cost":"3.0","slug":"suzuran","url":""},{"name":"キャヴァリー","cost":"3.0","slug":"cavalry","url":""},{"name":"ラジエル","cost":"3.0","slug":"raziel","url":""},{"name":"影","cost":"3.0","slug":"kage","url":""},{"name":"ライン","cost":"3.0","slug":"line","url":""},{"name":"ロタ","cost":"3.0","slug":"rota","url":""},{"name":"イーザー","cost":"3.0","slug":"ether","url":""},{"name":"秋雲","cost":"3.0","slug":"aki-gumo","url":""},{"name":"ベータ-ロンギヌス","cost":"3.0","slug":"beta-longinus","url":""},{"name":"キャミィ","cost":"3.0","slug":"cammy","url":""},{"name":"セイレン","cost":"3.0","slug":"seiren","url":""},{"name":"無銘","cost":"3.0","slug":"mumei","url":""},{"name":"アカツキ","cost":"3.0","slug":"akatsuki","url":""},{"name":"ヴォイドセーバー","cost":"3.0","slug":"void-saber","url":""},{"name":"フリード","cost":"2.5","slug":"freed","url":""},{"name":"カゼ","cost":"2.5","slug":"kaze","url":""},{"name":"シャオリン","cost":"2.5","slug":"shaolin","url":""},{"name":"シャープ","cost":"2.5","slug":"sharp","url":""},{"name":"アリス","cost":"2.5","slug":"alice","url":""},{"name":"スカイセーバー","cost":"2.5","slug":"sky-saber","url":""},{"name":"十八号","cost":"2.5","slug":"no-18","url":""},{"name":"シグナス","cost":"2.5","slug":"cygnus","url":""},{"name":"アンジェリス","cost":"2.5","slug":"angelis","url":""},{"name":"ヴァルキア","cost":"2.5","slug":"valkia","url":""},{"name":"エヴァ","cost":"2.5","slug":"eva","url":""},{"name":"轟雷改","cost":"2.5","slug":"gourai-kai","url":""},{"name":"稲","cost":"2.5","slug":"ina","url":""},{"name":"バーゼラルド","cost":"2.5","slug":"baselard","url":""},{"name":"ノーラ","cost":"2.5","slug":"nora","url":""},{"name":"ランスロット","cost":"2.5","slug":"lancelot","url":""},{"name":"サンダーボルト・OTOME","cost":"2.5","slug":"thunderbolt-otome","url":""},{"name":"ガラハッド・暁","cost":"2.5","slug":"galahad-akatsuki","url":""},{"name":"デッド・アライブ","cost":"2.5","slug":"dead-alive","url":""},{"name":"ハルカ","cost":"2.5","slug":"haruka","url":""},{"name":"ドラグナー","cost":"2.5","slug":"dragner","url":""},{"name":"レキ","cost":"2.5","slug":"reki","url":""},{"name":"ブラック★ロックシューター","cost":"2.5","slug":"black-rock-shooter","url":""},{"name":"デッドマスター","cost":"2.5","slug":"dead-master","url":""},{"name":"ベータ","cost":"2.0","slug":"beta","url":""},{"name":"デュカリオン","cost":"2.0","slug":"deucalion","url":""},{"name":"セラフィム","cost":"2.0","slug":"seraphim","url":""},{"name":"アイーダ","cost":"2.0","slug":"aida","url":""},{"name":"パラス","cost":"2.0","slug":"pallas","url":""},{"name":"スコーピオン","cost":"2.0","slug":"scorpion","url":""},{"name":"ヴァーチェ","cost":"2.0","slug":"virtue","url":""},{"name":"ザハロワ","cost":"2.0","slug":"zaharowa","url":""},{"name":"咲迦","cost":"2.0","slug":"sakuya","url":""},{"name":"チンニ","cost":"2.0","slug":"qinni","url":""},{"name":"ダークスター","cost":"2.0","slug":"darkstar","url":""},{"name":"ヒビキ","cost":"2.0","slug":"hibiki","url":""},{"name":"スティレット","cost":"2.0","slug":"stylet","url":""},{"name":"ボルゾイ","cost":"2.0","slug":"borzoi","url":""},{"name":"キャッティ","cost":"2.0","slug":"catty","url":""},{"name":"ブリーカー","cost":"2.0","slug":"breaker","url":""},{"name":"ガラハッド","cost":"2.0","slug":"galahad","url":""},{"name":"フランカー","cost":"2.0","slug":"flanker","url":""},{"name":"アイスリン","cost":"2.0","slug":"icelin","url":""},{"name":"クリスタ","cost":"2.0","slug":"crysta","url":""},{"name":"タチアナ","cost":"2.0","slug":"tatiana","url":""},{"name":"フィービー","cost":"2.0","slug":"phoebe","url":""},{"name":"オーキッド","cost":"1.5","slug":"orchid","url":""},{"name":"スノーウォル","cost":"1.5","slug":"snow-wal","url":""},{"name":"カタリナ","cost":"1.5","slug":"katarina","url":""},{"name":"ローランド","cost":"1.5","slug":"roland","url":""},{"name":"ヤミン","cost":"1.5","slug":"yamin","url":""}];
 
+  const CHARACTER_ART_PATHS = {
+    aida: "tools/apps/shared/characters/20/Aida.png",
+    akatsuki: "tools/apps/shared/characters/30/akatuki.png",
+    "aki-gumo": "tools/apps/shared/characters/30/Akigumo.png",
+    alice: "tools/apps/shared/characters/25/Aliz.png",
+    angelis: "tools/apps/shared/characters/25/Angelis.png",
+    baselard: "tools/apps/shared/characters/25/baze.png",
+    beta: "tools/apps/shared/characters/20/Beta.png",
+    "beta-longinus": "tools/apps/shared/characters/30/LonginusBeta.png",
+    "black-rock-shooter": "tools/apps/shared/characters/25/BRS.png",
+    borzoi: "tools/apps/shared/characters/20/Borzoi.png",
+    breaker: "tools/apps/shared/characters/20/Breaker.png",
+    cammy: "tools/apps/shared/characters/30/Cammy.png",
+    catty: "tools/apps/shared/characters/20/Kitty.png",
+    cavalry: "tools/apps/shared/characters/30/Cavalry.png",
+    cherubim: "tools/apps/shared/characters/30/Cherub.png",
+    crysta: "tools/apps/shared/characters/20/kurisu.png",
+    cygnus: "tools/apps/shared/characters/25/Cygnus.png",
+    darkstar: "tools/apps/shared/characters/20/Darkstar.png",
+    "dead-alive": "tools/apps/shared/characters/25/DeadAlive.png",
+    "dead-master": "tools/apps/shared/characters/25/DeadMaster.png",
+    deucalion: "tools/apps/shared/characters/20/Deucalion.png",
+    dragner: "tools/apps/shared/characters/25/doragu.png",
+    elfin: "tools/apps/shared/characters/30/Elfin.png",
+    ether: "tools/apps/shared/characters/30/Ether.png",
+    eva: "tools/apps/shared/characters/25/Iva.png",
+    flanker: "tools/apps/shared/characters/20/Franca.png",
+    freed: "tools/apps/shared/characters/25/Ffreedo.png",
+    "galahad-akatsuki": "tools/apps/shared/characters/25/sirogara-Photoroom.png",
+    galahad: "tools/apps/shared/characters/20/kuro.png",
+    "gourai-kai": "tools/apps/shared/characters/25/gouraikai.png",
+    griffin: "tools/apps/shared/characters/30/Griffin.png",
+    haruka: "tools/apps/shared/characters/25/haruka.png",
+    hibiki: "tools/apps/shared/characters/20/Hibiki.png",
+    hikari: "tools/apps/shared/characters/30/Hikari.png",
+    icelin: "tools/apps/shared/characters/20/ice.png",
+    ina: "tools/apps/shared/characters/25/Ine.png",
+    kage: "tools/apps/shared/characters/30/Shadow.png",
+    katarina: "tools/apps/shared/characters/15/Katerina.png",
+    kaze: "tools/apps/shared/characters/25/Kaze.png",
+    lancelot: "tools/apps/shared/characters/25/Lancelot.png",
+    line: "tools/apps/shared/characters/30/Rhine.png",
+    mumei: "tools/apps/shared/characters/30/Mumei.png",
+    "no-18": "tools/apps/shared/characters/25/XVIII.png",
+    nora: "tools/apps/shared/characters/25/Nora.png",
+    orchid: "tools/apps/shared/characters/15/Orchid.png",
+    pallas: "tools/apps/shared/characters/20/Pallas.png",
+    phoebe: "tools/apps/shared/characters/20/fibi.png",
+    qinni: "tools/apps/shared/characters/20/Qingni.png",
+    raziel: "tools/apps/shared/characters/30/Rasiel.png",
+    reki: "tools/apps/shared/characters/25/reki.png",
+    roland: "tools/apps/shared/characters/15/Roland.png",
+    rota: "tools/apps/shared/characters/30/Rota.png",
+    sakuya: "tools/apps/shared/characters/20/kuro.png",
+    scorpion: "tools/apps/shared/characters/20/Scorpion.png",
+    seiren: "tools/apps/shared/characters/30/Siren.png",
+    seraphim: "tools/apps/shared/characters/20/Seraph.png",
+    shaolin: "tools/apps/shared/characters/25/Xiaoling.png",
+    sharp: "tools/apps/shared/characters/25/Sharp.png",
+    shuuu: "tools/apps/shared/characters/30/Qiuyu.png",
+    "sky-saber": "tools/apps/shared/characters/25/Skysaber.png",
+    "snow-wal": "tools/apps/shared/characters/15/Snowowl.png",
+    stylet: "tools/apps/shared/characters/20/suteko.png",
+    suzuran: "tools/apps/shared/characters/30/Convallaria.png",
+    tatiana: "tools/apps/shared/characters/20/tatiana.png",
+    "thunderbolt-otome": "tools/apps/shared/characters/25/sanboruto.png",
+    valkia: "tools/apps/shared/characters/25/Valkia.png",
+    virtue: "tools/apps/shared/characters/20/Virtues.png",
+    "void-saber": "tools/apps/shared/characters/30/VoidSaber.png",
+    yamin: "tools/apps/shared/characters/15/Yammyn.png",
+    zaharowa: "tools/apps/shared/characters/20/Zakharova.png",
+  };
+
   const wikiPageName = (name) =>
     ({
       "ヴァルキア": "ヴァルキア_通常時",
@@ -220,6 +293,10 @@
     return `tools/assets/character-icons-api/${aliases[char.name] || char.name}.png`;
   }
 
+  function characterArtFor(char) {
+    return CHARACTER_ART_PATHS[char.slug] || iconFor(char);
+  }
+
   function videosForSlug(slug) {
     return state.library.videos[slug] || [];
   }
@@ -271,9 +348,47 @@
     }
   }
 
-  function thumbnailFor(url) {
+  function thumbnailCandidatesFor(url) {
     const id = youtubeVideoId(url);
-    return id ? `https://i.ytimg.com/vi/${encodeURIComponent(id)}/hqdefault.jpg` : "";
+    if (!id) return [];
+    const safeId = encodeURIComponent(id);
+    return [
+      `https://i.ytimg.com/vi/${safeId}/maxresdefault.jpg`,
+      `https://i.ytimg.com/vi/${safeId}/sddefault.jpg`,
+      `https://i.ytimg.com/vi/${safeId}/hqdefault.jpg`,
+      `https://i.ytimg.com/vi/${safeId}/mqdefault.jpg`,
+    ];
+  }
+
+  function thumbnailFor(url) {
+    return thumbnailCandidatesFor(url)[0] || "";
+  }
+
+  window.starwardVideoThumbFallback = (img) => {
+    const fallbacks = (img.dataset.thumbFallbacks || "").split("|").filter(Boolean);
+    const next = fallbacks.shift();
+    if (!next) {
+      img.onerror = null;
+      img.onload = null;
+      return;
+    }
+    img.dataset.thumbFallbacks = fallbacks.join("|");
+    img.src = next;
+  };
+
+  window.starwardVideoThumbLoaded = (img) => {
+    if (img.dataset.thumbChecked === img.currentSrc) return;
+    img.dataset.thumbChecked = img.currentSrc;
+    if (img.naturalWidth <= 160 || img.naturalHeight <= 100) {
+      window.starwardVideoThumbFallback(img);
+    }
+  };
+
+  function thumbnailFallbackAttr(url) {
+    const fallbacks = thumbnailCandidatesFor(url).slice(1);
+    return fallbacks.length
+      ? ` data-thumb-fallbacks="${esc(fallbacks.join("|"))}" onerror="window.starwardVideoThumbFallback && window.starwardVideoThumbFallback(this)" onload="window.starwardVideoThumbLoaded && window.starwardVideoThumbLoaded(this)"`
+      : "";
   }
 
   function formatDate(value) {
@@ -498,13 +613,21 @@
 
     els.selectedName.textContent = state.admin ? char.name : `${char.name}の動画`;
     els.selectedCost.textContent = `COST ${char.cost}`;
+    const artHtml = `<figure class="video-selected-art" aria-hidden="true">
+      <img src="${esc(characterArtFor(char))}" alt="" loading="lazy">
+    </figure>`;
+    const selectedArt = els.selectedCost.previousElementSibling?.classList?.contains("video-selected-art")
+      ? els.selectedCost.previousElementSibling
+      : null;
+    if (selectedArt) selectedArt.remove();
+    els.selectedCost.insertAdjacentHTML("beforebegin", artHtml);
 
     if (!entries.length) {
       els.list.innerHTML = `<div class="registered-empty">このキャラに登録された動画はまだありません。</div>`;
       return;
     }
 
-    els.list.innerHTML = entries.map((entry) => {
+    const cardsHtml = entries.map((entry) => {
       const channel = channelById(entry.channelId);
       const icon = channelIconFor(channel);
       const thumbnail = thumbnailFor(entry.url);
@@ -530,9 +653,10 @@
             <button class="video-admin-only" type="button" data-delete-video="${esc(entry.id)}">削除</button>
           </div>
         </div>
-        ${thumbnail ? `<a class="registered-video-thumb" href="${esc(entry.url)}" target="_blank" rel="noreferrer" aria-label="動画を開く">${entry.publishedAt ? `<span class="video-published-date">${esc(entry.publishedAt)}</span>` : `<span class="video-published-date is-loading">投稿日取得中</span>`}<img src="${esc(thumbnail)}" alt=""></a>` : ""}
+        ${thumbnail ? `<a class="registered-video-thumb" href="${esc(entry.url)}" target="_blank" rel="noreferrer" aria-label="動画を開く">${entry.publishedAt ? `<span class="video-published-date">${esc(entry.publishedAt)}</span>` : `<span class="video-published-date is-loading">投稿日取得中</span>`}<img src="${esc(thumbnail)}" alt="" loading="lazy"${thumbnailFallbackAttr(entry.url)}></a>` : ""}
       </article>
     `;}).join("");
+    els.list.innerHTML = cardsHtml;
 
     els.list.querySelectorAll("[data-delete-video]").forEach((button) => {
       button.addEventListener("click", () => {
