@@ -1,5 +1,0 @@
-User-agent: *
-Disallow: /admin.html
-Disallow: /editor.html
-Disallow: /*?admin=1
-Disallow: /*?edit=1
