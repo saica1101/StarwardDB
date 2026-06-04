@@ -772,7 +772,7 @@ h1 {
 .move-table-panel {
   display: grid;
   gap: 18px;
-  width: min(1120px, 100%);
+  width: min(1060px, 100%);
   margin: 0 auto;
   padding: 18px;
   border: 1px solid rgba(84, 216, 255, 0.28);
@@ -2026,6 +2026,13 @@ body:not(.video-admin) .video-selected-head h3 {
   justify-content: center;
   margin: 0 auto;
   padding-bottom: 0;
+}
+
+.move-table-panel .move-form-tabs {
+  justify-content: center;
+  margin: 0 auto;
+  padding-bottom: 0;
+  width: 100%;
 }
 
 .form-tab {
