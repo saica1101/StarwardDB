@@ -773,19 +773,17 @@ characterSearch?.addEventListener("input", () => {
   const shouldLoadPublicContributors = (() => {
     if (typeof fetch !== "function") return false;
     if (!siteAdmin) return true;
-    try {
-      const stored = JSON.parse(localStorage.getItem(storageKey) || "null");
-      return !(Array.isArray(stored) && stored.length);
-    } catch {
-      return true;
-    }
+    return true;
   })();
 
   if (shouldLoadPublicContributors) {
-    fetch("contributors-data.json?v=20260604contributors1")
+    fetch("contributors-data.json?v=20260605adminsync1")
       .then((response) => response.json())
       .then((contributors) => {
         publicContributors = Array.isArray(contributors) ? contributors : [];
+        if (siteAdmin && publicContributors.length) {
+          localStorage.setItem(storageKey, JSON.stringify(publicContributors));
+        }
         renderContributors();
       })
       .catch(renderContributors);

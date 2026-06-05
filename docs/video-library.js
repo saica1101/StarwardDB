@@ -236,14 +236,14 @@
 
   async function loadPublicLibrary() {
     if (typeof fetch !== "function") return;
-    if (state.admin && hasLibraryContent(state.library)) return;
     try {
-      const response = await fetch("video-library-data.json?v=20260603jsonsave2");
+      const response = await fetch("video-library-data.json?v=20260605adminsync1");
       if (!response.ok) return;
       const data = await response.json();
       const publicLibrary = data?.videos && data?.channels ? data : { channels: [], videos: {} };
       if (hasLibraryContent(publicLibrary)) {
         state.library = publicLibrary;
+        if (state.admin) localStorage.setItem(STORAGE_KEY, JSON.stringify(state.library));
       }
     } catch {
       state.library = loadLibrary();
