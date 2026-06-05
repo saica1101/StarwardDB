@@ -152,7 +152,7 @@ scrollToHashTarget();
 
 (() => {
   if (siteAdmin || typeof fetch !== "function") return;
-  fetch("page-edits-data.json?v=20260604pageedits1")
+  fetch(`page-edits-data.json?v=${Date.now()}`)
     .then((response) => response.ok ? response.json() : {})
     .then((allEdits) => {
       const key = pageEditKeyCandidates().find((candidate) => allEdits?.[candidate]);
@@ -569,6 +569,7 @@ characterSearch?.addEventListener("input", () => {
 
   assignKeys();
   applyEdits();
+  if (siteAdmin) publishPageEdits(loadEdits());
   scrollToHashTarget();
   window.StarwardPageEditor = {
     enable: () => setEditMode(true),
