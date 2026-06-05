@@ -24,8 +24,19 @@
   },
   "/editor.html": {
     "text": {
-      "p-5": "生成コマンドをコピーしました: node generate-character-pages.js",
-      "h2-7": "ヴォイドセーバー / Cost 3.0"
+      "p-5": "保存完了。docs のキャラページも更新しました。",
+      "h2-7": "稲 / Cost 2.5"
+    },
+    "hidden": {},
+    "added": []
+  },
+  "/characters/ina.html": {
+    "text": {
+      "li-16": "<strong data-edit-key=\"strong-17\" data-edit-original=\"1凸\" contenteditable=\"true\" spellcheck=\"false\">1凸</strong><span>「メイン射撃」の2段目を使用する際、弾薬を消費しない</span>",
+      "li-18": "<strong data-edit-key=\"strong-19\" data-edit-original=\"2凸\" contenteditable=\"true\" spellcheck=\"false\">2凸</strong><span>「後メイン射撃」の「バックジャンプ射撃」が使用可能になる</span>",
+      "li-20": "<strong data-edit-key=\"strong-21\" data-edit-original=\"3凸\" contenteditable=\"true\" spellcheck=\"false\">3凸</strong><span>「メイン射撃主弾数」のリロード時間が短縮</span>",
+      "li-22": "<strong data-edit-key=\"strong-23\" data-edit-original=\"4凸\" contenteditable=\"true\" spellcheck=\"false\">4凸</strong><span>「サブ射撃副弾数」のリロード時間2秒短縮</span>",
+      "li-24": "<strong data-edit-key=\"strong-25\" data-edit-original=\"5凸\" contenteditable=\"true\" spellcheck=\"false\">5凸</strong><span>「後バーストアタック」の「流星の一矢」が使用可能になる</span>"
     },
     "hidden": {},
     "added": []
