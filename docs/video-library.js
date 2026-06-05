@@ -61,7 +61,7 @@
     reki: "tools/apps/shared/characters/25/reki.png",
     roland: "tools/apps/shared/characters/15/Roland.png",
     rota: "tools/apps/shared/characters/30/Rota.png",
-    sakuya: "tools/apps/shared/characters/20/kuro.png",
+    sakuya: "tools/apps/shared/characters/20/Emika.png",
     scorpion: "tools/apps/shared/characters/20/Scorpion.png",
     seiren: "tools/apps/shared/characters/30/Siren.png",
     seraphim: "tools/apps/shared/characters/20/Seraph.png",

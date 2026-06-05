@@ -12,10 +12,9 @@
     "description": "S12ランキング1位　毎シーズンランキング上位に入る高ランクプレイヤーの1人"
   },
   {
-    "name": "みみのこのみみ(アゴアリアゴナシ)",
+    "name": "アゴアリアゴナシ",
     "url": "https://www.youtube.com/@%E3%81%BF%E3%81%BF%E3%81%AE%E3%81%93%E3%81%AE%E3%81%BF%E3%81%BF",
-    "iconUrl": "https://yt3.googleusercontent.com/ZjA-3TgoBEjFybiUgNMC3IvTGXtr0rGIfx4kWGtjchJK5mVEG0BuS3lN0yHX80HYr3FvJT3a=s900-c-k-c0x00ffffff-no-rj",
-    "description": "星の翼最上位帯の1人　近接系のキャラのお使いに長けている　バリトンボイスのイケボ"
+    "iconUrl": "https://yt3.googleusercontent.com/ZjA-3TgoBEjFybiUgNMC3IvTGXtr0rGIfx4kWGtjchJK5mVEG0BuS3lN0yHX80HYr3FvJT3a=s900-c-k-c0x00ffffff-no-rj"
   },
   {
     "name": "mahiru",
@@ -48,5 +47,15 @@
     "name": "MilkTea",
     "url": "https://www.youtube.com/@milktea1053/videos",
     "iconUrl": "https://yt3.googleusercontent.com/ytc/AIdro_l3zWRY9qvESDWfg-jFrd8KeBat2jtR52kKkYLm1pIYig=s160-c-k-c0x00ffffff-no-rj"
+  },
+  {
+    "name": "高山YT",
+    "url": "https://www.youtube.com/@takayama_games/featured",
+    "iconUrl": "https://yt3.googleusercontent.com/ytc/AIdro_ndL1t4IYhBw9fC3NB6Aa0JAOK6wfGhur4Cd3hRmhWK5JQ=s160-c-k-c0x00ffffff-no-rj"
+  },
+  {
+    "name": "桃",
+    "url": "https://www.youtube.com/@%E6%A1%83-w1r",
+    "iconUrl": "https://yt3.googleusercontent.com/HMDVplsE3Ytzewq_fzMIrsjUOjku1KESe0tD_iIGkOHVe6_bFG_2WiJPpc_AN8u_feF63Mqj8g=s160-c-k-c0x00ffffff-no-rj"
   }
 ]
