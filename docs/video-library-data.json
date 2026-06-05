@@ -41,18 +41,6 @@
       "name": "Milk tea",
       "url": "https://www.youtube.com/@milktea1053",
       "icon": "https://yt3.googleusercontent.com/ytc/AIdro_l3zWRY9qvESDWfg-jFrd8KeBat2jtR52kKkYLm1pIYig=s160-c-k-c0x00ffffff-no-rj"
-    },
-    {
-      "id": "1780557396963-7gxzbb",
-      "name": "高山YT",
-      "url": "https://www.youtube.com/@takayama_games/videos",
-      "icon": "https://yt3.googleusercontent.com/ytc/AIdro_ndL1t4IYhBw9fC3NB6Aa0JAOK6wfGhur4Cd3hRmhWK5JQ=s160-c-k-c0x00ffffff-no-rj"
-    },
-    {
-      "id": "1780557658907-gnkmjh",
-      "name": "桃",
-      "url": "https://www.youtube.com/@%E6%A1%83-w1r",
-      "icon": "https://yt3.googleusercontent.com/HMDVplsE3Ytzewq_fzMIrsjUOjku1KESe0tD_iIGkOHVe6_bFG_2WiJPpc_AN8u_feF63Mqj8g=s160-c-k-c0x00ffffff-no-rj"
     }
   ],
   "videos": {
@@ -114,8 +102,7 @@
         "url": "https://www.youtube.com/watch?v=OzdsIpMHU3w&t=15s",
         "note": "",
         "channelId": "1780302927852-nsdho4",
-        "createdAt": "2026-06-01T08:54:47.326Z",
-        "publishedAt": "2026-05-11"
+        "createdAt": "2026-06-01T08:54:47.326Z"
       },
       {
         "id": "1780303982891-6xoyjx",
@@ -123,8 +110,7 @@
         "url": "https://www.youtube.com/watch?v=PMK2r4TzzUM",
         "note": "",
         "channelId": "1780302927852-nsdho4",
-        "createdAt": "2026-06-01T08:53:02.891Z",
-        "publishedAt": "2026-05-18"
+        "createdAt": "2026-06-01T08:53:02.891Z"
       },
       {
         "id": "1780303939546-xu7t9v",
@@ -132,8 +118,7 @@
         "url": "https://www.youtube.com/watch?v=qAJmf4Be3HA",
         "note": "",
         "channelId": "1780302927852-nsdho4",
-        "createdAt": "2026-06-01T08:52:19.546Z",
-        "publishedAt": "2026-05-23"
+        "createdAt": "2026-06-01T08:52:19.546Z"
       }
     ],
     "darkstar": [
@@ -158,15 +143,6 @@
     ],
     "hikari": [
       {
-        "id": "1780304125982-sdp5wl",
-        "title": "【星の翼】初投稿！ヒカリ視点【ヒカリ】【Starward】",
-        "url": "https://www.youtube.com/watch?v=fCKgvy5FN9o&t",
-        "note": "",
-        "channelId": "1780302927852-nsdho4",
-        "createdAt": "2026-06-01T08:55:25.982Z",
-        "publishedAt": "2026-05-08"
-      },
-      {
         "id": "1780304003520-41euqg",
         "title": "【星の翼】ヒカリ視点【ヒカリ】【Starward】",
         "url": "https://www.youtube.com/watch?v=q3_y7eZPvhg&t=3s",
@@ -174,6 +150,15 @@
         "channelId": "1780302927852-nsdho4",
         "createdAt": "2026-06-01T08:53:23.520Z",
         "publishedAt": "2026-05-17"
+      },
+      {
+        "id": "1780304125982-sdp5wl",
+        "title": "【星の翼】初投稿！ヒカリ視点【ヒカリ】【Starward】",
+        "url": "https://www.youtube.com/watch?v=fCKgvy5FN9o&t",
+        "note": "",
+        "channelId": "1780302927852-nsdho4",
+        "createdAt": "2026-06-01T08:55:25.982Z",
+        "publishedAt": "2026-05-08"
       }
     ],
     "akatsuki": [
@@ -192,8 +177,7 @@
         "url": "https://www.youtube.com/watch?v=HDbAff3yJLI&t",
         "note": "",
         "channelId": "1780302927852-nsdho4",
-        "createdAt": "2026-06-01T08:55:56.810Z",
-        "publishedAt": "2026-05-10"
+        "createdAt": "2026-06-01T08:55:56.810Z"
       },
       {
         "id": "1780304018406-kbwbkc",
@@ -201,8 +185,7 @@
         "url": "https://www.youtube.com/watch?v=1tyFAPsd76w&t=1s",
         "note": "",
         "channelId": "1780302927852-nsdho4",
-        "createdAt": "2026-06-01T08:53:38.406Z",
-        "publishedAt": "2026-05-16"
+        "createdAt": "2026-06-01T08:53:38.406Z"
       },
       {
         "id": "1780306856519-9vmz5s",
@@ -210,8 +193,7 @@
         "url": "https://www.youtube.com/watch?v=Er4bPadt1IA",
         "note": "",
         "channelId": "1780302998162-2aeks7",
-        "createdAt": "2026-06-01T09:40:56.519Z",
-        "publishedAt": "2026-03-06"
+        "createdAt": "2026-06-01T09:40:56.519Z"
       }
     ],
     "seiren": [
@@ -246,9 +228,10 @@
         "title": "【星の翼】S13/キャミィ視点18【StarWard】",
         "url": "https://www.youtube.com/watch?v=Zzehl4pDeKU",
         "note": "",
-        "channelId": "1780302927852-nsdho4",
+        "channelId": "1780305530923-cs3sx9",
         "createdAt": "2026-06-01T09:20:06.308Z",
-        "publishedAt": "2026-05-14"
+        "publishedAt": "2026-05-14",
+        "updatedAt": "2026-06-04T04:56:06.874Z"
       },
       {
         "id": "1780305557650-purbr0",
@@ -394,16 +377,6 @@
     ],
     "griffin": [
       {
-        "id": "1780401752436-oub2ut",
-        "title": "【星の翼】 ランクマ 相方グリフィン視点8",
-        "url": "https://www.youtube.com/watch?v=BOt-ouKOLLo",
-        "note": "",
-        "publishedAt": "",
-        "channelId": "1780400579987-io4pw5",
-        "createdAt": "2026-06-02T12:02:32.436Z",
-        "updatedAt": "2026-06-02T12:04:09.927Z"
-      },
-      {
         "id": "1780308603825-k49088",
         "title": "【星の翼】全武装の使い道から対面と相方のキャラ相性、果ては新しいセットプレイまでも詰め込んだリメイク版グリフィン解説！！！",
         "url": "https://www.youtube.com/watch?v=ut8jxdQG7k8&t",
@@ -412,6 +385,16 @@
         "createdAt": "2026-06-01T10:10:03.825Z",
         "updatedAt": "2026-06-01T15:48:14.420Z",
         "publishedAt": "2025-08-13"
+      },
+      {
+        "id": "1780401752436-oub2ut",
+        "title": "【星の翼】 ランクマ 相方グリフィン視点8",
+        "url": "https://www.youtube.com/watch?v=BOt-ouKOLLo",
+        "note": "",
+        "publishedAt": "",
+        "channelId": "1780400579987-io4pw5",
+        "createdAt": "2026-06-02T12:02:32.436Z",
+        "updatedAt": "2026-06-02T12:04:09.927Z"
       },
       {
         "id": "1780305788486-bb9tub",
@@ -538,8 +521,7 @@
         "url": "https://www.youtube.com/watch?v=7j6QYCa4QQw",
         "note": "",
         "channelId": "1780302998162-2aeks7",
-        "createdAt": "2026-06-01T09:43:48.643Z",
-        "publishedAt": "2025-07-12"
+        "createdAt": "2026-06-01T09:43:48.643Z"
       }
     ],
     "dragner": [
@@ -637,38 +619,6 @@
         "publishedAt": "",
         "channelId": "1780400579987-io4pw5",
         "createdAt": "2026-06-02T11:59:48.382Z"
-      }
-    ],
-    "shuuu": [
-      {
-        "id": "1780557423955-386qh8",
-        "title": "【星の翼】steam版ランクマッチ　7000帯　秋雨（シュウウ）視点",
-        "url": "https://www.youtube.com/watch?v=weTy07QL6L8",
-        "note": "",
-        "publishedAt": "2026-06-02",
-        "channelId": "1780557396963-7gxzbb",
-        "createdAt": "2026-06-04T07:17:03.955Z"
-      }
-    ],
-    "sakuya": [
-      {
-        "id": "1780557916421-l7e5p7",
-        "title": "【星の翼】エミカ視点　ランクマッチ",
-        "url": "https://www.youtube.com/watch?v=N6EGmf--w7U",
-        "note": "",
-        "publishedAt": "",
-        "channelId": "1780557658907-gnkmjh",
-        "createdAt": "2026-06-04T07:25:16.421Z"
-      },
-      {
-        "id": "1780557645600-2l1yhr",
-        "title": "【星の翼】エミカ視点　S13　ランクマッチ",
-        "url": "https://www.youtube.com/watch?v=uzdOwuK3-HA",
-        "note": "",
-        "publishedAt": "",
-        "channelId": "1780557658907-gnkmjh",
-        "createdAt": "2026-06-04T07:20:45.600Z",
-        "updatedAt": "2026-06-04T07:21:05.779Z"
       }
     ]
   }
