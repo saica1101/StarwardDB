@@ -1,15 +1,17 @@
 :root {
   color-scheme: dark;
-  --bg: #07090d;
-  --surface: #101722;
-  --surface-2: #17212d;
-  --text: #eef5ff;
-  --muted: #b7c4d1;
-  --line: rgba(255, 255, 255, 0.14);
-  --cyan: #54d8ff;
-  --coral: #ff756f;
-  --gold: #f3c65a;
-  --shadow: 0 24px 80px rgba(0, 0, 0, 0.42);
+  --bg: #050711;
+  --surface: rgba(13, 21, 34, 0.88);
+  --surface-2: rgba(20, 31, 48, 0.9);
+  --text: #f3f8ff;
+  --muted: #b8c8dc;
+  --line: rgba(142, 232, 255, 0.18);
+  --cyan: #65e7ff;
+  --violet: #b69cff;
+  --coral: #ff7a9c;
+  --gold: #f7d778;
+  --green: #80ffc8;
+  --shadow: 0 26px 90px rgba(0, 0, 0, 0.48), 0 0 34px rgba(101, 231, 255, 0.08);
 }
 
 * {
@@ -22,10 +24,29 @@ html {
 
 body {
   margin: 0;
-  background: var(--bg);
+  background:
+    linear-gradient(rgba(101, 231, 255, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(101, 231, 255, 0.045) 1px, transparent 1px),
+    radial-gradient(ellipse at 20% 0%, rgba(182, 156, 255, 0.2), transparent 34%),
+    radial-gradient(ellipse at 82% 12%, rgba(101, 231, 255, 0.16), transparent 32%),
+    radial-gradient(ellipse at 48% 100%, rgba(128, 255, 200, 0.08), transparent 36%),
+    var(--bg);
+  background-size: 36px 36px, 36px 36px, auto, auto, auto, auto;
+  background-attachment: fixed;
   color: var(--text);
   font-family: "Segoe UI", "Hiragino Sans", "Yu Gothic UI", Meiryo, sans-serif;
   line-height: 1.7;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(120deg, transparent 0 28%, rgba(101, 231, 255, 0.1) 28.1%, transparent 28.6% 62%, rgba(182, 156, 255, 0.08) 62.1%, transparent 62.7%),
+    linear-gradient(180deg, rgba(5, 7, 17, 0.18), rgba(5, 7, 17, 0.82));
 }
 
 a {
@@ -43,15 +64,15 @@ a {
   gap: 24px;
   min-height: 68px;
   padding: 12px clamp(18px, 4vw, 56px);
-  background: rgba(7, 9, 13, 0.78);
+  background: rgba(5, 8, 17, 0.76);
   border-bottom: 1px solid var(--line);
   backdrop-filter: blur(16px);
   transition: background-color 180ms ease, box-shadow 180ms ease;
 }
 
 .site-header.is-scrolled {
-  background: rgba(7, 9, 13, 0.92);
-  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.28);
+  background: rgba(5, 8, 17, 0.94);
+  box-shadow: 0 12px 38px rgba(0, 0, 0, 0.34), 0 1px 0 rgba(101, 231, 255, 0.12);
 }
 
 .brand {
@@ -67,9 +88,12 @@ a {
   place-items: center;
   width: 34px;
   height: 34px;
-  border: 1px solid rgba(84, 216, 255, 0.7);
-  background: linear-gradient(135deg, rgba(84, 216, 255, 0.28), rgba(255, 117, 111, 0.2));
+  border: 1px solid rgba(101, 231, 255, 0.78);
+  background:
+    linear-gradient(135deg, rgba(101, 231, 255, 0.32), rgba(182, 156, 255, 0.24)),
+    rgba(5, 11, 21, 0.86);
   border-radius: 8px;
+  box-shadow: inset 0 0 18px rgba(101, 231, 255, 0.18), 0 0 20px rgba(101, 231, 255, 0.16);
 }
 
 .nav {
@@ -87,6 +111,7 @@ a {
 .nav a:hover,
 .nav a:focus-visible {
   color: var(--cyan);
+  text-shadow: 0 0 16px rgba(101, 231, 255, 0.45);
 }
 
 .nav a[aria-current="page"] {
@@ -121,8 +146,9 @@ a {
 
 .hero-shade {
   background:
-    linear-gradient(90deg, rgba(7, 9, 13, 0.88) 0%, rgba(7, 9, 13, 0.64) 42%, rgba(7, 9, 13, 0.16) 100%),
-    linear-gradient(0deg, var(--bg) 0%, rgba(7, 9, 13, 0) 25%);
+    linear-gradient(90deg, rgba(5, 7, 17, 0.92) 0%, rgba(5, 7, 17, 0.68) 46%, rgba(5, 7, 17, 0.22) 100%),
+    linear-gradient(0deg, var(--bg) 0%, rgba(5, 7, 17, 0) 28%),
+    linear-gradient(135deg, rgba(101, 231, 255, 0.12), transparent 34%, rgba(182, 156, 255, 0.12));
 }
 
 .hero-content {
@@ -135,7 +161,7 @@ a {
   position: relative;
   overflow: hidden;
   aspect-ratio: 16 / 9;
-  border: 1px solid rgba(84, 216, 255, 0.24);
+  border: 1px solid rgba(101, 231, 255, 0.28);
   border-radius: 8px;
   background: rgba(0, 0, 0, 0.34);
 }
@@ -173,8 +199,8 @@ a {
   place-items: center;
   min-height: 46px;
   padding: 0 12px;
-  border-top: 1px solid rgba(84, 216, 255, 0.24);
-  background: rgba(84, 216, 255, 0.1);
+  border-top: 1px solid rgba(101, 231, 255, 0.24);
+  background: rgba(101, 231, 255, 0.1);
 }
 
 .eyebrow {
@@ -199,6 +225,7 @@ h1 {
   line-height: 1.02;
   letter-spacing: 0;
   max-width: 8.5em;
+  text-shadow: 0 0 28px rgba(101, 231, 255, 0.22), 0 0 48px rgba(182, 156, 255, 0.16);
 }
 
 .hero-copy {
@@ -224,16 +251,26 @@ h1 {
   border-radius: 8px;
   border: 1px solid var(--line);
   font-weight: 800;
+  background: rgba(12, 22, 36, 0.72);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.025);
+  transition: border-color 160ms ease, background-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+}
+
+.button:hover,
+.button:focus-visible {
+  border-color: rgba(101, 231, 255, 0.62);
+  box-shadow: 0 0 24px rgba(101, 231, 255, 0.16);
+  transform: translateY(-1px);
 }
 
 .button.primary {
-  background: var(--cyan);
+  background: linear-gradient(135deg, var(--cyan), var(--green));
   color: #021019;
   border-color: transparent;
 }
 
 .button.ghost {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.07);
 }
 
 .quick-strip {
@@ -248,7 +285,7 @@ h1 {
 .quick-strip article {
   min-height: 230px;
   padding: clamp(22px, 4vw, 40px);
-  background: #0b1017;
+  background: rgba(7, 13, 24, 0.86);
 }
 
 .home-dashboard {
@@ -265,7 +302,18 @@ h1 {
   gap: 8px;
   min-height: 180px;
   padding: clamp(22px, 4vw, 38px);
-  background: #0b1017;
+  background:
+    linear-gradient(135deg, rgba(101, 231, 255, 0.07), transparent 46%),
+    rgba(7, 13, 24, 0.88);
+  transition: background-color 160ms ease, transform 160ms ease;
+}
+
+.home-dashboard a:hover,
+.home-dashboard a:focus-visible {
+  background:
+    linear-gradient(135deg, rgba(101, 231, 255, 0.13), rgba(182, 156, 255, 0.07)),
+    rgba(11, 21, 36, 0.94);
+  transform: translateY(-2px);
 }
 
 .home-dashboard span {
@@ -333,8 +381,8 @@ h1 {
 
 .tools-section {
   background:
-    linear-gradient(180deg, rgba(84, 216, 255, 0.08), rgba(243, 198, 90, 0.04)),
-    #080d13;
+    linear-gradient(180deg, rgba(101, 231, 255, 0.08), rgba(182, 156, 255, 0.06)),
+    rgba(6, 11, 20, 0.78);
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
 }
@@ -350,7 +398,9 @@ h1 {
 .tool-card {
   overflow: hidden;
   display: grid;
-  background: rgba(16, 23, 34, 0.86);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent 42%),
+    rgba(13, 21, 34, 0.9);
   border: 1px solid var(--line);
   border-radius: 8px;
   box-shadow: var(--shadow);
@@ -359,8 +409,9 @@ h1 {
 
 .tool-card:hover,
 .tool-card:focus-visible {
-  border-color: rgba(84, 216, 255, 0.65);
+  border-color: rgba(101, 231, 255, 0.68);
   transform: translateY(-2px);
+  box-shadow: var(--shadow), 0 0 28px rgba(101, 231, 255, 0.14);
 }
 
 .tool-card img {
@@ -381,7 +432,7 @@ h1 {
   width: fit-content;
   padding: 3px 7px;
   border-radius: 8px;
-  background: rgba(84, 216, 255, 0.12);
+  background: rgba(101, 231, 255, 0.12);
   color: var(--cyan);
   font-weight: 900;
   text-transform: uppercase;
@@ -437,8 +488,8 @@ h1 {
 
 .split-band {
   background:
-    linear-gradient(180deg, rgba(84, 216, 255, 0.07), rgba(255, 117, 111, 0.06)),
-    #0a0f15;
+    linear-gradient(180deg, rgba(182, 156, 255, 0.08), rgba(101, 231, 255, 0.05)),
+    rgba(7, 12, 22, 0.82);
 }
 
 .timeline {
@@ -454,7 +505,9 @@ h1 {
   border: 1px solid var(--line);
   border-radius: 8px;
   padding: 24px;
-  background: rgba(16, 23, 34, 0.78);
+  background:
+    linear-gradient(135deg, rgba(101, 231, 255, 0.05), transparent 48%),
+    rgba(13, 21, 34, 0.84);
 }
 
 .timeline span {
@@ -493,9 +546,9 @@ h1 {
 .page-hero {
   padding: clamp(84px, 10vw, 132px) clamp(20px, 5vw, 72px) clamp(48px, 7vw, 86px);
   background:
-    linear-gradient(115deg, rgba(84, 216, 255, 0.16), transparent 42%),
-    linear-gradient(295deg, rgba(255, 117, 111, 0.12), transparent 36%),
-    #080d13;
+    linear-gradient(115deg, rgba(101, 231, 255, 0.16), transparent 42%),
+    linear-gradient(295deg, rgba(182, 156, 255, 0.13), transparent 36%),
+    rgba(7, 12, 22, 0.88);
   border-bottom: 1px solid var(--line);
 }
 
@@ -558,10 +611,10 @@ h1 {
   align-items: end;
   padding: clamp(84px, 10vw, 132px) clamp(20px, 5vw, 72px) clamp(52px, 8vw, 96px);
   background:
-    linear-gradient(120deg, rgba(84, 216, 255, 0.18), transparent 38%),
-    linear-gradient(300deg, rgba(243, 198, 90, 0.1), transparent 34%),
-    radial-gradient(circle at 78% 28%, rgba(255, 117, 111, 0.18), transparent 30%),
-    #070b11;
+    linear-gradient(120deg, rgba(101, 231, 255, 0.18), transparent 38%),
+    linear-gradient(300deg, rgba(247, 215, 120, 0.1), transparent 34%),
+    radial-gradient(ellipse at 78% 28%, rgba(182, 156, 255, 0.18), transparent 32%),
+    rgba(6, 11, 22, 0.92);
   border-bottom: 1px solid var(--line);
 }
 
@@ -584,7 +637,7 @@ h1 {
   max-height: 560px;
   object-fit: contain;
   object-position: center bottom;
-  filter: drop-shadow(0 32px 42px rgba(0, 0, 0, 0.56));
+  filter: drop-shadow(0 32px 42px rgba(0, 0, 0, 0.56)) drop-shadow(0 0 26px rgba(101, 231, 255, 0.1));
 }
 
 .character-hero h1 {
@@ -621,7 +674,9 @@ h1 {
   padding: clamp(22px, 4vw, 34px);
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: rgba(16, 23, 34, 0.82);
+  background:
+    linear-gradient(135deg, rgba(101, 231, 255, 0.045), transparent 48%),
+    rgba(13, 21, 34, 0.88);
   box-shadow: var(--shadow);
 }
 
@@ -700,7 +755,7 @@ h1 {
   border-color: rgba(243, 198, 90, 0.3);
   background:
     linear-gradient(135deg, rgba(243, 198, 90, 0.08), transparent 42%),
-    rgba(16, 23, 34, 0.82);
+    rgba(13, 21, 34, 0.9);
 }
 
 .constellation-list {
@@ -775,9 +830,11 @@ h1 {
   width: min(1060px, 100%);
   margin: 0 auto;
   padding: 18px;
-  border: 1px solid rgba(84, 216, 255, 0.28);
+  border: 1px solid rgba(101, 231, 255, 0.28);
   border-radius: 8px;
-  background: rgba(7, 13, 22, 0.62);
+  background:
+    linear-gradient(135deg, rgba(101, 231, 255, 0.06), rgba(182, 156, 255, 0.04)),
+    rgba(7, 13, 22, 0.72);
   box-shadow: var(--shadow);
 }
 
@@ -920,7 +977,9 @@ h1 {
   padding: 0 18px;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: rgba(16, 23, 34, 0.92);
+  background:
+    linear-gradient(90deg, rgba(101, 231, 255, 0.08), transparent 52%),
+    rgba(13, 21, 34, 0.94);
   cursor: pointer;
   list-style: none;
 }
@@ -967,7 +1026,7 @@ h1 {
   border-top: 0;
   border-bottom-right-radius: 8px;
   border-bottom-left-radius: 8px;
-  background: rgba(7, 9, 13, 0.4);
+  background: rgba(5, 8, 17, 0.52);
 }
 
 .roster-list {
@@ -986,7 +1045,9 @@ h1 {
   padding: 18px;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: rgba(16, 23, 34, 0.82);
+  background:
+    linear-gradient(135deg, rgba(101, 231, 255, 0.06), transparent 50%),
+    rgba(13, 21, 34, 0.86);
 }
 
 .db-stats strong {
@@ -1006,8 +1067,18 @@ h1 {
 .video-card {
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: rgba(16, 23, 34, 0.82);
+  background:
+    linear-gradient(135deg, rgba(101, 231, 255, 0.045), transparent 48%),
+    rgba(13, 21, 34, 0.86);
   box-shadow: var(--shadow);
+  transition: border-color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+}
+
+.roster-card:hover,
+.video-card:hover {
+  border-color: rgba(101, 231, 255, 0.42);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow), 0 0 24px rgba(101, 231, 255, 0.1);
 }
 
 .roster-card {
@@ -1032,8 +1103,8 @@ h1 {
   border-radius: 50%;
   object-fit: cover;
   background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(84, 216, 255, 0.25);
-  box-shadow: 0 0 0 3px rgba(84, 216, 255, 0.06);
+  border: 1px solid rgba(101, 231, 255, 0.34);
+  box-shadow: 0 0 0 3px rgba(101, 231, 255, 0.07), 0 0 18px rgba(101, 231, 255, 0.12);
 }
 
 .roster-copy {
@@ -1080,8 +1151,8 @@ h1 {
   min-height: 40px;
   padding: 0 14px;
   border-radius: 8px;
-  background: rgba(84, 216, 255, 0.12);
-  border: 1px solid rgba(84, 216, 255, 0.28);
+  background: rgba(101, 231, 255, 0.12);
+  border: 1px solid rgba(101, 231, 255, 0.28);
   color: var(--cyan);
   font-weight: 800;
 }
@@ -1104,7 +1175,9 @@ h1 {
   padding: 22px;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: rgba(16, 23, 34, 0.82);
+  background:
+    linear-gradient(135deg, rgba(101, 231, 255, 0.06), transparent 48%),
+    rgba(13, 21, 34, 0.88);
   box-shadow: var(--shadow);
 }
 
@@ -1123,9 +1196,9 @@ h1 {
   gap: 16px;
   margin-top: 22px;
   padding: 18px;
-  border: 1px solid rgba(84, 216, 255, 0.26);
+  border: 1px solid rgba(101, 231, 255, 0.26);
   border-radius: 8px;
-  background: rgba(8, 13, 20, 0.9);
+  background: rgba(8, 14, 25, 0.92);
 }
 
 .page-editing .contributor-manager {
@@ -1147,7 +1220,7 @@ h1 {
 .contributor-manager button,
 .contributor-form input,
 .contributor-form textarea {
-  border: 1px solid rgba(148, 163, 184, 0.3);
+  border: 1px solid rgba(142, 232, 255, 0.22);
   border-radius: 8px;
   background: rgba(5, 8, 12, 0.84);
   color: var(--text);
@@ -1202,9 +1275,9 @@ h1 {
   gap: 10px;
   align-items: center;
   padding: 12px;
-  border: 1px solid rgba(148, 163, 184, 0.22);
+  border: 1px solid rgba(142, 232, 255, 0.2);
   border-radius: 8px;
-  background: rgba(15, 23, 35, 0.72);
+  background: rgba(13, 21, 34, 0.78);
 }
 
 .contributor-edit-row div {
@@ -1235,8 +1308,8 @@ h1 {
   border: 1px solid var(--line);
   border-radius: 8px;
   background:
-    linear-gradient(135deg, rgba(84, 216, 255, 0.08), transparent 48%),
-    rgba(16, 23, 34, 0.84);
+    linear-gradient(135deg, rgba(101, 231, 255, 0.08), transparent 48%),
+    rgba(13, 21, 34, 0.86);
   box-shadow: var(--shadow);
 }
 
@@ -1250,7 +1323,7 @@ h1 {
 .streamer-head img {
   width: 58px;
   height: 58px;
-  border: 1px solid rgba(84, 216, 255, 0.35);
+  border: 1px solid rgba(101, 231, 255, 0.35);
   border-radius: 50%;
   object-fit: cover;
   background: rgba(5, 8, 12, 0.7);
