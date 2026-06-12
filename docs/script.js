@@ -40,9 +40,45 @@ if (siteAdmin) {
 }
 document.body.classList.toggle("site-admin", siteAdmin);
 
+const setupSidebarVideo = () => {
+  if (!header) return;
+  const wideSidebar = window.matchMedia?.("(min-width: 960px)");
+  const allowMotion = window.matchMedia?.("(prefers-reduced-motion: no-preference)");
+  if (!wideSidebar?.matches || allowMotion?.matches === false) return;
+  if (header.querySelector(".sidebar-bg-video")) return;
+
+  const video = document.createElement("video");
+  video.className = "sidebar-bg-video";
+  video.muted = true;
+  video.loop = true;
+  video.autoplay = true;
+  video.playsInline = true;
+  video.preload = "metadata";
+  video.setAttribute("aria-hidden", "true");
+  video.setAttribute("tabindex", "-1");
+  video.controls = false;
+  video.disablePictureInPicture = true;
+  video.controlsList = "nodownload noplaybackrate noremoteplayback";
+  video.innerHTML = `
+    <source src="${siteAssetUrl("assets/brand/sidebar-bg.webm")}" type="video/webm">
+    <source src="${siteAssetUrl("assets/brand/sidebar-bg.mp4")}" type="video/mp4">
+  `;
+  const tryPlay = () => video.play?.().catch(() => {});
+  video.addEventListener("loadedmetadata", tryPlay, { once: true });
+  video.addEventListener("canplay", tryPlay, { once: true });
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden) tryPlay();
+  });
+  header.prepend(video);
+  video.load();
+  tryPlay();
+};
+
 const setHeaderState = () => {
   header?.classList.toggle("is-scrolled", window.scrollY > 12);
 };
+
+setupSidebarVideo();
 
 const scrollToHashTarget = () => {
   if (!location.hash) return;
