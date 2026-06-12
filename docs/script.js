@@ -60,8 +60,8 @@ const setupSidebarVideo = () => {
   video.disablePictureInPicture = true;
   video.controlsList = "nodownload noplaybackrate noremoteplayback";
   video.innerHTML = `
-    <source src="${siteAssetUrl("assets/brand/sidebar-bg.webm")}" type="video/webm">
-    <source src="${siteAssetUrl("assets/brand/sidebar-bg.mp4")}" type="video/mp4">
+    <source src="${siteAssetUrl("assets/brand/sidebar-bg-portrait.webm")}" type="video/webm">
+    <source src="${siteAssetUrl("assets/brand/sidebar-bg-portrait.mp4")}" type="video/mp4">
   `;
   const tryPlay = () => video.play?.().catch(() => {});
   video.addEventListener("loadedmetadata", tryPlay, { once: true });
