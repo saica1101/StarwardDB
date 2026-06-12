@@ -210,6 +210,19 @@ characterSearch?.addEventListener("input", () => {
   });
 });
 
+document.querySelectorAll("[data-table-filter]").forEach((input) => {
+  const table = document.querySelector(input.dataset.tableFilter);
+  if (!table) return;
+  const rows = [...table.querySelectorAll("tbody tr")];
+  input.addEventListener("input", () => {
+    const query = input.value.trim().toLowerCase();
+    rows.forEach((row) => {
+      const text = `${row.textContent} ${row.dataset.search ?? ""}`.toLowerCase();
+      row.hidden = query.length > 0 && !text.includes(query);
+    });
+  });
+});
+
 (() => {
   const tabGroups = [...document.querySelectorAll("[data-move-form-tabs]")];
   if (!tabGroups.length) return;

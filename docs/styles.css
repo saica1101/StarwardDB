@@ -327,7 +327,7 @@ h1 {
 
 .home-dashboard {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
   gap: 1px;
   background: var(--line);
   border-top: 1px solid var(--line);
@@ -1202,6 +1202,68 @@ h1 {
 
 .video-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.guide-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  width: min(1060px, 100%);
+  margin: 0 auto;
+}
+
+.guide-card-grid + .guide-card-grid {
+  margin-top: 22px;
+}
+
+.guide-mini-card {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  min-height: 170px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(201, 184, 255, 0.06), transparent 52%),
+    rgba(13, 21, 34, 0.86);
+  box-shadow: var(--shadow);
+}
+
+.guide-mini-card h3,
+.guide-mini-card p {
+  margin: 0;
+}
+
+.guide-mini-card p,
+.guide-mini-card li {
+  color: var(--muted);
+}
+
+.guide-mini-card a {
+  width: fit-content;
+  color: var(--cyan);
+  font-weight: 900;
+}
+
+.matchup-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.matchup-grid ul {
+  margin: 0;
+  padding-left: 1.1em;
+}
+
+.data-table-wrap .move-table th:first-child,
+.data-table-wrap .move-table td:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+}
+
+.compare-table tbody th {
+  min-width: 150px;
 }
 
 .official-feed-grid {
