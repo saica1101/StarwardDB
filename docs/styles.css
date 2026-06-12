@@ -25,6 +25,7 @@ html {
 
 body {
   margin: 0;
+  position: relative;
   background:
     radial-gradient(circle at 14% 18%, rgba(255, 255, 255, 0.42) 0 1px, transparent 1.6px),
     radial-gradient(circle at 78% 22%, rgba(201, 184, 255, 0.38) 0 1px, transparent 1.7px),
@@ -36,15 +37,15 @@ body {
     radial-gradient(ellipse at 48% 100%, rgba(159, 255, 215, 0.11), transparent 38%),
     var(--bg);
   background-size: 220px 220px, 280px 280px, 340px 340px, 42px 42px, 42px 42px, auto, auto, auto, auto;
-  background-attachment: fixed;
   color: var(--text);
   font-family: "Segoe UI", "Hiragino Sans", "Yu Gothic UI", Meiryo, sans-serif;
   line-height: 1.7;
+  overflow-x: hidden;
 }
 
 body::before {
   content: "";
-  position: fixed;
+  position: absolute;
   inset: 0;
   z-index: -1;
   pointer-events: none;
@@ -52,20 +53,11 @@ body::before {
     linear-gradient(118deg, transparent 0 24%, rgba(101, 231, 255, 0.1) 29%, transparent 43%, rgba(201, 184, 255, 0.12) 57%, transparent 76%),
     linear-gradient(66deg, transparent 0 34%, rgba(159, 255, 215, 0.09) 47%, transparent 64%),
     linear-gradient(180deg, rgba(5, 7, 17, 0.1), rgba(5, 7, 17, 0.84));
-  filter: saturate(1.08);
+  min-height: 100svh;
 }
 
 body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background:
-    radial-gradient(ellipse at 50% 18%, rgba(243, 248, 255, 0.12), transparent 52%),
-    linear-gradient(180deg, transparent 0 48%, rgba(8, 13, 27, 0.56) 100%);
-  mix-blend-mode: screen;
-  opacity: 0.72;
+  display: none;
 }
 
 a {
@@ -457,6 +449,7 @@ h1 {
     border-right: 1px solid rgba(142, 232, 255, 0.22);
     border-bottom: 0;
     box-shadow: var(--shadow);
+    backdrop-filter: none;
   }
 
   .site-header.is-scrolled {

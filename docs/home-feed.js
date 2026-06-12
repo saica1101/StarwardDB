@@ -50,7 +50,7 @@
       if (slot.frame) {
         slot.frame.innerHTML = `
           <a class="latest-video-card-link" href="${esc(url)}" data-youtube-id="${esc(video.id)}" data-youtube-title="${esc(video.title || "星の翼 公式YouTube")}">
-            <img src="${esc(thumb)}" data-fallback-src="${esc(fallbackThumb)}" alt="">
+            <img src="${esc(thumb)}" data-fallback-src="${esc(fallbackThumb)}" alt="" loading="lazy" decoding="async" fetchpriority="low">
             <span>このサイトで再生</span>
           </a>
         `;

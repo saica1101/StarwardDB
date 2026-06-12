@@ -79,14 +79,14 @@ jobs:
           let html = fs.readFileSync(indexPath, "utf8");
           const videoBlock = `<div class="latest-video-frame compact" id="official-latest-video-card">
               <a class="latest-video-card-link" href="${escHtml(latestVideo.url)}" data-youtube-id="${escHtml(latestVideo.id)}" data-youtube-title="${escHtml(latestVideo.title)}">
-                <img src="https://i.ytimg.com/vi/${escHtml(latestVideo.id)}/maxresdefault.jpg" data-fallback-src="https://i.ytimg.com/vi/${escHtml(latestVideo.id)}/hqdefault.jpg" alt="" />
+                <img src="https://i.ytimg.com/vi/${escHtml(latestVideo.id)}/maxresdefault.jpg" data-fallback-src="https://i.ytimg.com/vi/${escHtml(latestVideo.id)}/hqdefault.jpg" alt="" loading="lazy" decoding="async" fetchpriority="low" />
                 <span>このサイトで再生</span>
               </a>
             </div>
             <p id="official-latest-card-title">${escHtml(latestVideo.title)}</p>`;
           const shortBlock = `<div class="latest-video-frame compact" id="official-latest-short-card">
               <a class="latest-video-card-link" href="${escHtml(latestShort.url)}" data-youtube-id="${escHtml(latestShort.id)}" data-youtube-title="${escHtml(latestShort.title)}">
-                <img src="https://i.ytimg.com/vi/${escHtml(latestShort.id)}/maxresdefault.jpg" data-fallback-src="https://i.ytimg.com/vi/${escHtml(latestShort.id)}/hqdefault.jpg" alt="" />
+                <img src="https://i.ytimg.com/vi/${escHtml(latestShort.id)}/maxresdefault.jpg" data-fallback-src="https://i.ytimg.com/vi/${escHtml(latestShort.id)}/hqdefault.jpg" alt="" loading="lazy" decoding="async" fetchpriority="low" />
                 <span>このサイトで再生</span>
               </a>
             </div>

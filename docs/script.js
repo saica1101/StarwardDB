@@ -741,7 +741,7 @@ document.querySelectorAll("[data-table-filter]").forEach((input) => {
     list.innerHTML = contributors.map((contributor) => `
       <article class="video-card channel-card">
         <a class="contributor-icon-link" href="${esc(normalizeUrl(contributor.url))}" target="_blank" rel="noreferrer" aria-label="${esc(contributor.name)}を開く">
-          <img src="${esc(iconFor(contributor))}" alt="">
+          <img src="${esc(iconFor(contributor))}" alt="" loading="lazy" decoding="async">
         </a>
         <h3>${esc(contributor.name)}</h3>
       </article>
