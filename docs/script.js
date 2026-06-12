@@ -5,6 +5,14 @@ const siteParams = new URLSearchParams(location.search);
 const siteAdminRequested = siteParams.get("admin") === "1" || siteParams.get("edit") === "1";
 const SITE_ADMIN_KEY = "starward-site-admin";
 const SITE_ADMIN_PASSWORD = "xzyjp";
+const siteAssetBase = (() => {
+  try {
+    return new URL(".", document.currentScript?.src || location.href);
+  } catch {
+    return new URL("./", location.href);
+  }
+})();
+const siteAssetUrl = (path) => new URL(path, siteAssetBase).toString();
 const siteAdminStored = (() => {
   try {
     return sessionStorage.getItem(SITE_ADMIN_KEY) === "1";
@@ -152,7 +160,7 @@ scrollToHashTarget();
 
 (() => {
   if (siteAdmin || typeof fetch !== "function") return;
-  fetch(`page-edits-data.json?v=${Date.now()}`)
+  fetch(siteAssetUrl(`page-edits-data.json?v=${Date.now()}`))
     .then((response) => response.ok ? response.json() : {})
     .then((allEdits) => {
       const key = pageEditKeyCandidates().find((candidate) => allEdits?.[candidate]);
@@ -778,7 +786,7 @@ characterSearch?.addEventListener("input", () => {
   })();
 
   if (shouldLoadPublicContributors) {
-    fetch("contributors-data.json?v=20260605adminsync1")
+    fetch(siteAssetUrl("contributors-data.json?v=20260612icons1"))
       .then((response) => response.json())
       .then((contributors) => {
         publicContributors = Array.isArray(contributors) ? contributors : [];

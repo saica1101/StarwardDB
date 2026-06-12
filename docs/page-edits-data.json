@@ -40,5 +40,27 @@
     },
     "hidden": {},
     "added": []
+  },
+  "/characters/ina.html": {
+    "text": {
+      "li-16": "<strong data-edit-key=\"strong-17\" data-edit-original=\"1凸\" contenteditable=\"true\" spellcheck=\"false\">1凸</strong><span>「メイン射撃」の2段目を使用する際、弾薬を消費しない</span>",
+      "li-18": "<strong data-edit-key=\"strong-19\" data-edit-original=\"2凸\" contenteditable=\"true\" spellcheck=\"false\">2凸</strong><span>「後メイン射撃」の「バックジャンプ射撃」が使用可能になる</span>",
+      "li-20": "<strong data-edit-key=\"strong-21\" data-edit-original=\"3凸\" contenteditable=\"true\" spellcheck=\"false\">3凸</strong><span>「メイン射撃主弾数」のリロード時間が短縮</span>",
+      "li-22": "<strong data-edit-key=\"strong-23\" data-edit-original=\"4凸\" contenteditable=\"true\" spellcheck=\"false\">4凸</strong><span>「サブ射撃副弾数」のリロード時間2秒短縮</span>",
+      "li-24": "<strong data-edit-key=\"strong-25\" data-edit-original=\"5凸\" contenteditable=\"true\" spellcheck=\"false\">5凸</strong><span>「後バーストアタック」の「流星の一矢」が使用可能になる</span>"
+    },
+    "hidden": {},
+    "added": []
+  },
+  "/characters/sky-saber.html": {
+    "text": {
+      "li-16": "<strong data-edit-key=\"strong-17\" data-edit-original=\"1凸\" contenteditable=\"true\" spellcheck=\"false\">1凸</strong><span>「後メイン格闘」の「フォーメーション01A(ダークスター呼出)」が使用可能になる</span>",
+      "li-18": "<strong data-edit-key=\"strong-19\" data-edit-original=\"2凸\" contenteditable=\"true\" spellcheck=\"false\">2凸</strong><span>「レバー入れサブ射撃」と「横サブ格闘」がオーバーヒート状態でも使用可能になる</span>",
+      "li-20": "<strong data-edit-key=\"strong-21\" data-edit-original=\"3凸\" contenteditable=\"true\" spellcheck=\"false\">3凸</strong><span>「サブ格闘」中、「サブ射撃派生」で「格闘プログラム・ユニークⅢ」が使用可能になる</span>",
+      "li-22": "<strong data-edit-key=\"strong-23\" data-edit-original=\"4凸\" contenteditable=\"true\" spellcheck=\"false\">4凸</strong><span>「メイン射撃主弾数」のリロード時間1秒短縮</span>",
+      "li-24": "<strong data-edit-key=\"strong-25\" data-edit-original=\"5凸\" contenteditable=\"true\" spellcheck=\"false\">5凸</strong><span>「爆発中メイン格闘サブ射撃派生」がヒットした場合、ブースト回復量が増加する（13→22）</span>"
+    },
+    "hidden": {},
+    "added": []
   }
 }
