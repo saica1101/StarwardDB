@@ -1,0 +1,10 @@
+{
+  "home-hero-actions": [
+    "href:characters.html:キャラDBを見る",
+    "href:comparison.html:キャラ比較",
+    "href:landing-tech.html:降りテク",
+    "href:tools.html:ツール",
+    "href::ご協力者様",
+    "href:streamers.html:配信者紹介"
+  ]
+}

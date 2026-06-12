@@ -80,6 +80,139 @@ const setHeaderState = () => {
 
 setupSidebarVideo();
 
+const setupSiteOrderControls = () => {
+  const storageKey = "starward-site-order";
+  const pageKey = String(location.pathname || "/index.html").replace(/\\/g, "/").replace(/\/$/, "/index.html");
+  const getItemKey = (item) => {
+    const href = item.getAttribute?.("href");
+    if (href) return `href:${href.split(/[?#]/)[0]}:${item.textContent.trim()}`;
+    if (item.id) return `id:${item.id}`;
+    return `text:${item.textContent.trim()}`;
+  };
+  const getItemLabel = (item) => item.querySelector?.("strong")?.textContent?.trim() || item.textContent.trim().replace(/\s+/g, " ");
+  const containers = [
+    { key: "main-nav", element: document.querySelector(".site-header .nav") },
+    { key: "home-hero-actions", element: document.querySelector(".hero-actions") },
+    { key: "home-dashboard", element: document.querySelector(".home-dashboard") },
+    { key: "home-official-feed", element: document.querySelector(".official-feed-grid") },
+    ...Array.from(document.querySelectorAll(".tool-grid")).map((element, index) => ({
+      key: `tool-grid:${pageKey}:${index}`,
+      element,
+    })),
+  ].filter((entry) => entry.element);
+
+  if (!containers.length) return;
+
+  const readLocalOrder = () => {
+    try {
+      const value = JSON.parse(localStorage.getItem(storageKey) || "{}");
+      return value && typeof value === "object" ? value : {};
+    } catch {
+      return {};
+    }
+  };
+
+  let orderMap = readLocalOrder();
+
+  const applyOrder = (entry) => {
+    const order = orderMap[entry.key];
+    if (!Array.isArray(order) || !order.length) return;
+    const items = Array.from(entry.element.children).filter((item) => !item.classList.contains("order-manager"));
+    const keyed = new Map(items.map((item) => [getItemKey(item), item]));
+    order.forEach((key) => {
+      const item = keyed.get(key);
+      if (item) entry.element.appendChild(item);
+    });
+    items.forEach((item) => {
+      if (!order.includes(getItemKey(item))) entry.element.appendChild(item);
+    });
+  };
+
+  const saveOrder = () => {
+    try {
+      localStorage.setItem(storageKey, JSON.stringify(orderMap));
+    } catch {}
+    if (typeof fetch !== "function") return;
+    fetch("/api/save/site-order", {
+      method: "POST",
+      headers: { "Content-Type": "application/json; charset=utf-8" },
+      body: JSON.stringify(orderMap),
+    }).catch((error) => console.warn("site-order-data.json の保存に失敗しました", error));
+  };
+
+  const currentOrder = (entry) => Array.from(entry.element.children)
+    .filter((item) => !item.classList.contains("order-manager"))
+    .map(getItemKey);
+
+  const renderManager = (entry, manager) => {
+    const items = Array.from(entry.element.children).filter((item) => !item.classList.contains("order-manager"));
+    manager.innerHTML = `
+      <div class="order-manager-head">
+        <strong>表示順</strong>
+        <span>↑↓で並べ替え</span>
+      </div>
+    `;
+    items.forEach((item, index) => {
+      const row = document.createElement("div");
+      row.className = "order-manager-row";
+      const label = document.createElement("span");
+      const upButton = document.createElement("button");
+      const downButton = document.createElement("button");
+      label.textContent = getItemLabel(item);
+      upButton.type = "button";
+      upButton.dataset.orderMove = "-1";
+      upButton.textContent = "↑";
+      upButton.disabled = index === 0;
+      downButton.type = "button";
+      downButton.dataset.orderMove = "1";
+      downButton.textContent = "↓";
+      downButton.disabled = index === items.length - 1;
+      row.append(label, upButton, downButton);
+      [upButton, downButton].forEach((button) => {
+        button.addEventListener("click", () => {
+          const direction = Number(button.dataset.orderMove || 0);
+          const nextIndex = index + direction;
+          const freshItems = Array.from(entry.element.children).filter((child) => !child.classList.contains("order-manager"));
+          const target = freshItems[index];
+          const neighbor = freshItems[nextIndex];
+          if (!target || !neighbor) return;
+          if (direction < 0) entry.element.insertBefore(target, neighbor);
+          else entry.element.insertBefore(neighbor, target);
+          orderMap[entry.key] = currentOrder(entry);
+          saveOrder();
+          renderManager(entry, manager);
+        });
+      });
+      manager.appendChild(row);
+    });
+  };
+
+  const setupManagers = () => {
+    if (!siteAdmin) return;
+    containers.forEach((entry) => {
+      if (entry.element.previousElementSibling?.classList.contains("order-manager")) return;
+      const manager = document.createElement("div");
+      manager.className = "order-manager";
+      entry.element.before(manager);
+      renderManager(entry, manager);
+    });
+  };
+
+  fetch(siteAssetUrl(`site-order-data.json?v=${Date.now()}`))
+    .then((response) => response.ok ? response.json() : {})
+    .then((published) => {
+      orderMap = { ...(published || {}), ...readLocalOrder() };
+      containers.forEach(applyOrder);
+      setupManagers();
+    })
+    .catch(() => {
+      containers.forEach(applyOrder);
+      setupManagers();
+    });
+};
+
+setupSiteOrderControls();
+
 const scrollToHashTarget = () => {
   if (!location.hash) return;
   const target = document.getElementById(decodeURIComponent(location.hash.slice(1)));

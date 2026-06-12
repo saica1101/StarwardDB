@@ -116,6 +116,68 @@ a {
   display: none;
 }
 
+.order-manager {
+  display: none;
+}
+
+.site-admin .order-manager {
+  display: grid;
+  gap: 8px;
+  width: min(100%, 760px);
+  margin: 10px 0 14px;
+  padding: 12px;
+  border: 1px solid rgba(101, 231, 255, 0.26);
+  border-radius: 8px;
+  background: rgba(8, 16, 30, 0.82);
+  box-shadow: 0 16px 42px rgba(0, 0, 0, 0.22);
+}
+
+.order-manager-head,
+.order-manager-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  gap: 8px;
+  align-items: center;
+}
+
+.order-manager-head {
+  color: var(--cyan);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+
+.order-manager-head span {
+  grid-column: 2 / span 2;
+  color: var(--muted);
+  text-transform: none;
+}
+
+.order-manager-row {
+  color: var(--text);
+  font-size: 0.9rem;
+}
+
+.order-manager-row span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.order-manager-row button {
+  min-width: 36px;
+  min-height: 32px;
+  border: 1px solid rgba(101, 231, 255, 0.32);
+  border-radius: 8px;
+  background: rgba(10, 28, 42, 0.84);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.order-manager-row button:disabled {
+  cursor: default;
+  opacity: 0.38;
+}
+
 .nav {
   display: flex;
   align-items: center;
