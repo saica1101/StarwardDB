@@ -62,9 +62,9 @@ jobs:
           const indexPath = "docs/index.html";
           let html = fs.readFileSync(indexPath, "utf8");
           const block = `<div class="latest-video-frame compact" id="official-latest-video-card">
-              <a class="latest-video-card-link" href="${escHtml(latest.url)}" target="_blank" rel="noreferrer">
-                <img src="https://i.ytimg.com/vi/${escHtml(latest.id)}/hqdefault.jpg" alt="" />
-                <span>Youtubeで開く</span>
+              <a class="latest-video-card-link" href="${escHtml(latest.url)}" data-youtube-id="${escHtml(latest.id)}" data-youtube-title="${escHtml(latest.title)}">
+                <img src="https://i.ytimg.com/vi/${escHtml(latest.id)}/maxresdefault.jpg" data-fallback-src="https://i.ytimg.com/vi/${escHtml(latest.id)}/hqdefault.jpg" alt="" />
+                <span>このサイトで再生</span>
               </a>
             </div>
             <p id="official-latest-card-title">${escHtml(latest.title)}</p>`;
