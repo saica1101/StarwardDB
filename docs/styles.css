@@ -1407,8 +1407,9 @@ h1 {
 
 .official-feed-grid {
   display: grid;
-  grid-template-columns: minmax(320px, 760px);
+  grid-template-columns: repeat(2, minmax(300px, 1fr));
   justify-content: center;
+  align-items: start;
   gap: 16px;
 }
 

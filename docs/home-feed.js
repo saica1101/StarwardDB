@@ -11,6 +11,13 @@
       meta: null,
     },
   ];
+  const latestShortSlots = [
+    {
+      frame: document.querySelector("#official-latest-short-card"),
+      title: document.querySelector("#official-latest-short-title"),
+      meta: null,
+    },
+  ];
   const esc = (value) => String(value ?? "").replace(/[&<>"']/g, (char) => ({
     "&": "&amp;",
     "<": "&lt;",
@@ -34,12 +41,12 @@
     `;
   };
 
-  const renderLatestVideo = (video) => {
+  const renderLatestVideo = (video, slots = latestSlots) => {
     if (!video?.id) return;
     const url = video.url || `https://www.youtube.com/watch?v=${encodeURIComponent(video.id)}`;
     const thumb = thumbnailUrl(video.id);
     const fallbackThumb = thumbnailUrl(video.id, "hqdefault");
-    latestSlots.forEach((slot) => {
+    slots.forEach((slot) => {
       if (slot.frame) {
         slot.frame.innerHTML = `
           <a class="latest-video-card-link" href="${esc(url)}" data-youtube-id="${esc(video.id)}" data-youtube-title="${esc(video.title || "星の翼 公式YouTube")}">
@@ -89,5 +96,27 @@
     }
   };
 
+  const loadLatestShort = async () => {
+    const sources = [
+      "official-latest-short.json",
+      "api/youtube-latest-short?handle=StarWard_jp",
+      "api/youtube-latest-short.json",
+    ];
+    for (const source of sources) {
+      try {
+        const response = await fetch(source, { cache: "no-store" });
+        if (!response.ok) continue;
+        const video = await response.json();
+        if (video?.id) {
+          renderLatestVideo(video, latestShortSlots);
+          return;
+        }
+      } catch {
+        // Try the next source.
+      }
+    }
+  };
+
   loadLatest();
+  loadLatestShort();
 })();

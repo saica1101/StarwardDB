@@ -38,39 +38,66 @@ jobs:
             .replace(/>/g, "&gt;")
             .replace(/"/g, "&quot;");
 
+          const parseLatest = (xml, predicate) => {
+            const entries = xml.match(/<entry>[\s\S]*?<\/entry>/g) || [];
+            for (const entry of entries) {
+              const id = entry.match(/<yt:videoId>([^<]+)<\/yt:videoId>/)?.[1] || "";
+              const url = escXml(entry.match(/<link rel="alternate" href="([^"]+)"/)?.[1] || (id ? `https://www.youtube.com/watch?v=${id}` : ""));
+              if (!id || !predicate(url)) continue;
+              const publishedAt = entry.match(/<published>([^<]+)<\/published>/)?.[1] || "";
+              return {
+                id,
+                url,
+                title: escXml(entry.match(/<title>([\s\S]*?)<\/title>/)?.[1] || "星の翼 公式YouTube 最新動画"),
+                publishedAt,
+                publishedText: publishedAt ? publishedAt.slice(0, 10) : "公式YouTube 最新動画",
+              };
+            }
+            return null;
+          };
+
           const response = await fetch(feedUrl);
           if (!response.ok) throw new Error(`YouTube RSS ${response.status}`);
           const xml = await response.text();
-          const entry = xml.match(/<entry>[\s\S]*?<\/entry>/)?.[0] || "";
-          const id = entry.match(/<yt:videoId>([^<]+)<\/yt:videoId>/)?.[1] || "";
-          if (!id) throw new Error("latest video id not found");
-
-          const latest = {
-            id,
-            url: escXml(entry.match(/<link rel="alternate" href="([^"]+)"/)?.[1] || `https://www.youtube.com/watch?v=${id}`),
-            title: escXml(entry.match(/<title>([\s\S]*?)<\/title>/)?.[1] || "星の翼 公式YouTube 最新動画"),
-            publishedAt: entry.match(/<published>([^<]+)<\/published>/)?.[1] || "",
-          };
-          latest.publishedText = latest.publishedAt ? latest.publishedAt.slice(0, 10) : "公式YouTube 最新動画";
+          const latestVideo = parseLatest(xml, (url) => !url.includes("/shorts/"));
+          const latestShort = parseLatest(xml, (url) => url.includes("/shorts/"));
+          if (!latestVideo?.id) throw new Error("latest normal video id not found");
+          if (!latestShort?.id) throw new Error("latest shorts video id not found");
 
           fs.mkdirSync("docs/api", { recursive: true });
-          const json = JSON.stringify(latest, null, 2) + "\n";
-          fs.writeFileSync("docs/official-latest-video.json", json, "utf8");
-          fs.writeFileSync("docs/api/youtube-latest", json, "utf8");
-          fs.writeFileSync("docs/api/youtube-latest.json", json, "utf8");
+          const writeJson = (name, latest) => {
+            const json = JSON.stringify(latest, null, 2) + "\n";
+            fs.writeFileSync(`docs/official-latest-${name}.json`, json, "utf8");
+            const apiName = name === "short" ? "youtube-latest-short" : "youtube-latest";
+            fs.writeFileSync(`docs/api/${apiName}`, json, "utf8");
+            fs.writeFileSync(`docs/api/${apiName}.json`, json, "utf8");
+          };
+          writeJson("video", latestVideo);
+          writeJson("short", latestShort);
 
           const indexPath = "docs/index.html";
           let html = fs.readFileSync(indexPath, "utf8");
-          const block = `<div class="latest-video-frame compact" id="official-latest-video-card">
-              <a class="latest-video-card-link" href="${escHtml(latest.url)}" data-youtube-id="${escHtml(latest.id)}" data-youtube-title="${escHtml(latest.title)}">
-                <img src="https://i.ytimg.com/vi/${escHtml(latest.id)}/maxresdefault.jpg" data-fallback-src="https://i.ytimg.com/vi/${escHtml(latest.id)}/hqdefault.jpg" alt="" />
+          const videoBlock = `<div class="latest-video-frame compact" id="official-latest-video-card">
+              <a class="latest-video-card-link" href="${escHtml(latestVideo.url)}" data-youtube-id="${escHtml(latestVideo.id)}" data-youtube-title="${escHtml(latestVideo.title)}">
+                <img src="https://i.ytimg.com/vi/${escHtml(latestVideo.id)}/maxresdefault.jpg" data-fallback-src="https://i.ytimg.com/vi/${escHtml(latestVideo.id)}/hqdefault.jpg" alt="" />
                 <span>このサイトで再生</span>
               </a>
             </div>
-            <p id="official-latest-card-title">${escHtml(latest.title)}</p>`;
+            <p id="official-latest-card-title">${escHtml(latestVideo.title)}</p>`;
+          const shortBlock = `<div class="latest-video-frame compact" id="official-latest-short-card">
+              <a class="latest-video-card-link" href="${escHtml(latestShort.url)}" data-youtube-id="${escHtml(latestShort.id)}" data-youtube-title="${escHtml(latestShort.title)}">
+                <img src="https://i.ytimg.com/vi/${escHtml(latestShort.id)}/maxresdefault.jpg" data-fallback-src="https://i.ytimg.com/vi/${escHtml(latestShort.id)}/hqdefault.jpg" alt="" />
+                <span>このサイトで再生</span>
+              </a>
+            </div>
+            <p id="official-latest-short-title">${escHtml(latestShort.title)}</p>`;
           html = html.replace(
             /<div class="latest-video-frame compact" id="official-latest-video-card">[\s\S]*?<\/div>\s*<p id="official-latest-card-title">[\s\S]*?<\/p>/,
-            block
+            videoBlock
+          );
+          html = html.replace(
+            /<div class="latest-video-frame compact" id="official-latest-short-card">[\s\S]*?<\/div>\s*<p id="official-latest-short-title">[\s\S]*?<\/p>/,
+            shortBlock
           );
           fs.writeFileSync(indexPath, html, "utf8");
           NODE
@@ -79,6 +106,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add docs/official-latest-video.json docs/api/youtube-latest docs/api/youtube-latest.json docs/index.html
+          git add docs/official-latest-video.json docs/official-latest-short.json docs/api/youtube-latest docs/api/youtube-latest.json docs/api/youtube-latest-short docs/api/youtube-latest-short.json docs/index.html
           git diff --cached --quiet || git commit -m "Update official latest video"
           git push
