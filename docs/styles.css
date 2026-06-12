@@ -831,9 +831,20 @@ h1 {
   color: #176d2c;
 }
 
-.burst-table tbody th {
+.move-table.burst-table tbody th {
   background: #eb70ef;
   color: #651f74;
+}
+
+.move-table.cancel-route-table tbody th {
+  background: #ffdca8;
+  color: #74501f;
+}
+
+.move-table.cancel-route-table tbody td:nth-child(2),
+.move-table.cancel-route-table tbody td:nth-child(3) {
+  text-align: center;
+  white-space: nowrap;
 }
 
 .quick-strip.inline {
@@ -965,7 +976,7 @@ h1 {
 
 .db-stats {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 12px;
   width: min(1060px, 100%);
   margin: 0 auto 20px;
@@ -2113,7 +2124,8 @@ body:not(.video-admin) .video-selected-head h3 {
   text-align: left;
 }
 
-.editor-table input {
+.editor-table input,
+.editor-table select {
   width: 100%;
   min-width: 90px;
   padding: 8px;
