@@ -38,8 +38,26 @@
   };
 
   if (typeof fetch !== "function") return;
-  fetch("/api/youtube-latest?handle=StarWard_jp")
-    .then((response) => (response.ok ? response.json() : null))
-    .then(renderLatestVideo)
-    .catch(() => {});
+
+  const loadLatest = async () => {
+    const sources = [
+      "official-latest-video.json",
+      "/api/youtube-latest?handle=StarWard_jp",
+    ];
+    for (const source of sources) {
+      try {
+        const response = await fetch(source, { cache: "no-store" });
+        if (!response.ok) continue;
+        const video = await response.json();
+        if (video?.id) {
+          renderLatestVideo(video);
+          return;
+        }
+      } catch {
+        // Try the next source.
+      }
+    }
+  };
+
+  loadLatest();
 })();
