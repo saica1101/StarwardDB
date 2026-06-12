@@ -42,6 +42,8 @@
   const loadLatest = async () => {
     const sources = [
       "official-latest-video.json",
+      "api/youtube-latest?handle=StarWard_jp",
+      "api/youtube-latest.json",
       "/api/youtube-latest?handle=StarWard_jp",
     ];
     for (const source of sources) {

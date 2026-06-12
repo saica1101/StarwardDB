@@ -1,0 +1,84 @@
+name: Update official latest video
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 * * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Fetch latest official YouTube video
+        run: |
+          node <<'NODE'
+          const fs = require("fs");
+          const path = require("path");
+
+          const channelId = "UCFLnYX_2SXJvEJRwVnGxlnQ";
+          const feedUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`;
+          const escXml = (value) => String(value ?? "")
+            .replace(/&amp;/g, "&")
+            .replace(/&lt;/g, "<")
+            .replace(/&gt;/g, ">")
+            .replace(/&quot;/g, '"')
+            .replace(/&#39;/g, "'");
+          const escHtml = (value) => String(value ?? "")
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;");
+
+          const response = await fetch(feedUrl);
+          if (!response.ok) throw new Error(`YouTube RSS ${response.status}`);
+          const xml = await response.text();
+          const entry = xml.match(/<entry>[\s\S]*?<\/entry>/)?.[0] || "";
+          const id = entry.match(/<yt:videoId>([^<]+)<\/yt:videoId>/)?.[1] || "";
+          if (!id) throw new Error("latest video id not found");
+
+          const latest = {
+            id,
+            url: escXml(entry.match(/<link rel="alternate" href="([^"]+)"/)?.[1] || `https://www.youtube.com/watch?v=${id}`),
+            title: escXml(entry.match(/<title>([\s\S]*?)<\/title>/)?.[1] || "星の翼 公式YouTube 最新動画"),
+            publishedAt: entry.match(/<published>([^<]+)<\/published>/)?.[1] || "",
+          };
+          latest.publishedText = latest.publishedAt ? latest.publishedAt.slice(0, 10) : "公式YouTube 最新動画";
+
+          fs.mkdirSync("docs/api", { recursive: true });
+          const json = JSON.stringify(latest, null, 2) + "\n";
+          fs.writeFileSync("docs/official-latest-video.json", json, "utf8");
+          fs.writeFileSync("docs/api/youtube-latest", json, "utf8");
+          fs.writeFileSync("docs/api/youtube-latest.json", json, "utf8");
+
+          const indexPath = "docs/index.html";
+          let html = fs.readFileSync(indexPath, "utf8");
+          const block = `<div class="latest-video-frame compact" id="official-latest-video-card">
+              <a class="latest-video-card-link" href="${escHtml(latest.url)}" target="_blank" rel="noreferrer">
+                <img src="https://i.ytimg.com/vi/${escHtml(latest.id)}/hqdefault.jpg" alt="" />
+                <span>Youtubeで開く</span>
+              </a>
+            </div>
+            <p id="official-latest-card-title">${escHtml(latest.title)}</p>`;
+          html = html.replace(
+            /<div class="latest-video-frame compact" id="official-latest-video-card">[\s\S]*?<\/div>\s*<p id="official-latest-card-title">[\s\S]*?<\/p>/,
+            block
+          );
+          fs.writeFileSync(indexPath, html, "utf8");
+          NODE
+
+      - name: Commit latest video update
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/official-latest-video.json docs/api/youtube-latest docs/api/youtube-latest.json docs/index.html
+          git diff --cached --quiet || git commit -m "Update official latest video"
+          git push
