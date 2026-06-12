@@ -435,40 +435,77 @@ h1 {
 
 @media (min-width: 960px) {
   body {
-    padding-left: 350px;
+    padding-left: 300px;
   }
 
   .site-header {
-    display: none;
+    position: fixed;
+    inset: 0 auto 0 0;
+    z-index: 40;
+    display: flex;
+    width: 300px;
+    min-height: 100svh;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 20px;
+    padding: 22px 18px 24px;
+    overflow-y: auto;
+    background:
+      linear-gradient(180deg, rgba(101, 231, 255, 0.07), transparent 42%, rgba(201, 184, 255, 0.05)),
+      rgba(1, 5, 11, 0.9);
+    border-right: 1px solid rgba(142, 232, 255, 0.22);
+    border-bottom: 0;
+    box-shadow: var(--shadow);
+  }
+
+  .site-header.is-scrolled {
+    background:
+      linear-gradient(180deg, rgba(101, 231, 255, 0.08), transparent 42%, rgba(201, 184, 255, 0.06)),
+      rgba(1, 5, 11, 0.94);
+    box-shadow: var(--shadow);
+  }
+
+  .brand {
+    padding: 0 10px 10px;
+    font-size: 1.05rem;
+  }
+
+  .nav {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+    color: var(--text);
+    font-size: 1.05rem;
+  }
+
+  .nav a {
+    padding: 12px 14px;
+    border-radius: 999px;
+    color: rgba(244, 248, 255, 0.88);
+    transition: background-color 160ms ease, color 160ms ease, transform 160ms ease;
+  }
+
+  .nav a:hover,
+  .nav a:focus-visible {
+    color: var(--text);
+    background: rgba(255, 255, 255, 0.08);
+    text-shadow: none;
+    transform: translateX(4px);
+  }
+
+  .nav a[aria-current="page"] {
+    color: var(--text);
+    background: linear-gradient(135deg, rgba(101, 231, 255, 0.16), rgba(201, 184, 255, 0.1));
+    font-weight: 900;
   }
 
   .home-dashboard {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 35;
-    width: 350px;
-    margin: 0;
-    padding: 22px 20px 24px;
-    overflow-y: auto;
-    border-top: 0;
-    border-right: 1px solid rgba(142, 232, 255, 0.22);
-    border-bottom: 0;
-    border-radius: 0;
+    display: none;
   }
 
   .hero {
     min-height: 100svh;
-  }
-
-  .home-dashboard::before {
-    content: "StarWard DB";
-    display: block;
-    padding: 0 14px 12px;
-    color: var(--text);
-    font-size: 1.1rem;
-    font-weight: 900;
   }
 }
 
