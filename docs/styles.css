@@ -433,6 +433,45 @@ h1 {
   color: rgba(223, 232, 255, 0.6);
 }
 
+@media (min-width: 960px) {
+  body {
+    padding-left: 350px;
+  }
+
+  .site-header {
+    display: none;
+  }
+
+  .home-dashboard {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 35;
+    width: 350px;
+    margin: 0;
+    padding: 22px 20px 24px;
+    overflow-y: auto;
+    border-top: 0;
+    border-right: 1px solid rgba(142, 232, 255, 0.22);
+    border-bottom: 0;
+    border-radius: 0;
+  }
+
+  .hero {
+    min-height: 100svh;
+  }
+
+  .home-dashboard::before {
+    content: "StarWard DB";
+    display: block;
+    padding: 0 14px 12px;
+    color: var(--text);
+    font-size: 1.1rem;
+    font-weight: 900;
+  }
+}
+
 .number {
   color: var(--gold);
   font-weight: 900;
