@@ -257,21 +257,13 @@
     ],
     "void-saber": [
       {
-        "id": "1780306023059-dy42rr",
-        "title": "【星の翼】ヴォイドセーバー視点レート20000↑　大会7連続入賞者視点【makipon】",
-        "url": "https://www.youtube.com/watch?v=KM13uGpEdUY",
+        "id": "1781264390133-8jppmb",
+        "title": "【星の翼】S13/ヴォイドセイバー視点3【StarWard】",
+        "url": "https://www.youtube.com/watch?v=-OIYD4Tswlw",
         "note": "",
-        "channelId": "1780305502713-1fd1pg",
-        "createdAt": "2026-06-01T09:27:03.059Z"
-      },
-      {
-        "id": "1780305593487-0hi1ym",
-        "title": "【星の翼】S13/ヴォイドセイバー視点1【StarWard】",
-        "url": "https://www.youtube.com/watch?v=6A-Q2TTnX2A",
-        "note": "",
+        "publishedAt": "2026-06-10",
         "channelId": "1780305530923-cs3sx9",
-        "createdAt": "2026-06-01T09:19:53.488Z",
-        "publishedAt": "2026-05-29"
+        "createdAt": "2026-06-12T11:39:50.133Z"
       },
       {
         "id": "1780305579064-mjoqta",
@@ -281,6 +273,14 @@
         "channelId": "1780305530923-cs3sx9",
         "createdAt": "2026-06-01T09:19:39.064Z",
         "publishedAt": "2026-05-30"
+      },
+      {
+        "id": "1780306023059-dy42rr",
+        "title": "【星の翼】ヴォイドセーバー視点レート20000↑　大会7連続入賞者視点【makipon】",
+        "url": "https://www.youtube.com/watch?v=KM13uGpEdUY",
+        "note": "",
+        "channelId": "1780305502713-1fd1pg",
+        "createdAt": "2026-06-01T09:27:03.059Z"
       }
     ],
     "black-rock-shooter": [
@@ -341,24 +341,34 @@
     ],
     "dead-master": [
       {
+        "id": "1781264352267-h17jj5",
+        "title": "【星の翼】S13/デッドマスター視点2【StarWard】",
+        "url": "https://www.youtube.com/watch?v=FnBJ_U04ZuM",
+        "note": "",
+        "publishedAt": "2026-06-11",
+        "channelId": "1780305530923-cs3sx9",
+        "createdAt": "2026-06-12T11:39:12.267Z"
+      },
+      {
         "id": "1780306289059-rjni1h",
         "title": "【星の翼】初の移動照射メインデッドマスター視点　運営さんひよったな！？【makipon】",
         "url": "https://www.youtube.com/watch?v=tudrqqQtPio",
         "note": "",
         "channelId": "1780305502713-1fd1pg",
         "createdAt": "2026-06-01T09:31:29.059Z"
-      },
-      {
-        "id": "1780305672109-32bs1q",
-        "title": "【星の翼】S13/デッドマスター視点1【StarWard】",
-        "url": "https://www.youtube.com/watch?v=pobrMw_0i2Y",
-        "note": "",
-        "channelId": "1780305530923-cs3sx9",
-        "createdAt": "2026-06-01T09:21:12.109Z",
-        "publishedAt": "2026-05-10"
       }
     ],
     "kage": [
+      {
+        "id": "1780305698254-9kqixh",
+        "title": "【星の翼】S13/影視点37【StarWard】",
+        "url": "https://www.youtube.com/watch?v=aZYzHWE5KQg&t=1s",
+        "note": "",
+        "channelId": "1780305530923-cs3sx9",
+        "createdAt": "2026-06-01T09:21:38.254Z",
+        "publishedAt": "2026-06-08",
+        "updatedAt": "2026-06-12T11:38:38.539Z"
+      },
       {
         "id": "1780306973087-4lvcxu",
         "title": "【星の翼】アプデにより今までと真逆の立ち回りを要求されるようになったリワーク後影プチ解説",
@@ -376,15 +386,6 @@
         "channelId": "1780305530923-cs3sx9",
         "createdAt": "2026-06-01T09:22:38.797Z",
         "publishedAt": "2026-04-09"
-      },
-      {
-        "id": "1780305698254-9kqixh",
-        "title": "【星の翼】SAC世界3位による影解説動画【ビヨンド記念】",
-        "url": "https://www.youtube.com/watch?v=SQGz0l8Up_Y",
-        "note": "",
-        "channelId": "1780305530923-cs3sx9",
-        "createdAt": "2026-06-01T09:21:38.254Z",
-        "publishedAt": "2026-04-29"
       }
     ],
     "griffin": [
