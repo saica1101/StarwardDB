@@ -7,11 +7,12 @@
   --muted: #b8c8dc;
   --line: rgba(142, 232, 255, 0.18);
   --cyan: #65e7ff;
-  --violet: #b69cff;
-  --coral: #ff7a9c;
-  --gold: #f7d778;
-  --green: #80ffc8;
-  --shadow: 0 26px 90px rgba(0, 0, 0, 0.48), 0 0 34px rgba(101, 231, 255, 0.08);
+  --violet: #c9b8ff;
+  --coral: #ff8fb0;
+  --gold: #ffe49b;
+  --green: #9fffd7;
+  --mist: rgba(216, 240, 255, 0.72);
+  --shadow: 0 26px 90px rgba(0, 0, 0, 0.48), 0 0 42px rgba(182, 156, 255, 0.1);
 }
 
 * {
@@ -25,13 +26,16 @@ html {
 body {
   margin: 0;
   background:
-    linear-gradient(rgba(101, 231, 255, 0.055) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(101, 231, 255, 0.045) 1px, transparent 1px),
-    radial-gradient(ellipse at 20% 0%, rgba(182, 156, 255, 0.2), transparent 34%),
-    radial-gradient(ellipse at 82% 12%, rgba(101, 231, 255, 0.16), transparent 32%),
-    radial-gradient(ellipse at 48% 100%, rgba(128, 255, 200, 0.08), transparent 36%),
+    radial-gradient(circle at 14% 18%, rgba(255, 255, 255, 0.42) 0 1px, transparent 1.6px),
+    radial-gradient(circle at 78% 22%, rgba(201, 184, 255, 0.38) 0 1px, transparent 1.7px),
+    radial-gradient(circle at 44% 72%, rgba(159, 255, 215, 0.28) 0 1px, transparent 1.6px),
+    linear-gradient(rgba(101, 231, 255, 0.026) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(101, 231, 255, 0.022) 1px, transparent 1px),
+    radial-gradient(ellipse at 20% 0%, rgba(201, 184, 255, 0.24), transparent 36%),
+    radial-gradient(ellipse at 82% 12%, rgba(101, 231, 255, 0.16), transparent 34%),
+    radial-gradient(ellipse at 48% 100%, rgba(159, 255, 215, 0.11), transparent 38%),
     var(--bg);
-  background-size: 36px 36px, 36px 36px, auto, auto, auto, auto;
+  background-size: 220px 220px, 280px 280px, 340px 340px, 42px 42px, 42px 42px, auto, auto, auto, auto;
   background-attachment: fixed;
   color: var(--text);
   font-family: "Segoe UI", "Hiragino Sans", "Yu Gothic UI", Meiryo, sans-serif;
@@ -45,8 +49,23 @@ body::before {
   z-index: -1;
   pointer-events: none;
   background:
-    linear-gradient(120deg, transparent 0 28%, rgba(101, 231, 255, 0.1) 28.1%, transparent 28.6% 62%, rgba(182, 156, 255, 0.08) 62.1%, transparent 62.7%),
-    linear-gradient(180deg, rgba(5, 7, 17, 0.18), rgba(5, 7, 17, 0.82));
+    linear-gradient(118deg, transparent 0 24%, rgba(101, 231, 255, 0.1) 29%, transparent 43%, rgba(201, 184, 255, 0.12) 57%, transparent 76%),
+    linear-gradient(66deg, transparent 0 34%, rgba(159, 255, 215, 0.09) 47%, transparent 64%),
+    linear-gradient(180deg, rgba(5, 7, 17, 0.1), rgba(5, 7, 17, 0.84));
+  filter: saturate(1.08);
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 50% 18%, rgba(243, 248, 255, 0.12), transparent 52%),
+    linear-gradient(180deg, transparent 0 48%, rgba(8, 13, 27, 0.56) 100%);
+  mix-blend-mode: screen;
+  opacity: 0.72;
 }
 
 a {
@@ -64,7 +83,7 @@ a {
   gap: 24px;
   min-height: 68px;
   padding: 12px clamp(18px, 4vw, 56px);
-  background: rgba(5, 8, 17, 0.76);
+  background: rgba(5, 8, 17, 0.72);
   border-bottom: 1px solid var(--line);
   backdrop-filter: blur(16px);
   transition: background-color 180ms ease, box-shadow 180ms ease;
@@ -128,6 +147,21 @@ a {
   padding: clamp(76px, 10vw, 132px) clamp(20px, 5vw, 72px);
 }
 
+.hero::before,
+.page-hero::before,
+.character-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 24% 34%, rgba(255, 255, 255, 0.42) 0 1px, transparent 1.7px),
+    radial-gradient(circle at 66% 20%, rgba(201, 184, 255, 0.38) 0 1px, transparent 1.7px),
+    radial-gradient(circle at 86% 66%, rgba(159, 255, 215, 0.3) 0 1px, transparent 1.7px);
+  background-size: 190px 190px, 260px 260px, 310px 310px;
+  opacity: 0.5;
+}
+
 .guide-hero {
   background: var(--bg);
 }
@@ -146,9 +180,10 @@ a {
 
 .hero-shade {
   background:
-    linear-gradient(90deg, rgba(5, 7, 17, 0.92) 0%, rgba(5, 7, 17, 0.68) 46%, rgba(5, 7, 17, 0.22) 100%),
+    linear-gradient(90deg, rgba(5, 7, 17, 0.9) 0%, rgba(5, 7, 17, 0.66) 46%, rgba(5, 7, 17, 0.2) 100%),
     linear-gradient(0deg, var(--bg) 0%, rgba(5, 7, 17, 0) 28%),
-    linear-gradient(135deg, rgba(101, 231, 255, 0.12), transparent 34%, rgba(182, 156, 255, 0.12));
+    linear-gradient(124deg, rgba(101, 231, 255, 0.15), transparent 32%, rgba(201, 184, 255, 0.16) 62%, transparent 86%),
+    linear-gradient(38deg, transparent 14%, rgba(159, 255, 215, 0.08) 42%, transparent 72%);
 }
 
 .hero-content {
@@ -210,6 +245,7 @@ a {
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  text-shadow: 0 0 18px rgba(101, 231, 255, 0.35);
 }
 
 h1,
@@ -225,7 +261,7 @@ h1 {
   line-height: 1.02;
   letter-spacing: 0;
   max-width: 8.5em;
-  text-shadow: 0 0 28px rgba(101, 231, 255, 0.22), 0 0 48px rgba(182, 156, 255, 0.16);
+  text-shadow: 0 0 24px rgba(101, 231, 255, 0.22), 0 0 58px rgba(201, 184, 255, 0.22), 0 0 86px rgba(159, 255, 215, 0.08);
 }
 
 .hero-copy {
@@ -264,9 +300,10 @@ h1 {
 }
 
 .button.primary {
-  background: linear-gradient(135deg, var(--cyan), var(--green));
+  background: linear-gradient(135deg, var(--cyan), var(--green) 58%, var(--gold));
   color: #021019;
   border-color: transparent;
+  box-shadow: 0 0 26px rgba(101, 231, 255, 0.18), 0 0 34px rgba(159, 255, 215, 0.12);
 }
 
 .button.ghost {
@@ -303,7 +340,7 @@ h1 {
   min-height: 180px;
   padding: clamp(22px, 4vw, 38px);
   background:
-    linear-gradient(135deg, rgba(101, 231, 255, 0.07), transparent 46%),
+    linear-gradient(135deg, rgba(101, 231, 255, 0.07), transparent 42%, rgba(201, 184, 255, 0.05)),
     rgba(7, 13, 24, 0.88);
   transition: background-color 160ms ease, transform 160ms ease;
 }
@@ -381,7 +418,7 @@ h1 {
 
 .tools-section {
   background:
-    linear-gradient(180deg, rgba(101, 231, 255, 0.08), rgba(182, 156, 255, 0.06)),
+    linear-gradient(180deg, rgba(101, 231, 255, 0.07), rgba(201, 184, 255, 0.08) 46%, rgba(159, 255, 215, 0.035)),
     rgba(6, 11, 20, 0.78);
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
@@ -399,7 +436,8 @@ h1 {
   overflow: hidden;
   display: grid;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent 42%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045), transparent 42%),
+    linear-gradient(135deg, rgba(201, 184, 255, 0.055), transparent 52%),
     rgba(13, 21, 34, 0.9);
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -460,7 +498,9 @@ h1 {
 .panel,
 .checklist,
 .note {
-  background: var(--surface);
+  background:
+    linear-gradient(135deg, rgba(201, 184, 255, 0.055), transparent 52%),
+    var(--surface);
   border: 1px solid var(--line);
   border-radius: 8px;
   padding: clamp(22px, 4vw, 34px);
@@ -488,7 +528,7 @@ h1 {
 
 .split-band {
   background:
-    linear-gradient(180deg, rgba(182, 156, 255, 0.08), rgba(101, 231, 255, 0.05)),
+    linear-gradient(180deg, rgba(201, 184, 255, 0.1), rgba(101, 231, 255, 0.05) 54%, rgba(159, 255, 215, 0.035)),
     rgba(7, 12, 22, 0.82);
 }
 
@@ -506,7 +546,7 @@ h1 {
   border-radius: 8px;
   padding: 24px;
   background:
-    linear-gradient(135deg, rgba(101, 231, 255, 0.05), transparent 48%),
+    linear-gradient(135deg, rgba(101, 231, 255, 0.045), transparent 44%, rgba(201, 184, 255, 0.05)),
     rgba(13, 21, 34, 0.84);
 }
 
@@ -544,10 +584,13 @@ h1 {
 }
 
 .page-hero {
+  position: relative;
+  overflow: hidden;
   padding: clamp(84px, 10vw, 132px) clamp(20px, 5vw, 72px) clamp(48px, 7vw, 86px);
   background:
-    linear-gradient(115deg, rgba(101, 231, 255, 0.16), transparent 42%),
-    linear-gradient(295deg, rgba(182, 156, 255, 0.13), transparent 36%),
+    linear-gradient(115deg, rgba(101, 231, 255, 0.14), transparent 38%),
+    linear-gradient(295deg, rgba(201, 184, 255, 0.16), transparent 38%),
+    linear-gradient(30deg, transparent 18%, rgba(159, 255, 215, 0.07), transparent 70%),
     rgba(7, 12, 22, 0.88);
   border-bottom: 1px solid var(--line);
 }
