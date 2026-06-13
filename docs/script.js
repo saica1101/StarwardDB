@@ -201,7 +201,7 @@ const setupSiteOrderControls = () => {
   fetch(siteAssetUrl(`site-order-data.json?v=${Date.now()}`))
     .then((response) => response.ok ? response.json() : {})
     .then((published) => {
-      orderMap = { ...(published || {}), ...readLocalOrder() };
+      orderMap = { ...readLocalOrder(), ...(published || {}) };
       containers.forEach(applyOrder);
       setupManagers();
     })

@@ -8,12 +8,14 @@
     "href::ご協力者様"
   ],
   "main-nav": [
-    "href:characters.html:キャラ",
+    "href:characters.html:キャラDB",
+    "href:tools.html:ツール",
     "href:comparison.html:比較",
     "href:landing-tech.html:降りテク",
     "href:videos.html:動画",
-    "href:index.html:基本",
-    "href:recent-updates.html:更新"
+    "href::チャンネル",
+    "href:streamers.html:配信者",
+    "href::ご協力者様"
   ],
   "home-dashboard": [
     "href:characters.html:キャラDBを見る",
