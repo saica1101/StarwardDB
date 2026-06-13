@@ -178,6 +178,175 @@ a {
   opacity: 0.38;
 }
 
+.favorite-character-panel,
+.personal-matchup-panel,
+.recent-filter-panel,
+.landing-filter-panel,
+.video-filter-panel,
+.character-compare-picker {
+  border: 1px solid rgba(101, 231, 255, 0.28);
+  border-radius: 8px;
+  background: rgba(7, 16, 30, 0.78);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.24);
+}
+
+.favorite-character-panel {
+  width: min(100%, 640px);
+  margin-top: 20px;
+  overflow: hidden;
+}
+
+.favorite-character-panel summary,
+.personal-matchup-panel summary {
+  cursor: pointer;
+  padding: 12px 14px;
+  color: var(--cyan);
+  font-weight: 800;
+}
+
+.favorite-character-body,
+.personal-matchup-body {
+  display: grid;
+  gap: 12px;
+  padding: 0 14px 14px;
+}
+
+.favorite-character-body label,
+.personal-matchup-body label,
+.recent-filter-panel label {
+  display: grid;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 0.84rem;
+  font-weight: 800;
+}
+
+.favorite-character-body select,
+.favorite-character-body button,
+.personal-matchup-body select,
+.personal-matchup-body textarea,
+.personal-note-actions button,
+.recent-filter-panel select,
+.recent-filter-panel input,
+.landing-filter-panel button,
+.video-filter-panel button,
+.character-compare-picker select,
+.character-compare-picker button {
+  min-height: 40px;
+  border: 1px solid rgba(101, 231, 255, 0.28);
+  border-radius: 8px;
+  background: rgba(5, 12, 24, 0.86);
+  color: var(--text);
+  font: inherit;
+}
+
+.favorite-character-body button,
+.personal-note-actions button,
+.landing-filter-panel button,
+.video-filter-panel button,
+.character-compare-picker button {
+  padding: 0 14px;
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.favorite-character-body button:hover,
+.personal-note-actions button:hover,
+.landing-filter-panel button:hover,
+.landing-filter-panel button.is-active,
+.video-filter-panel button:hover,
+.video-filter-panel button.is-active,
+.character-compare-picker button:hover {
+  border-color: rgba(101, 231, 255, 0.62);
+  background: rgba(26, 73, 92, 0.7);
+  color: var(--cyan);
+}
+
+.favorite-character-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.favorite-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 100%;
+  padding: 6px 6px 6px 10px;
+  border: 1px solid rgba(159, 255, 215, 0.28);
+  border-radius: 999px;
+  background: rgba(159, 255, 215, 0.08);
+}
+
+.favorite-chip a {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.favorite-chip button {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  min-height: 26px;
+  padding: 0;
+  border-radius: 999px;
+}
+
+.empty-text {
+  color: var(--muted);
+}
+
+.character-compare-picker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+}
+
+.recent-filter-panel {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(150px, 220px)) minmax(220px, 1fr);
+  gap: 12px;
+  margin: 18px 0 24px;
+  padding: 14px;
+}
+
+.landing-filter-panel,
+.video-filter-panel {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 14px 0 18px;
+  padding: 12px;
+}
+
+.is-highlighted-row {
+  outline: 2px solid rgba(101, 231, 255, 0.55);
+  outline-offset: -2px;
+}
+
+.personal-matchup-panel {
+  margin-top: 22px;
+}
+
+.personal-matchup-body textarea {
+  width: 100%;
+  min-height: 104px;
+  padding: 10px 12px;
+  resize: vertical;
+}
+
+.personal-note-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--muted);
+}
+
 .nav {
   display: flex;
   align-items: center;
@@ -2802,6 +2971,7 @@ body.page-editing .page-edit-block:hover {
   .tool-grid,
   .guide-hero,
   .official-feed-grid,
+  .recent-filter-panel,
   .channel-grid,
   .timeline,
   .character-grid,
@@ -2857,6 +3027,13 @@ body.page-editing .page-edit-block:hover {
 
   .video-register-form {
     grid-template-columns: 1fr;
+  }
+
+  .character-compare-picker,
+  .personal-note-actions {
+    width: 100%;
+    align-items: stretch;
+    flex-direction: column;
   }
 
   .video-channel-form,

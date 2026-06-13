@@ -428,6 +428,389 @@ document.querySelectorAll("[data-table-sort]").forEach((button) => {
   });
 });
 
+const loadCharacterData = (() => {
+  let cache = null;
+  return () => {
+    if (cache) return cache;
+    cache = fetch(siteAssetUrl(`characters-data.json?v=${Date.now()}`))
+      .then((response) => response.ok ? response.json() : [])
+      .catch(() => []);
+    return cache;
+  };
+})();
+
+const loadVideoLibrary = (() => {
+  let cache = null;
+  return () => {
+    if (cache) return cache;
+    cache = fetch(siteAssetUrl(`video-library-data.json?v=${Date.now()}`))
+      .then((response) => response.ok ? response.json() : { channels: [], videos: {} })
+      .catch(() => ({ channels: [], videos: {} }));
+    return cache;
+  };
+})();
+
+const escapeHtml = (value) => String(value ?? "").replace(/[&<>"']/g, (char) => ({
+  "&": "&amp;",
+  "<": "&lt;",
+  ">": "&gt;",
+  '"': "&quot;",
+  "'": "&#39;",
+})[char]);
+
+const currentCharacterSlug = () => {
+  const match = normalizePagePath().match(/\/characters\/([^/]+)\.html$/);
+  return match?.[1] || "";
+};
+
+const relativeCharacterHref = (slug) => {
+  const inCharacterPage = /\/characters\/[^/]+\.html$/.test(normalizePagePath());
+  return `${inCharacterPage ? "" : "characters/"}${slug}.html`;
+};
+
+const setupFavoriteCharacters = async () => {
+  const characters = await loadCharacterData();
+  if (!characters.length) return;
+  const storageKey = "starward-favorite-characters";
+  const loadFavorites = () => {
+    try {
+      const value = JSON.parse(localStorage.getItem(storageKey) || "[]");
+      return Array.isArray(value) ? value : [];
+    } catch {
+      return [];
+    }
+  };
+  const saveFavorites = (items) => {
+    try {
+      localStorage.setItem(storageKey, JSON.stringify(items));
+    } catch {}
+  };
+  const findCharacter = (slug) => characters.find((character) => character.slug === slug);
+  const currentSlug = currentCharacterSlug();
+  const target = document.querySelector(".page-hero-inner, .character-hero-inner, .hero-inner");
+  if (!target || document.querySelector(".favorite-character-panel")) return;
+
+  const details = document.createElement("details");
+  details.className = "favorite-character-panel";
+  details.innerHTML = `
+    <summary>お気に入りキャラ</summary>
+    <div class="favorite-character-body">
+      <label>
+        キャラ選択
+        <select data-favorite-select>
+          <option value="">キャラを選ぶ</option>
+          ${characters.map((character) => `<option value="${escapeHtml(character.slug)}">${escapeHtml(character.name)}</option>`).join("")}
+        </select>
+      </label>
+      <button type="button" data-favorite-add>追加</button>
+      <div class="favorite-character-list" data-favorite-list></div>
+    </div>
+  `;
+  target.append(details);
+
+  const select = details.querySelector("[data-favorite-select]");
+  const list = details.querySelector("[data-favorite-list]");
+  const addButton = details.querySelector("[data-favorite-add]");
+
+  const render = () => {
+    const favorites = loadFavorites().filter(findCharacter);
+    list.innerHTML = favorites.length
+      ? favorites.map((slug) => {
+        const character = findCharacter(slug);
+        return `
+          <span class="favorite-chip">
+            <a href="${escapeHtml(relativeCharacterHref(character.slug))}">${escapeHtml(character.name)}</a>
+            <button type="button" data-favorite-remove="${escapeHtml(character.slug)}" aria-label="${escapeHtml(character.name)}を外す">×</button>
+          </span>
+        `;
+      }).join("")
+      : `<span class="empty-text">未登録</span>`;
+    if (currentSlug) {
+      const favoritesSet = new Set(favorites);
+      addButton.textContent = favoritesSet.has(currentSlug) ? "登録済み" : "このキャラを追加";
+    }
+  };
+
+  addButton.addEventListener("click", () => {
+    const slug = currentSlug || select.value;
+    if (!slug) return;
+    const favorites = loadFavorites();
+    if (!favorites.includes(slug)) saveFavorites([...favorites, slug]);
+    render();
+  });
+  select.addEventListener("change", () => {
+    addButton.disabled = !select.value && !currentSlug;
+  });
+  list.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-favorite-remove]");
+    if (!button) return;
+    saveFavorites(loadFavorites().filter((slug) => slug !== button.dataset.favoriteRemove));
+    render();
+  });
+  addButton.disabled = !currentSlug && !select.value;
+  render();
+};
+
+const setupCharacterComparePicker = async () => {
+  const slug = currentCharacterSlug();
+  if (!slug || document.querySelector(".character-compare-picker")) return;
+  const actions = document.querySelector(".character-hero .hero-actions");
+  if (!actions) return;
+  const characters = (await loadCharacterData()).filter((character) => character.slug !== slug);
+  if (!characters.length) return;
+  const picker = document.createElement("div");
+  picker.className = "character-compare-picker";
+  picker.innerHTML = `
+    <select aria-label="比較相手を選ぶ">
+      <option value="">比較相手</option>
+      ${characters.map((character) => `<option value="${escapeHtml(character.slug)}">${escapeHtml(character.name)}</option>`).join("")}
+    </select>
+    <button type="button">比較</button>
+  `;
+  actions.append(picker);
+  picker.querySelector("button").addEventListener("click", () => {
+    const target = picker.querySelector("select").value;
+    if (!target) return;
+    location.href = `../comparison.html?compare=${encodeURIComponent(slug)},${encodeURIComponent(target)}`;
+  });
+};
+
+const setupComparisonQuery = () => {
+  const table = document.querySelector("#compare-table");
+  if (!table) return;
+  const compare = siteParams.get("compare");
+  if (!compare) return;
+  const namesBySlug = {};
+  table.querySelectorAll("tbody a[href*='characters/']").forEach((link) => {
+    const slug = link.getAttribute("href")?.match(/characters\/([^/]+)\.html/)?.[1];
+    if (slug) namesBySlug[slug] = link.textContent.trim();
+  });
+  const selected = compare.split(",").map((slug) => slug.trim()).filter(Boolean);
+  if (!selected.length) return;
+  const selectedNames = new Set(selected.map((slug) => namesBySlug[slug]).filter(Boolean));
+  table.querySelectorAll("tbody tr").forEach((row) => {
+    const name = row.querySelector("th")?.textContent?.trim();
+    const visible = selectedNames.has(name);
+    row.hidden = !visible;
+    row.classList.toggle("is-highlighted-row", visible);
+  });
+  const search = document.querySelector("#compare-search");
+  if (search) search.value = [...selectedNames].join(" / ");
+};
+
+const setupRecentUpdateFilters = () => {
+  const page = document.querySelector("main .section.tight");
+  if (!page || !document.querySelector("#compare-table") && !/recent-updates\.html$/.test(normalizePagePath())) return;
+  const grids = [...page.querySelectorAll(".guide-card-grid")];
+  if (!grids.length || document.querySelector(".recent-filter-panel")) return;
+  const panel = document.createElement("div");
+  panel.className = "recent-filter-panel";
+  panel.innerHTML = `
+    <label>
+      種別
+      <select data-recent-kind>
+        <option value="all">すべて</option>
+        <option value="page">キャラ編集</option>
+        <option value="video">動画追加</option>
+      </select>
+    </label>
+    <label>
+      期間
+      <select data-recent-days>
+        <option value="all">全期間</option>
+        <option value="7">直近7日</option>
+        <option value="30">直近30日</option>
+      </select>
+    </label>
+    <input type="search" placeholder="タイトル・キャラで検索" data-recent-search>
+  `;
+  page.querySelector(".section-heading")?.after(panel);
+  const cards = grids.flatMap((grid) => [...grid.querySelectorAll(".guide-mini-card")]);
+  const cardKind = (card) => {
+    const tag = card.querySelector(".tag")?.textContent?.trim() || "";
+    return tag === "Page Edit" ? "page" : "video";
+  };
+  const cardDate = (card) => {
+    const tag = card.querySelector(".tag")?.textContent?.trim() || "";
+    const date = tag.match(/\d{4}-\d{2}-\d{2}/)?.[0];
+    return date ? new Date(`${date}T00:00:00`) : null;
+  };
+  const apply = () => {
+    const kind = panel.querySelector("[data-recent-kind]").value;
+    const days = panel.querySelector("[data-recent-days]").value;
+    const query = panel.querySelector("[data-recent-search]").value.trim().toLowerCase();
+    const minDate = days === "all" ? null : new Date(Date.now() - Number(days) * 86400000);
+    cards.forEach((card) => {
+      const date = cardDate(card);
+      const visibleKind = kind === "all" || cardKind(card) === kind;
+      const visibleDate = !minDate || !date || date >= minDate;
+      const visibleText = !query || card.textContent.toLowerCase().includes(query);
+      card.hidden = !(visibleKind && visibleDate && visibleText);
+    });
+  };
+  panel.addEventListener("input", apply);
+  panel.addEventListener("change", apply);
+};
+
+const setupLandingQuickFilters = () => {
+  const table = document.querySelector("#landing-table");
+  const search = document.querySelector("#landing-search");
+  if (!table || !search || document.querySelector(".landing-filter-panel")) return;
+  const panel = document.createElement("div");
+  panel.className = "landing-filter-panel";
+  panel.innerHTML = `
+    <button type="button" data-landing-query="">すべて</button>
+    <button type="button" data-landing-query="メイン">メイン始動</button>
+    <button type="button" data-landing-query="サブ">サブ関連</button>
+    <button type="button" data-landing-query="後格">後格あり</button>
+    <button type="button" data-landing-query="格闘">格闘関連</button>
+  `;
+  search.closest(".roster-tools")?.after(panel);
+  panel.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-landing-query]");
+    if (!button) return;
+    search.value = button.dataset.landingQuery;
+    search.dispatchEvent(new Event("input", { bubbles: true }));
+    panel.querySelectorAll("button").forEach((item) => item.classList.toggle("is-active", item === button));
+  });
+};
+
+const setupCharacterVideoHub = async () => {
+  const slug = currentCharacterSlug();
+  const section = document.querySelector("#reference-videos");
+  if (!slug || !section || section.dataset.videoHubReady) return;
+  section.dataset.videoHubReady = "1";
+  const library = await loadVideoLibrary();
+  const entries = (library.videos?.[slug] || []).map((entry) => ({
+    ...entry,
+    channel: library.channels?.find((channel) => channel.id === entry.channelId),
+  }));
+  const grid = section.querySelector(".guide-card-grid");
+  if (!grid || !entries.length) return;
+  const controls = document.createElement("div");
+  controls.className = "video-filter-panel";
+  controls.innerHTML = `
+    <button type="button" class="is-active" data-video-kind="all">すべて</button>
+    <button type="button" data-video-kind="latest">最新</button>
+    <button type="button" data-video-kind="guide">解説</button>
+    <button type="button" data-video-kind="match">対戦</button>
+  `;
+  section.querySelector(".section-heading")?.after(controls);
+  const classify = (entry) => {
+    const text = `${entry.title || ""} ${entry.note || ""}`.toLowerCase();
+    if (/解説|使い方|講座|立ち回り|攻略/.test(text)) return "guide";
+    if (/ランク|対戦|視点|固定|シャッフル|s\d+/.test(text)) return "match";
+    return "latest";
+  };
+  const sorted = [...entries].sort((a, b) => String(b.publishedAt || b.createdAt || "").localeCompare(String(a.publishedAt || a.createdAt || "")));
+  const render = (kind = "all") => {
+    grid.innerHTML = sorted
+      .filter((entry, index) => kind === "all" || (kind === "latest" ? index < 6 : classify(entry) === kind))
+      .map((entry) => `
+        <article class="guide-mini-card" data-video-kind="${classify(entry)}">
+          <span class="tag">${escapeHtml(entry.channel?.name || "投稿者")}</span>
+          <h3>${escapeHtml(entry.title || "参考動画")}</h3>
+          <p>${escapeHtml(entry.publishedAt || "日付未登録")} / ${classify(entry) === "guide" ? "解説" : classify(entry) === "match" ? "対戦" : "動画"}</p>
+          <a href="${escapeHtml(entry.url)}" target="_blank" rel="noreferrer">動画を開く</a>
+        </article>
+      `).join("") || `<article class="guide-mini-card"><span class="tag">Video</span><h3>該当なし</h3><p>条件に合う動画がありません。</p></article>`;
+  };
+  controls.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-video-kind]");
+    if (!button) return;
+    controls.querySelectorAll("button").forEach((item) => item.classList.toggle("is-active", item === button));
+    render(button.dataset.videoKind);
+  });
+  render("all");
+};
+
+const setupPersonalMatchupNotes = async () => {
+  const slug = currentCharacterSlug();
+  const section = document.querySelector("#matchup");
+  if (!slug || !section || document.querySelector(".personal-matchup-panel")) return;
+  const characters = await loadCharacterData();
+  const storageKey = `starward-personal-matchup:${slug}`;
+  const loadNotes = () => {
+    try {
+      return JSON.parse(localStorage.getItem(storageKey) || "{}") || {};
+    } catch {
+      return {};
+    }
+  };
+  const saveNotes = (notes) => {
+    try {
+      localStorage.setItem(storageKey, JSON.stringify(notes));
+    } catch {}
+  };
+  const panel = document.createElement("details");
+  panel.className = "personal-matchup-panel";
+  panel.innerHTML = `
+    <summary>個人用メモ</summary>
+    <div class="personal-matchup-body">
+      <label>
+        対面キャラ
+        <select data-note-opponent>
+          <option value="general">共通メモ</option>
+          ${characters.filter((character) => character.slug !== slug).map((character) => `<option value="${escapeHtml(character.slug)}">${escapeHtml(character.name)}</option>`).join("")}
+        </select>
+      </label>
+      <label>
+        気をつけること
+        <textarea rows="4" data-note-field="caution" placeholder="例: この武装を見てから動く"></textarea>
+      </label>
+      <label>
+        攻めるポイント
+        <textarea rows="4" data-note-field="plan" placeholder="例: 弾切れ時に詰める"></textarea>
+      </label>
+      <label>
+        自由メモ
+        <textarea rows="5" data-note-field="free" placeholder="自分用の対策メモ"></textarea>
+      </label>
+      <div class="personal-note-actions">
+        <span data-note-status>ブラウザに保存</span>
+        <button type="button" data-note-clear>この対面を消す</button>
+      </div>
+    </div>
+  `;
+  section.append(panel);
+  const opponent = panel.querySelector("[data-note-opponent]");
+  const fields = [...panel.querySelectorAll("[data-note-field]")];
+  const status = panel.querySelector("[data-note-status]");
+  const render = () => {
+    const notes = loadNotes();
+    const current = notes[opponent.value] || {};
+    fields.forEach((field) => {
+      field.value = current[field.dataset.noteField] || "";
+    });
+  };
+  const saveCurrent = () => {
+    const notes = loadNotes();
+    notes[opponent.value] = Object.fromEntries(fields.map((field) => [field.dataset.noteField, field.value]));
+    saveNotes(notes);
+    status.textContent = "保存済み";
+    window.setTimeout(() => {
+      status.textContent = "ブラウザに保存";
+    }, 900);
+  };
+  opponent.addEventListener("change", render);
+  fields.forEach((field) => field.addEventListener("input", saveCurrent));
+  panel.querySelector("[data-note-clear]").addEventListener("click", () => {
+    const notes = loadNotes();
+    delete notes[opponent.value];
+    saveNotes(notes);
+    render();
+  });
+  render();
+};
+
+setupFavoriteCharacters();
+setupCharacterComparePicker();
+setupComparisonQuery();
+setupRecentUpdateFilters();
+setupLandingQuickFilters();
+setupCharacterVideoHub();
+setupPersonalMatchupNotes();
+
 (() => {
   const tabGroups = [...document.querySelectorAll("[data-move-form-tabs]")];
   if (!tabGroups.length) return;
