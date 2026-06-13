@@ -1,10 +1,29 @@
 {
   "home-hero-actions": [
     "href:characters.html:キャラDBを見る",
+    "href:tools.html:ツール",
     "href:comparison.html:キャラ比較",
     "href:landing-tech.html:降りテク",
-    "href:tools.html:ツール",
-    "href::ご協力者様",
-    "href:streamers.html:配信者紹介"
+    "href:streamers.html:配信者紹介",
+    "href::ご協力者様"
+  ],
+  "main-nav": [
+    "href:characters.html:キャラ",
+    "href:comparison.html:比較",
+    "href:landing-tech.html:降りテク",
+    "href:videos.html:動画",
+    "href:index.html:基本",
+    "href:recent-updates.html:更新"
+  ],
+  "home-dashboard": [
+    "href:characters.html:キャラDBを見る",
+    "href:characters.html:DB\n          \n            キャラを探す\n            コスト別・検索・武装表",
+    "href:videos.html:VI\n          \n            動画で確認\n            公式・キャラ別検索",
+    "href:comparison.html:CP\n          \n            キャラ比較\n            体力・赤ロック・武装数",
+    "href:landing-tech.html:LT\n          \n            降りテク一覧\n            キャンセルルートから抽出",
+    "href:recent-updates.html:UP\n          \n            最近の更新\n            編集・動画追加を確認",
+    "href:streamers.html:LV\n          \n            配信者を見る\n            配信メインのチャンネル紹介",
+    "href:tools.html:TL\n          \n            攻略ツール\n            更新まとめ・抽選・2v2・Pick/Ban",
+    "href::S\n          \n            星の翼ガイド\n            @StarwardDB"
   ]
 }
