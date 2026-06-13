@@ -1505,7 +1505,8 @@ h1 {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin: 14px 0 16px;
+  width: min(1060px, 100%);
+  margin: 14px auto 16px;
 }
 
 .compare-sort-group {
