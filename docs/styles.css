@@ -211,6 +211,28 @@ a {
   padding: 0 14px 14px;
 }
 
+.favorite-character-box {
+  display: grid;
+  gap: 10px;
+  padding: 12px;
+  border: 1px solid rgba(101, 231, 255, 0.18);
+  border-radius: 8px;
+  background: rgba(4, 11, 22, 0.58);
+}
+
+.favorite-character-box h3 {
+  margin: 0;
+  color: var(--text);
+  font-size: 0.96rem;
+}
+
+.favorite-select-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: end;
+}
+
 .favorite-character-body label,
 .personal-matchup-body label,
 .recent-filter-panel label {
@@ -263,36 +285,77 @@ a {
 }
 
 .favorite-character-list {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  gap: 12px;
+}
+
+.favorite-cost-group {
+  display: grid;
   gap: 8px;
 }
 
-.favorite-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  max-width: 100%;
-  padding: 6px 6px 6px 10px;
-  border: 1px solid rgba(159, 255, 215, 0.28);
-  border-radius: 999px;
-  background: rgba(159, 255, 215, 0.08);
+.favorite-cost-group > strong {
+  color: var(--cyan);
+  font-size: 0.82rem;
 }
 
-.favorite-chip a {
+.favorite-icon-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(82px, 1fr));
+  gap: 10px;
+}
+
+.favorite-icon-card {
+  position: relative;
+  display: grid;
+  min-width: 0;
+  border: 1px solid rgba(159, 255, 215, 0.2);
+  border-radius: 8px;
+  background: rgba(159, 255, 215, 0.07);
   overflow: hidden;
+}
+
+.favorite-icon-card a {
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  min-width: 0;
+  padding: 10px 8px 8px;
+}
+
+.favorite-icon-card img {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border: 1px solid rgba(101, 231, 255, 0.34);
+  border-radius: 8px;
+  background: rgba(5, 12, 24, 0.86);
+}
+
+.favorite-icon-card span {
+  width: 100%;
+  overflow: hidden;
+  color: var(--text);
+  font-size: 0.78rem;
+  font-weight: 800;
+  line-height: 1.35;
+  text-align: center;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.favorite-chip button {
+.favorite-icon-card button {
+  position: absolute;
+  top: 4px;
+  right: 4px;
   display: grid;
   place-items: center;
-  width: 26px;
-  height: 26px;
-  min-height: 26px;
+  width: 24px;
+  height: 24px;
+  min-height: 24px;
   padding: 0;
   border-radius: 999px;
+  background: rgba(5, 12, 24, 0.88);
 }
 
 .empty-text {
@@ -3030,10 +3093,12 @@ body.page-editing .page-edit-block:hover {
   }
 
   .character-compare-picker,
+  .favorite-select-row,
   .personal-note-actions {
     width: 100%;
     align-items: stretch;
     flex-direction: column;
+    grid-template-columns: 1fr;
   }
 
   .video-channel-form,

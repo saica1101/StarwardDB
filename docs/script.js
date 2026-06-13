@@ -472,6 +472,7 @@ const setupFavoriteCharacters = async () => {
   const characters = await loadCharacterData();
   if (!characters.length) return;
   const storageKey = "starward-favorite-characters";
+  const costOrder = ["3.0", "2.5", "2.0", "1.5"];
   const loadFavorites = () => {
     try {
       const value = JSON.parse(localStorage.getItem(storageKey) || "[]");
@@ -486,6 +487,13 @@ const setupFavoriteCharacters = async () => {
     } catch {}
   };
   const findCharacter = (slug) => characters.find((character) => character.slug === slug);
+  const characterIcon = (character) => siteAssetUrl(`tools/assets/character-icons-api/${encodeURIComponent(character.name)}.png`);
+  const groupedCharacters = costOrder
+    .map((cost) => ({
+      cost,
+      items: characters.filter((character) => character.cost === cost),
+    }))
+    .filter((group) => group.items.length);
   const currentSlug = currentCharacterSlug();
   const target = document.querySelector(".page-hero-inner, .character-hero-inner, .hero-inner");
   if (!target || document.querySelector(".favorite-character-panel")) return;
@@ -495,15 +503,27 @@ const setupFavoriteCharacters = async () => {
   details.innerHTML = `
     <summary>お気に入りキャラ</summary>
     <div class="favorite-character-body">
-      <label>
-        キャラ選択
-        <select data-favorite-select>
-          <option value="">キャラを選ぶ</option>
-          ${characters.map((character) => `<option value="${escapeHtml(character.slug)}">${escapeHtml(character.name)}</option>`).join("")}
-        </select>
-      </label>
-      <button type="button" data-favorite-add>追加</button>
-      <div class="favorite-character-list" data-favorite-list></div>
+      <section class="favorite-character-box">
+        <h3>キャラ選択</h3>
+        <div class="favorite-select-row">
+          <label>
+            追加するキャラ
+            <select data-favorite-select>
+              <option value="">キャラを選ぶ</option>
+              ${groupedCharacters.map((group) => `
+                <optgroup label="コスト${escapeHtml(group.cost)}">
+                  ${group.items.map((character) => `<option value="${escapeHtml(character.slug)}">${escapeHtml(character.name)}</option>`).join("")}
+                </optgroup>
+              `).join("")}
+            </select>
+          </label>
+          <button type="button" data-favorite-add>追加</button>
+        </div>
+      </section>
+      <section class="favorite-character-box">
+        <h3>お気に入りキャラ</h3>
+        <div class="favorite-character-list" data-favorite-list></div>
+      </section>
     </div>
   `;
   target.append(details);
@@ -514,16 +534,29 @@ const setupFavoriteCharacters = async () => {
 
   const render = () => {
     const favorites = loadFavorites().filter(findCharacter);
-    list.innerHTML = favorites.length
-      ? favorites.map((slug) => {
-        const character = findCharacter(slug);
-        return `
-          <span class="favorite-chip">
-            <a href="${escapeHtml(relativeCharacterHref(character.slug))}">${escapeHtml(character.name)}</a>
-            <button type="button" data-favorite-remove="${escapeHtml(character.slug)}" aria-label="${escapeHtml(character.name)}を外す">×</button>
-          </span>
-        `;
-      }).join("")
+    const favoriteGroups = groupedCharacters
+      .map((group) => ({
+        cost: group.cost,
+        items: group.items.filter((character) => favorites.includes(character.slug)),
+      }))
+      .filter((group) => group.items.length);
+    list.innerHTML = favoriteGroups.length
+      ? favoriteGroups.map((group) => `
+        <div class="favorite-cost-group">
+          <strong>コスト${escapeHtml(group.cost)}</strong>
+          <div class="favorite-icon-grid">
+            ${group.items.map((character) => `
+              <span class="favorite-icon-card">
+                <a href="${escapeHtml(relativeCharacterHref(character.slug))}" title="${escapeHtml(character.name)}">
+                  <img src="${escapeHtml(characterIcon(character))}" alt="${escapeHtml(character.name)}" loading="lazy" decoding="async">
+                  <span>${escapeHtml(character.name)}</span>
+                </a>
+                <button type="button" data-favorite-remove="${escapeHtml(character.slug)}" aria-label="${escapeHtml(character.name)}を外す">×</button>
+              </span>
+            `).join("")}
+          </div>
+        </div>
+      `).join("")
       : `<span class="empty-text">未登録</span>`;
     if (currentSlug) {
       const favoritesSet = new Set(favorites);
@@ -532,10 +565,11 @@ const setupFavoriteCharacters = async () => {
   };
 
   addButton.addEventListener("click", () => {
-    const slug = currentSlug || select.value;
+    const slug = select.value || currentSlug;
     if (!slug) return;
     const favorites = loadFavorites();
     if (!favorites.includes(slug)) saveFavorites([...favorites, slug]);
+    select.value = "";
     render();
   });
   select.addEventListener("change", () => {
