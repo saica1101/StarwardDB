@@ -6,7 +6,7 @@
     <title>キャラ比較 | 星の翼ガイド</title>
     <meta name="description" content="星の翼のキャラをコスト、体力、赤ロック、武装数、キャンセル、降りテク、動画数で横比較できます。" />
     <link rel="icon" href="assets/brand/hp-icon-64.png" type="image/png" />
-    <link rel="stylesheet" href="styles.css?v=20260613order1" />
+    <link rel="stylesheet" href="styles.css?v=20260613compare-sort1" />
   </head>
   <body>
 
@@ -38,6 +38,23 @@
         <div class="roster-tools" role="search">
           <label for="compare-search">比較検索</label>
           <input id="compare-search" type="search" placeholder="例: 2.5 / グリフィン / コラボ" data-table-filter="#compare-table" />
+        </div>
+        <div class="compare-sort-controls" aria-label="比較表の並び替え">
+          <div class="compare-sort-group">
+            <span>コスト</span>
+            <button type="button" data-table-sort="#compare-table" data-sort-column="1" data-sort-direction="desc">高い順</button>
+            <button type="button" data-table-sort="#compare-table" data-sort-column="1" data-sort-direction="asc">低い順</button>
+          </div>
+          <div class="compare-sort-group">
+            <span>体力</span>
+            <button type="button" data-table-sort="#compare-table" data-sort-column="2" data-sort-direction="desc">高い順</button>
+            <button type="button" data-table-sort="#compare-table" data-sort-column="2" data-sort-direction="asc">低い順</button>
+          </div>
+          <div class="compare-sort-group">
+            <span>赤ロック</span>
+            <button type="button" data-table-sort="#compare-table" data-sort-column="3" data-sort-direction="desc">長い順</button>
+            <button type="button" data-table-sort="#compare-table" data-sort-column="3" data-sort-direction="asc">短い順</button>
+          </div>
         </div>
         <div class="move-table-panel">
           <div class="move-table-wrap data-table-wrap">
@@ -908,6 +925,6 @@
     <footer class="footer">
       <a href="#top">上へ戻る</a>
     </footer>
-    <script src="script.js?v=20260613order1"></script>
+    <script src="script.js?v=20260613compare-sort1"></script>
   </body>
 </html>

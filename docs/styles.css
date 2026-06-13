@@ -1501,6 +1501,49 @@ h1 {
   min-width: 150px;
 }
 
+.compare-sort-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 14px 0 16px;
+}
+
+.compare-sort-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 40px;
+  padding: 7px;
+  border: 1px solid rgba(101, 231, 255, 0.2);
+  border-radius: 8px;
+  background: rgba(8, 18, 32, 0.62);
+}
+
+.compare-sort-group span {
+  padding: 0 5px;
+  color: var(--cyan);
+  font-size: 0.82rem;
+  font-weight: 900;
+}
+
+.compare-sort-group button {
+  min-height: 32px;
+  padding: 0 12px;
+  border: 1px solid rgba(101, 231, 255, 0.25);
+  border-radius: 8px;
+  background: rgba(12, 29, 45, 0.86);
+  color: var(--text);
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.compare-sort-group button:hover,
+.compare-sort-group button.is-active {
+  border-color: rgba(101, 231, 255, 0.72);
+  background: rgba(38, 204, 230, 0.18);
+  color: #f5fbff;
+}
+
 .official-feed-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(300px, 1fr));

@@ -392,6 +392,42 @@ document.querySelectorAll("[data-table-filter]").forEach((input) => {
   });
 });
 
+document.querySelectorAll("[data-table-sort]").forEach((button) => {
+  const table = document.querySelector(button.dataset.tableSort);
+  const tbody = table?.querySelector("tbody");
+  if (!tbody) return;
+
+  button.addEventListener("click", () => {
+    const column = Number(button.dataset.sortColumn || 0);
+    const direction = button.dataset.sortDirection === "asc" ? 1 : -1;
+    const rows = [...tbody.querySelectorAll("tr")];
+    const getValue = (row) => {
+      const raw = row.children[column]?.textContent?.trim() || "";
+      const numeric = Number.parseFloat(raw.replace(/[^\d.-]/g, ""));
+      return Number.isFinite(numeric) ? numeric : raw;
+    };
+
+    rows
+      .sort((a, b) => {
+        const aValue = getValue(a);
+        const bValue = getValue(b);
+        if (typeof aValue === "number" && typeof bValue === "number" && aValue !== bValue) {
+          return (aValue - bValue) * direction;
+        }
+        const textCompare = String(aValue).localeCompare(String(bValue), "ja");
+        if (textCompare !== 0) return textCompare * direction;
+        return a.querySelector("th")?.textContent?.trim().localeCompare(b.querySelector("th")?.textContent?.trim() || "", "ja") || 0;
+      })
+      .forEach((row) => tbody.appendChild(row));
+
+    document.querySelectorAll(`[data-table-sort="${button.dataset.tableSort}"]`).forEach((target) => {
+      const isActive = target === button;
+      target.classList.toggle("is-active", isActive);
+      target.setAttribute("aria-pressed", String(isActive));
+    });
+  });
+});
+
 (() => {
   const tabGroups = [...document.querySelectorAll("[data-move-form-tabs]")];
   if (!tabGroups.length) return;
