@@ -40,29 +40,90 @@ if (siteAdmin) {
 }
 document.body.classList.toggle("site-admin", siteAdmin);
 
-const setupSidebarVideo = () => {
+const DEFAULT_BACKGROUND_MEDIA = {
+  enabled: true,
+  type: "video",
+  src: "assets/brand/sidebar-bg-portrait.webm",
+  fallbackSrc: "assets/brand/sidebar-bg-portrait.mp4",
+  opacity: 0.22,
+  loop: true,
+  position: "center center",
+};
+
+const normalizeBackgroundMedia = (value) => {
+  const config = value && typeof value === "object" ? value : {};
+  const opacity = Number.parseFloat(config.opacity);
+  return {
+    ...DEFAULT_BACKGROUND_MEDIA,
+    ...config,
+    type: config.type === "image" ? "image" : "video",
+    enabled: config.enabled !== false,
+    src: String(config.src || DEFAULT_BACKGROUND_MEDIA.src).trim(),
+    fallbackSrc: String(config.fallbackSrc || "").trim(),
+    opacity: Number.isFinite(opacity) ? Math.min(0.8, Math.max(0, opacity)) : DEFAULT_BACKGROUND_MEDIA.opacity,
+    loop: config.loop !== false,
+    position: String(config.position || DEFAULT_BACKGROUND_MEDIA.position).trim(),
+  };
+};
+
+const loadBackgroundMedia = async () => {
+  let published = {};
+  try {
+    const response = await fetch(siteAssetUrl(`background-media-data.json?v=${Date.now()}`), { cache: "no-store" });
+    if (response.ok) published = await response.json();
+  } catch {}
+  if (siteAdmin) {
+    try {
+      const stored = JSON.parse(localStorage.getItem("starward-background-media") || "null");
+      if (stored && typeof stored === "object") published = { ...published, ...stored };
+    } catch {}
+  }
+  return normalizeBackgroundMedia(published);
+};
+
+const setupSidebarVideo = async () => {
   if (!header) return;
   const wideSidebar = window.matchMedia?.("(min-width: 960px)");
   const allowMotion = window.matchMedia?.("(prefers-reduced-motion: no-preference)");
-  if (!wideSidebar?.matches || allowMotion?.matches === false) return;
-  if (header.querySelector(".sidebar-bg-video")) return;
+  if (!wideSidebar?.matches) return;
+  if (header.querySelector(".sidebar-bg-media")) return;
+  const config = await loadBackgroundMedia();
+  if (!config.enabled || !config.src) return;
+  if (config.type === "video" && allowMotion?.matches === false) return;
 
-  const video = document.createElement("video");
-  video.className = "sidebar-bg-video";
+  const media = config.type === "image"
+    ? document.createElement("img")
+    : document.createElement("video");
+  media.className = "sidebar-bg-media";
+  media.style.opacity = String(config.opacity);
+  media.style.objectPosition = config.position;
+  media.setAttribute("aria-hidden", "true");
+  media.setAttribute("tabindex", "-1");
+  media.setAttribute("data-bg-media", config.type);
+  if (media.tagName === "IMG") {
+    media.loading = "lazy";
+    media.decoding = "async";
+    media.src = siteAssetUrl(config.src);
+    media.addEventListener("error", () => {
+      if (config.fallbackSrc && media.src !== siteAssetUrl(config.fallbackSrc)) media.src = siteAssetUrl(config.fallbackSrc);
+    }, { once: true });
+    header.prepend(media);
+    return;
+  }
+  const video = media;
   video.muted = true;
-  video.loop = true;
+  video.loop = config.loop;
   video.autoplay = true;
   video.playsInline = true;
   video.preload = "metadata";
-  video.setAttribute("aria-hidden", "true");
-  video.setAttribute("tabindex", "-1");
   video.controls = false;
   video.disablePictureInPicture = true;
   video.controlsList = "nodownload noplaybackrate noremoteplayback";
-  video.innerHTML = `
-    <source src="${siteAssetUrl("assets/brand/sidebar-bg-portrait.webm")}" type="video/webm">
-    <source src="${siteAssetUrl("assets/brand/sidebar-bg-portrait.mp4")}" type="video/mp4">
-  `;
+  const sources = [config.src, config.fallbackSrc].filter(Boolean);
+  video.innerHTML = sources.map((src) => {
+    const type = src.endsWith(".webm") ? "video/webm" : src.endsWith(".mp4") ? "video/mp4" : "";
+    return `<source src="${siteAssetUrl(src)}"${type ? ` type="${type}"` : ""}>`;
+  }).join("");
   const tryPlay = () => video.play?.().catch(() => {});
   video.addEventListener("loadedmetadata", tryPlay, { once: true });
   video.addEventListener("canplay", tryPlay, { once: true });

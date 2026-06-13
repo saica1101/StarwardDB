@@ -1,0 +1,9 @@
+{
+  "enabled": true,
+  "type": "video",
+  "src": "assets/brand/sidebar-bg-portrait.webm",
+  "fallbackSrc": "assets/brand/sidebar-bg-portrait.mp4",
+  "opacity": 0.22,
+  "loop": true,
+  "position": "center center"
+}
