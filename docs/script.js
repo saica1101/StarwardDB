@@ -41,28 +41,72 @@ if (siteAdmin) {
 document.body.classList.toggle("site-admin", siteAdmin);
 
 const DEFAULT_BACKGROUND_MEDIA = {
-  enabled: true,
-  type: "video",
-  src: "assets/brand/sidebar-bg-portrait.webm",
-  fallbackSrc: "assets/brand/sidebar-bg-portrait.mp4",
-  opacity: 0.22,
-  loop: true,
-  position: "center center",
+  sidebar: {
+    enabled: true,
+    type: "video",
+    src: "assets/brand/sidebar-bg-portrait.webm",
+    fallbackSrc: "assets/brand/sidebar-bg-portrait.mp4",
+    opacity: 0.22,
+    loop: true,
+    position: "center center",
+  },
+  headers: {
+    home: {
+      enabled: false,
+      type: "image",
+      src: "assets/hero-starward-guide.webp",
+      fallbackSrc: "",
+      opacity: 0.42,
+      loop: true,
+      position: "center center",
+    },
+    page: {
+      enabled: false,
+      type: "image",
+      src: "assets/hero-starward-guide.webp",
+      fallbackSrc: "",
+      opacity: 0.34,
+      loop: true,
+      position: "center center",
+    },
+    character: {
+      enabled: false,
+      type: "image",
+      src: "assets/hero-starward-guide.webp",
+      fallbackSrc: "",
+      opacity: 0.32,
+      loop: true,
+      position: "center center",
+    },
+  },
+};
+
+const normalizeMediaConfig = (value, defaults = DEFAULT_BACKGROUND_MEDIA.sidebar) => {
+  const config = value && typeof value === "object" ? value : {};
+  const opacity = Number.parseFloat(config.opacity);
+  return {
+    ...defaults,
+    ...config,
+    type: config.type === "image" ? "image" : "video",
+    enabled: config.enabled === undefined ? defaults.enabled !== false : config.enabled !== false,
+    src: String(config.src || defaults.src || "").trim(),
+    fallbackSrc: String(config.fallbackSrc || "").trim(),
+    opacity: Number.isFinite(opacity) ? Math.min(0.8, Math.max(0, opacity)) : defaults.opacity,
+    loop: config.loop !== false,
+    position: String(config.position || defaults.position || "center center").trim(),
+  };
 };
 
 const normalizeBackgroundMedia = (value) => {
   const config = value && typeof value === "object" ? value : {};
-  const opacity = Number.parseFloat(config.opacity);
+  const legacySidebar = Object.prototype.hasOwnProperty.call(config, "src") ? config : config.sidebar;
   return {
-    ...DEFAULT_BACKGROUND_MEDIA,
-    ...config,
-    type: config.type === "image" ? "image" : "video",
-    enabled: config.enabled !== false,
-    src: String(config.src || DEFAULT_BACKGROUND_MEDIA.src).trim(),
-    fallbackSrc: String(config.fallbackSrc || "").trim(),
-    opacity: Number.isFinite(opacity) ? Math.min(0.8, Math.max(0, opacity)) : DEFAULT_BACKGROUND_MEDIA.opacity,
-    loop: config.loop !== false,
-    position: String(config.position || DEFAULT_BACKGROUND_MEDIA.position).trim(),
+    sidebar: normalizeMediaConfig(legacySidebar, DEFAULT_BACKGROUND_MEDIA.sidebar),
+    headers: {
+      home: normalizeMediaConfig(config.headers?.home, DEFAULT_BACKGROUND_MEDIA.headers.home),
+      page: normalizeMediaConfig(config.headers?.page, DEFAULT_BACKGROUND_MEDIA.headers.page),
+      character: normalizeMediaConfig(config.headers?.character, DEFAULT_BACKGROUND_MEDIA.headers.character),
+    },
   };
 };
 
@@ -87,7 +131,7 @@ const setupSidebarVideo = async () => {
   const allowMotion = window.matchMedia?.("(prefers-reduced-motion: no-preference)");
   if (!wideSidebar?.matches) return;
   if (header.querySelector(".sidebar-bg-media")) return;
-  const config = await loadBackgroundMedia();
+  const config = (await loadBackgroundMedia()).sidebar;
   if (!config.enabled || !config.src) return;
   if (config.type === "video" && allowMotion?.matches === false) return;
 
@@ -135,11 +179,71 @@ const setupSidebarVideo = async () => {
   tryPlay();
 };
 
+const createBackgroundMediaElement = (config, className) => {
+  if (!config.enabled || !config.src) return null;
+  const media = config.type === "image"
+    ? document.createElement("img")
+    : document.createElement("video");
+  media.className = className;
+  media.style.opacity = String(config.opacity);
+  media.style.objectPosition = config.position;
+  media.setAttribute("aria-hidden", "true");
+  media.setAttribute("tabindex", "-1");
+  if (media.tagName === "IMG") {
+    media.loading = "lazy";
+    media.decoding = "async";
+    media.src = siteAssetUrl(config.src);
+    media.addEventListener("error", () => {
+      if (config.fallbackSrc && media.src !== siteAssetUrl(config.fallbackSrc)) media.src = siteAssetUrl(config.fallbackSrc);
+    }, { once: true });
+    return media;
+  }
+  const video = media;
+  video.muted = true;
+  video.loop = config.loop;
+  video.autoplay = true;
+  video.playsInline = true;
+  video.preload = "metadata";
+  video.controls = false;
+  video.disablePictureInPicture = true;
+  video.controlsList = "nodownload noplaybackrate noremoteplayback";
+  [config.src, config.fallbackSrc].filter(Boolean).forEach((src) => {
+    const source = document.createElement("source");
+    source.src = siteAssetUrl(src);
+    if (src.endsWith(".webm")) source.type = "video/webm";
+    if (src.endsWith(".mp4")) source.type = "video/mp4";
+    video.append(source);
+  });
+  const tryPlay = () => video.play?.().catch(() => {});
+  video.addEventListener("loadedmetadata", tryPlay, { once: true });
+  video.addEventListener("canplay", tryPlay, { once: true });
+  video.load();
+  tryPlay();
+  return video;
+};
+
+const setupHeaderBackgroundMedia = async () => {
+  const target = document.querySelector(".hero, .page-hero, .character-hero");
+  if (!target || target.querySelector(".hero-bg-media")) return;
+  const settings = await loadBackgroundMedia();
+  const key = target.classList.contains("character-hero")
+    ? "character"
+    : target.classList.contains("page-hero")
+      ? "page"
+      : "home";
+  const config = settings.headers?.[key];
+  if (config?.type === "video" && window.matchMedia?.("(prefers-reduced-motion: no-preference)")?.matches === false) return;
+  const media = createBackgroundMediaElement(config || {}, "hero-bg-media");
+  if (!media) return;
+  target.prepend(media);
+};
+
 const setHeaderState = () => {
   header?.classList.toggle("is-scrolled", window.scrollY > 12);
 };
 
 setupSidebarVideo();
+setupHeaderBackgroundMedia();
 
 const setupSiteOrderControls = () => {
   const storageKey = "starward-site-order";
@@ -556,11 +660,12 @@ const setupFavoriteCharacters = async () => {
     }))
     .filter((group) => group.items.length);
   const currentSlug = currentCharacterSlug();
-  const target = document.querySelector(".page-hero-inner, .character-hero-inner, .hero-inner");
+  const target = document.querySelector(".page-hero-inner, .character-hero-inner, .hero-content, .hero-inner");
   if (!target || document.querySelector(".favorite-character-panel")) return;
 
   const details = document.createElement("details");
   details.className = "favorite-character-panel";
+  details.open = true;
   details.innerHTML = `
     <summary>お気に入りキャラ</summary>
     <div class="favorite-character-body">

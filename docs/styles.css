@@ -451,10 +451,20 @@ a {
   overflow: hidden;
   display: grid;
   place-items: center;
+  width: min(100%, 760px);
   border: 1px solid rgba(101, 231, 255, 0.22);
   border-radius: 8px;
   background: rgba(1, 5, 11, 0.86);
   color: var(--muted);
+}
+
+.background-preview.is-sidebar-preview {
+  width: min(100%, 300px);
+  min-height: 520px;
+}
+
+.background-preview.is-header-preview {
+  aspect-ratio: 16 / 7;
 }
 
 .background-preview img,
@@ -526,7 +536,8 @@ a {
 }
 
 .hero-image,
-.hero-shade {
+.hero-shade,
+.hero-bg-media {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -535,6 +546,22 @@ a {
 
 .hero-image {
   object-fit: cover;
+}
+
+.hero-bg-media {
+  z-index: 0;
+  object-fit: cover;
+  object-position: center center;
+  pointer-events: none;
+  user-select: none;
+  filter: saturate(1.1) contrast(1.04);
+}
+
+.hero > :not(.hero-bg-media),
+.page-hero > :not(.hero-bg-media),
+.character-hero > :not(.hero-bg-media) {
+  position: relative;
+  z-index: 1;
 }
 
 .hero-shade {

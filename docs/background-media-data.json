@@ -1,9 +1,40 @@
 {
-  "enabled": true,
-  "type": "video",
-  "src": "assets/brand/sidebar-bg-portrait.webm",
-  "fallbackSrc": "assets/brand/sidebar-bg-portrait.mp4",
-  "opacity": 0.22,
-  "loop": true,
-  "position": "center center"
+  "sidebar": {
+    "enabled": true,
+    "type": "video",
+    "src": "assets/brand/sidebar-bg-portrait.webm",
+    "fallbackSrc": "assets/brand/sidebar-bg-portrait.mp4",
+    "opacity": 0.22,
+    "loop": true,
+    "position": "center center"
+  },
+  "headers": {
+    "home": {
+      "enabled": false,
+      "type": "image",
+      "src": "assets/hero-starward-guide.webp",
+      "fallbackSrc": "",
+      "opacity": 0.42,
+      "loop": true,
+      "position": "center center"
+    },
+    "page": {
+      "enabled": false,
+      "type": "image",
+      "src": "assets/hero-starward-guide.webp",
+      "fallbackSrc": "",
+      "opacity": 0.34,
+      "loop": true,
+      "position": "center center"
+    },
+    "character": {
+      "enabled": false,
+      "type": "image",
+      "src": "assets/hero-starward-guide.webp",
+      "fallbackSrc": "",
+      "opacity": 0.32,
+      "loop": true,
+      "position": "center center"
+    }
+  }
 }

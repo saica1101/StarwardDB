@@ -80,8 +80,17 @@
         <div class="notice-card background-manager" id="background-manager">
           <p class="eyebrow">Background Media</p>
           <h2>左メニュー背景</h2>
-          <p>画像または動画のURL/パス、透過率、ループ、表示位置を編集します。動画は軽くするためメタデータだけ先読みします。</p>
+          <p>画像または動画のURL/パス、透過率、ループ、表示位置を編集します。左メニューと各ヘッダーを切り替えて設定できます。</p>
           <form class="background-form" id="background-form">
+            <label>
+              編集対象
+              <select name="target">
+                <option value="sidebar">左メニュー</option>
+                <option value="home">トップヘッダー</option>
+                <option value="page">通常ページヘッダー</option>
+                <option value="character">キャラページヘッダー</option>
+              </select>
+            </label>
             <label>
               表示
               <select name="enabled">
@@ -229,14 +238,46 @@
         const opacityLabel = document.querySelector("[data-bg-opacity-label]");
         const preview = document.querySelector("[data-bg-preview]");
         const defaultConfig = {
-          enabled: true,
-          type: "video",
-          src: "assets/brand/sidebar-bg-portrait.webm",
-          fallbackSrc: "assets/brand/sidebar-bg-portrait.mp4",
-          opacity: 0.22,
-          loop: true,
-          position: "center center",
+          sidebar: {
+            enabled: true,
+            type: "video",
+            src: "assets/brand/sidebar-bg-portrait.webm",
+            fallbackSrc: "assets/brand/sidebar-bg-portrait.mp4",
+            opacity: 0.22,
+            loop: true,
+            position: "center center",
+          },
+          headers: {
+            home: {
+              enabled: false,
+              type: "image",
+              src: "assets/hero-starward-guide.webp",
+              fallbackSrc: "",
+              opacity: 0.42,
+              loop: true,
+              position: "center center",
+            },
+            page: {
+              enabled: false,
+              type: "image",
+              src: "assets/hero-starward-guide.webp",
+              fallbackSrc: "",
+              opacity: 0.34,
+              loop: true,
+              position: "center center",
+            },
+            character: {
+              enabled: false,
+              type: "image",
+              src: "assets/hero-starward-guide.webp",
+              fallbackSrc: "",
+              opacity: 0.32,
+              loop: true,
+              position: "center center",
+            },
+          },
         };
+        let backgroundConfig = JSON.parse(JSON.stringify(defaultConfig));
         const assetUrl = (path) => {
           try {
             return new URL(path, location.href).toString();
@@ -246,6 +287,47 @@
         };
         const setStatus = (text) => {
           if (status) status.textContent = text;
+        };
+        const targetDefaults = (target) => target === "sidebar"
+          ? defaultConfig.sidebar
+          : defaultConfig.headers[target] || defaultConfig.headers.page;
+        const readTarget = () => form.elements.target.value || "sidebar";
+        const normalizeMedia = (value, defaults) => {
+          const config = value && typeof value === "object" ? value : {};
+          const opacity = Number.parseFloat(config.opacity);
+          return {
+            ...defaults,
+            ...config,
+            enabled: config.enabled === undefined ? defaults.enabled !== false : config.enabled !== false,
+            type: config.type === "image" ? "image" : "video",
+            src: String(config.src || defaults.src || "").trim(),
+            fallbackSrc: String(config.fallbackSrc || "").trim(),
+            opacity: Number.isFinite(opacity) ? Math.min(0.8, Math.max(0, opacity)) : defaults.opacity,
+            loop: config.loop !== false,
+            position: String(config.position || defaults.position || "center center").trim(),
+          };
+        };
+        const normalizeAll = (value) => {
+          const config = value && typeof value === "object" ? value : {};
+          const legacySidebar = Object.prototype.hasOwnProperty.call(config, "src") ? config : config.sidebar;
+          return {
+            sidebar: normalizeMedia(legacySidebar, defaultConfig.sidebar),
+            headers: {
+              home: normalizeMedia(config.headers?.home, defaultConfig.headers.home),
+              page: normalizeMedia(config.headers?.page, defaultConfig.headers.page),
+              character: normalizeMedia(config.headers?.character, defaultConfig.headers.character),
+            },
+          };
+        };
+        const targetConfig = (target = readTarget()) => target === "sidebar"
+          ? backgroundConfig.sidebar
+          : backgroundConfig.headers[target];
+        const writeTargetConfig = (target, value) => {
+          if (target === "sidebar") {
+            backgroundConfig.sidebar = normalizeMedia(value, defaultConfig.sidebar);
+            return;
+          }
+          backgroundConfig.headers[target] = normalizeMedia(value, targetDefaults(target));
         };
         const readForm = () => ({
           enabled: form.elements.enabled.value === "true",
@@ -257,13 +339,14 @@
           position: form.elements.position.value.trim() || "center center",
         });
         const applyForm = (config) => {
+          config = normalizeMedia(config, targetDefaults(readTarget()));
           form.elements.enabled.value = config.enabled === false ? "false" : "true";
           form.elements.type.value = config.type === "image" ? "image" : "video";
-          form.elements.src.value = config.src || defaultConfig.src;
+          form.elements.src.value = config.src || targetDefaults(readTarget()).src;
           form.elements.fallbackSrc.value = config.fallbackSrc || "";
-          form.elements.opacity.value = Number.isFinite(Number(config.opacity)) ? config.opacity : defaultConfig.opacity;
+          form.elements.opacity.value = Number.isFinite(Number(config.opacity)) ? config.opacity : targetDefaults(readTarget()).opacity;
           form.elements.loop.value = config.loop === false ? "false" : "true";
-          form.elements.position.value = config.position || defaultConfig.position;
+          form.elements.position.value = config.position || targetDefaults(readTarget()).position;
           const preset = [...form.elements.positionPreset.options].some((option) => option.value === form.elements.position.value)
             ? form.elements.position.value
             : "custom";
@@ -273,6 +356,8 @@
         const renderPreview = () => {
           const config = readForm();
           preview.innerHTML = "";
+          preview.classList.toggle("is-sidebar-preview", readTarget() === "sidebar");
+          preview.classList.toggle("is-header-preview", readTarget() !== "sidebar");
           preview.style.setProperty("--preview-opacity", String(config.opacity));
           preview.style.setProperty("--preview-position", config.position);
           if (!config.enabled || !config.src) {
@@ -301,25 +386,37 @@
           }
           preview.append(media);
         };
+        const persistLocal = () => {
+          writeTargetConfig(readTarget(), readForm());
+          try {
+            localStorage.setItem("starward-background-media", JSON.stringify(backgroundConfig));
+          } catch {}
+        };
+        form.elements.target.addEventListener("change", () => {
+          applyForm(targetConfig());
+          renderPreview();
+        });
         form.elements.opacity.addEventListener("input", () => {
           opacityLabel.textContent = form.elements.opacity.value;
+          persistLocal();
           renderPreview();
         });
         form.elements.positionPreset.addEventListener("change", () => {
           if (form.elements.positionPreset.value !== "custom") {
             form.elements.position.value = form.elements.positionPreset.value;
+            persistLocal();
             renderPreview();
           }
         });
         form.addEventListener("input", () => {
-          try {
-            localStorage.setItem("starward-background-media", JSON.stringify(readForm()));
-          } catch {}
+          persistLocal();
+          renderPreview();
         });
         document.querySelector("[data-bg-preview-button]")?.addEventListener("click", renderPreview);
         form.addEventListener("submit", async (event) => {
           event.preventDefault();
-          const payload = readForm();
+          writeTargetConfig(readTarget(), readForm());
+          const payload = backgroundConfig;
           try {
             localStorage.setItem("starward-background-media", JSON.stringify(payload));
           } catch {}
@@ -338,15 +435,15 @@
           renderPreview();
         });
         fetch(`background-media-data.json?v=${Date.now()}`)
-          .then((response) => response.ok ? response.json() : defaultConfig)
-          .catch(() => defaultConfig)
+          .then((response) => response.ok ? response.json() : {})
+          .catch(() => ({}))
           .then((published) => {
-            let config = { ...defaultConfig, ...published };
+            backgroundConfig = normalizeAll(published);
             try {
               const local = JSON.parse(localStorage.getItem("starward-background-media") || "null");
-              if (local) config = { ...config, ...local };
+              if (local) backgroundConfig = normalizeAll({ ...backgroundConfig, ...local });
             } catch {}
-            applyForm(config);
+            applyForm(targetConfig());
             renderPreview();
           });
       })();
