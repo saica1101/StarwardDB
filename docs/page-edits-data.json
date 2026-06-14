@@ -1,15 +1,8 @@
 {
   "/index.html": {
-    "text": {
-      "p-31": "『星の翼』量産レギオン－レムPV"
-    },
+    "text": {},
     "hidden": {},
-    "added": [
-      {
-        "id": "added-1781310022169-xb637",
-        "html": "<article class=\"page-edit-block page-edit-text\" data-added-block=\"added-1781310022169-xb637\" data-block-key=\"block-18\"><p data-edit-key=\"p-55\" data-edit-original=\"新しい文章を入力できます。\">新しい文章を入力できます。</p></article>"
-      }
-    ]
+    "added": []
   },
   "/videos.html": {
     "text": {
@@ -86,6 +79,11 @@
     "added": []
   },
   "/characters.html": {
+    "text": {},
+    "hidden": {},
+    "added": []
+  },
+  "/recent-updates.html": {
     "text": {},
     "hidden": {},
     "added": []

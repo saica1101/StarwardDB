@@ -2,21 +2,21 @@
   "sidebar": {
     "enabled": true,
     "type": "video",
-    "src": "assets/brand/sidebar-bg-portrait.webm",
-    "fallbackSrc": "assets/brand/sidebar-bg-portrait.mp4",
-    "opacity": 0.22,
+    "src": "assets/background-media/4d5a183f1450accb58e6d82527e1bda4.mp4",
+    "fallbackSrc": "",
+    "opacity": 0.51,
     "loop": true,
-    "position": "center center"
+    "position": "29.2% 31.3%"
   },
   "headers": {
     "home": {
       "enabled": false,
       "type": "image",
-      "src": "assets/hero-starward-guide.webp",
+      "src": "assets/background-media/item_namecard_bg_large_new_20010040.png",
       "fallbackSrc": "",
-      "opacity": 0.42,
+      "opacity": 0.51,
       "loop": true,
-      "position": "center center"
+      "position": "12.8% 0%"
     },
     "page": {
       "enabled": false,
