@@ -110,6 +110,39 @@ const normalizeBackgroundMedia = (value) => {
   };
 };
 
+const parseMediaPosition = (position) => {
+  const keywords = {
+    left: 0,
+    center: 50,
+    right: 100,
+    top: 0,
+    bottom: 100,
+  };
+  const parts = String(position || "center center").trim().split(/\s+/);
+  let x = 50;
+  let y = 50;
+  if (parts.length >= 2) {
+    x = parts[0].endsWith("%") ? Number.parseFloat(parts[0]) : keywords[parts[0]] ?? x;
+    y = parts[1].endsWith("%") ? Number.parseFloat(parts[1]) : keywords[parts[1]] ?? y;
+  } else if (parts.length === 1) {
+    const single = parts[0];
+    if (single === "top" || single === "bottom") y = keywords[single];
+    else x = single.endsWith("%") ? Number.parseFloat(single) : keywords[single] ?? x;
+  }
+  return {
+    x: Number.isFinite(x) ? Math.min(100, Math.max(0, x)) : 50,
+    y: Number.isFinite(y) ? Math.min(100, Math.max(0, y)) : 50,
+  };
+};
+
+const applyMediaPan = (media, position) => {
+  const point = parseMediaPosition(position);
+  const translateX = Math.round((50 - point.x) * 1.8) / 10;
+  const translateY = Math.round((50 - point.y) * 1.8) / 10;
+  media.style.setProperty("--media-translate-x", `${translateX}%`);
+  media.style.setProperty("--media-translate-y", `${translateY}%`);
+};
+
 const loadBackgroundMedia = async () => {
   let published = {};
   try {
@@ -141,6 +174,7 @@ const setupSidebarVideo = async () => {
   media.className = "sidebar-bg-media";
   media.style.opacity = String(config.opacity);
   media.style.objectPosition = config.position;
+  applyMediaPan(media, config.position);
   media.setAttribute("aria-hidden", "true");
   media.setAttribute("tabindex", "-1");
   media.setAttribute("data-bg-media", config.type);
@@ -187,6 +221,7 @@ const createBackgroundMediaElement = (config, className) => {
   media.className = className;
   media.style.opacity = String(config.opacity);
   media.style.objectPosition = config.position;
+  applyMediaPan(media, config.position);
   media.setAttribute("aria-hidden", "true");
   media.setAttribute("tabindex", "-1");
   if (media.tagName === "IMG") {

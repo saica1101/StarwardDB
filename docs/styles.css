@@ -517,6 +517,9 @@ a {
   min-height: 190px;
   object-fit: cover;
   object-position: var(--preview-position, center center);
+  transform: translate(var(--media-translate-x, 0), var(--media-translate-y, 0)) scale(1.22);
+  transform-origin: center;
+  will-change: transform;
 }
 
 .admin-form-actions {
@@ -598,6 +601,9 @@ a {
   pointer-events: none;
   user-select: none;
   filter: saturate(1.1) contrast(1.04);
+  transform: translate(var(--media-translate-x, 0), var(--media-translate-y, 0)) scale(1.14);
+  transform-origin: center;
+  will-change: transform;
 }
 
 .hero > :not(.hero-bg-media),
@@ -907,6 +913,9 @@ h1 {
     pointer-events: none;
     user-select: none;
     filter: saturate(1.16) contrast(1.06);
+    transform: translate(var(--media-translate-x, 0), var(--media-translate-y, 0)) scale(1.22);
+    transform-origin: center;
+    will-change: transform;
   }
 
   .site-header::before {

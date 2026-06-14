@@ -324,6 +324,15 @@
           preview.style.setProperty("--preview-x", `${point.x}%`);
           preview.style.setProperty("--preview-y", `${point.y}%`);
         };
+        const setMediaPan = (position) => {
+          const point = parsePosition(position);
+          const translateX = (50 - point.x) * 0.18;
+          const translateY = (50 - point.y) * 0.18;
+          const media = preview.querySelector("video,img");
+          if (!media) return;
+          media.style.setProperty("--media-translate-x", `${formatPercent(translateX)}%`);
+          media.style.setProperty("--media-translate-y", `${formatPercent(translateY)}%`);
+        };
         const targetDefaults = (target) => target === "sidebar"
           ? defaultConfig.sidebar
           : defaultConfig.headers[target] || defaultConfig.headers.page;
@@ -424,6 +433,7 @@
           }
           preview.classList.add("has-media");
           preview.append(media);
+          setMediaPan(config.position);
         };
         const persistLocal = () => {
           writeTargetConfig(readTarget(), readForm());
@@ -436,6 +446,7 @@
           setPreviewMarker(position);
           const media = preview.querySelector("video,img");
           if (media) media.style.objectPosition = position;
+          setMediaPan(position);
         };
         const updatePreviewOpacity = () => {
           const opacity = form.elements.opacity.value || "0.22";
