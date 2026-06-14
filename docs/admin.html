@@ -288,6 +288,42 @@
         const setStatus = (text) => {
           if (status) status.textContent = text;
         };
+        const clampPercent = (value) => Math.min(100, Math.max(0, value));
+        const formatPercent = (value) => {
+          const rounded = Math.round(value * 10) / 10;
+          return Number.isInteger(rounded) ? String(rounded) : rounded.toFixed(1);
+        };
+        const parsePosition = (position) => {
+          const keywords = {
+            left: 0,
+            center: 50,
+            right: 100,
+            top: 0,
+            bottom: 100,
+          };
+          const parts = String(position || "center center").trim().split(/\s+/);
+          let x = 50;
+          let y = 50;
+          if (parts.length >= 2) {
+            const first = parts[0];
+            const second = parts[1];
+            x = first.endsWith("%") ? Number.parseFloat(first) : keywords[first] ?? x;
+            y = second.endsWith("%") ? Number.parseFloat(second) : keywords[second] ?? y;
+          } else if (parts.length === 1) {
+            const single = parts[0];
+            if (single === "top" || single === "bottom") y = keywords[single];
+            else x = single.endsWith("%") ? Number.parseFloat(single) : keywords[single] ?? x;
+          }
+          return {
+            x: Number.isFinite(x) ? clampPercent(x) : 50,
+            y: Number.isFinite(y) ? clampPercent(y) : 50,
+          };
+        };
+        const setPreviewMarker = (position) => {
+          const point = parsePosition(position);
+          preview.style.setProperty("--preview-x", `${point.x}%`);
+          preview.style.setProperty("--preview-y", `${point.y}%`);
+        };
         const targetDefaults = (target) => target === "sidebar"
           ? defaultConfig.sidebar
           : defaultConfig.headers[target] || defaultConfig.headers.page;
@@ -360,7 +396,9 @@
           preview.classList.toggle("is-header-preview", readTarget() !== "sidebar");
           preview.style.setProperty("--preview-opacity", String(config.opacity));
           preview.style.setProperty("--preview-position", config.position);
+          setPreviewMarker(config.position);
           if (!config.enabled || !config.src) {
+            preview.classList.remove("has-media");
             preview.textContent = "非表示";
             return;
           }
@@ -384,6 +422,7 @@
           } else {
             media.src = assetUrl(config.src);
           }
+          preview.classList.add("has-media");
           preview.append(media);
         };
         const persistLocal = () => {
@@ -392,6 +431,41 @@
             localStorage.setItem("starward-background-media", JSON.stringify(backgroundConfig));
           } catch {}
         };
+        const updatePositionFromPointer = (event) => {
+          const rect = preview.getBoundingClientRect();
+          if (!rect.width || !rect.height) return;
+          const x = clampPercent(((event.clientX - rect.left) / rect.width) * 100);
+          const y = clampPercent(((event.clientY - rect.top) / rect.height) * 100);
+          const position = `${formatPercent(x)}% ${formatPercent(y)}%`;
+          form.elements.position.value = position;
+          form.elements.positionPreset.value = "custom";
+          preview.style.setProperty("--preview-position", position);
+          setPreviewMarker(position);
+          const media = preview.querySelector("video,img");
+          if (media) media.style.objectPosition = position;
+          persistLocal();
+          setStatus("位置を調整中");
+        };
+        preview.addEventListener("pointerdown", (event) => {
+          if (!preview.querySelector("video,img")) return;
+          event.preventDefault();
+          preview.classList.add("is-dragging");
+          preview.setPointerCapture?.(event.pointerId);
+          updatePositionFromPointer(event);
+        });
+        preview.addEventListener("pointermove", (event) => {
+          if (!preview.classList.contains("is-dragging")) return;
+          updatePositionFromPointer(event);
+        });
+        preview.addEventListener("pointerup", (event) => {
+          preview.classList.remove("is-dragging");
+          preview.releasePointerCapture?.(event.pointerId);
+          setStatus("位置を反映済み");
+        });
+        preview.addEventListener("pointercancel", (event) => {
+          preview.classList.remove("is-dragging");
+          preview.releasePointerCapture?.(event.pointerId);
+        });
         form.elements.target.addEventListener("change", () => {
           applyForm(targetConfig());
           renderPreview();

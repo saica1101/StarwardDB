@@ -456,6 +456,49 @@ a {
   border-radius: 8px;
   background: rgba(1, 5, 11, 0.86);
   color: var(--muted);
+  cursor: grab;
+  touch-action: none;
+}
+
+.background-preview.is-dragging {
+  cursor: grabbing;
+}
+
+.background-preview::after {
+  display: none;
+  content: "";
+  position: absolute;
+  left: var(--preview-x, 50%);
+  top: var(--preview-y, 50%);
+  z-index: 2;
+  width: 24px;
+  height: 24px;
+  border: 2px solid rgba(255, 255, 255, 0.92);
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px rgba(3, 16, 25, 0.8), 0 0 18px rgba(101, 231, 255, 0.54);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.background-preview::before {
+  display: none;
+  content: "";
+  position: absolute;
+  left: var(--preview-x, 50%);
+  top: var(--preview-y, 50%);
+  z-index: 3;
+  width: 34px;
+  height: 34px;
+  background:
+    linear-gradient(90deg, transparent 0 15px, rgba(255, 255, 255, 0.84) 15px 17px, transparent 17px),
+    linear-gradient(180deg, transparent 0 15px, rgba(255, 255, 255, 0.84) 15px 17px, transparent 17px);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.background-preview.has-media::before,
+.background-preview.has-media::after {
+  display: block;
 }
 
 .background-preview.is-sidebar-preview {
