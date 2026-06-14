@@ -431,6 +431,18 @@
             localStorage.setItem("starward-background-media", JSON.stringify(backgroundConfig));
           } catch {}
         };
+        const updatePreviewPosition = (position) => {
+          preview.style.setProperty("--preview-position", position);
+          setPreviewMarker(position);
+          const media = preview.querySelector("video,img");
+          if (media) media.style.objectPosition = position;
+        };
+        const updatePreviewOpacity = () => {
+          const opacity = form.elements.opacity.value || "0.22";
+          preview.style.setProperty("--preview-opacity", opacity);
+          const media = preview.querySelector("video,img");
+          if (media) media.style.opacity = opacity;
+        };
         const updatePositionFromPointer = (event) => {
           const rect = preview.getBoundingClientRect();
           if (!rect.width || !rect.height) return;
@@ -439,10 +451,7 @@
           const position = `${formatPercent(x)}% ${formatPercent(y)}%`;
           form.elements.position.value = position;
           form.elements.positionPreset.value = "custom";
-          preview.style.setProperty("--preview-position", position);
-          setPreviewMarker(position);
-          const media = preview.querySelector("video,img");
-          if (media) media.style.objectPosition = position;
+          updatePreviewPosition(position);
           persistLocal();
           setStatus("位置を調整中");
         };
@@ -473,16 +482,26 @@
         form.elements.opacity.addEventListener("input", () => {
           opacityLabel.textContent = form.elements.opacity.value;
           persistLocal();
-          renderPreview();
+          updatePreviewOpacity();
         });
         form.elements.positionPreset.addEventListener("change", () => {
           if (form.elements.positionPreset.value !== "custom") {
             form.elements.position.value = form.elements.positionPreset.value;
             persistLocal();
-            renderPreview();
+            updatePreviewPosition(form.elements.position.value);
           }
         });
-        form.addEventListener("input", () => {
+        form.elements.position.addEventListener("input", () => {
+          form.elements.positionPreset.value = "custom";
+          persistLocal();
+          updatePreviewPosition(form.elements.position.value.trim() || "center center");
+        });
+        form.addEventListener("input", (event) => {
+          if (
+            event.target === form.elements.position ||
+            event.target === form.elements.opacity ||
+            event.target === form.elements.positionPreset
+          ) return;
           persistLocal();
           renderPreview();
         });
