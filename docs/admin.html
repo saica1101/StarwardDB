@@ -110,6 +110,10 @@
               <input name="src" type="text" placeholder="assets/brand/sidebar-bg-portrait.webm" />
             </label>
             <label class="wide">
+              動画/画像を選択
+              <input name="mediaFile" type="file" accept="video/webm,video/mp4,image/webp,image/png,image/jpeg" />
+            </label>
+            <label class="wide">
               予備URL/パス
               <input name="fallbackSrc" type="text" placeholder="assets/brand/sidebar-bg-portrait.mp4" />
             </label>
@@ -287,6 +291,10 @@
         };
         const setStatus = (text) => {
           if (status) status.textContent = text;
+        };
+        const apiUrl = (endpoint) => {
+          if (location.protocol === "file:") return `http://127.0.0.1:8766${endpoint}`;
+          return endpoint;
         };
         const clampPercent = (value) => Math.min(100, Math.max(0, value));
         const formatPercent = (value) => {
@@ -524,10 +532,53 @@
           persistLocal();
           updatePreviewPosition(form.elements.position.value.trim() || "center center");
         });
+        form.elements.mediaFile.addEventListener("change", async () => {
+          const file = form.elements.mediaFile.files?.[0];
+          if (!file) return;
+          if (!/^(video|image)\//.test(file.type)) {
+            setStatus("動画/画像ファイルを選んでください");
+            return;
+          }
+          form.elements.type.value = file.type.startsWith("image/") ? "image" : "video";
+          const previewUrl = URL.createObjectURL(file);
+          form.elements.src.value = previewUrl;
+          form.elements.fallbackSrc.value = "";
+          renderPreview();
+          setStatus("ファイル取り込み中...");
+          try {
+            const dataUrl = await new Promise((resolve, reject) => {
+              const reader = new FileReader();
+              reader.onload = () => resolve(String(reader.result || ""));
+              reader.onerror = () => reject(reader.error || new Error("read failed"));
+              reader.readAsDataURL(file);
+            });
+            const response = await fetch(apiUrl("/api/upload/background-media"), {
+              method: "POST",
+              headers: { "Content-Type": "application/json; charset=utf-8" },
+              body: JSON.stringify({
+                name: file.name,
+                type: file.type,
+                dataUrl,
+              }),
+            });
+            const result = await response.json().catch(() => ({}));
+            if (!response.ok || !result.path) throw new Error(result.error || `HTTP ${response.status}`);
+            form.elements.src.value = result.path;
+            persistLocal();
+            renderPreview();
+            setStatus(`取り込み済み: ${result.path}`);
+          } catch (error) {
+            setStatus("ローカルサーバーで開くと取り込めます");
+          } finally {
+            URL.revokeObjectURL(previewUrl);
+            form.elements.mediaFile.value = "";
+          }
+        });
         form.addEventListener("input", (event) => {
           if (
             event.target === form.elements.position ||
             event.target === form.elements.opacity ||
+            event.target === form.elements.mediaFile ||
             event.target === form.elements.positionPreset
           ) return;
           persistLocal();
