@@ -1200,6 +1200,7 @@ function changeCharacter() {
 // 【新実装】タイムライン事前計算 ＆ シークバー連動システム
 // ==========================================
 function resetSeekbar() {
+  currentProgressFrame = 0;
   const routeArrows = arrows.filter(a => a.arrowType === 'route' && a.points && a.points.length > 1);
   if (routeArrows.length === 0) {
     seekbar.max = 100; seekbar.value = 0; seekbar.disabled = true;
@@ -1326,8 +1327,8 @@ function buildPlaybackTimeline() {
     for (let f = 0; f <= totalPlaybackFrames; f++) {
       let frameSnapshot = {};
       tasks.forEach(t => {
-        if (f <= t.startF) {
-          frameSnapshot[t.charId] = charEndPos[t.charId] || { nx: t.points[0].nx, ny: t.points[0].ny };
+        if (f < t.startF) {
+          return;
         } else if (f >= t.endF) {
           const lastPt = t.points[t.points.length - 1];
           frameSnapshot[t.charId] = { nx: lastPt.nx, ny: lastPt.ny };
