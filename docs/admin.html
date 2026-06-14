@@ -443,6 +443,13 @@
           const media = preview.querySelector("video,img");
           if (media) media.style.opacity = opacity;
         };
+        let dragFrame = 0;
+        let pendingDragPosition = "";
+        const applyDragPosition = () => {
+          dragFrame = 0;
+          if (!pendingDragPosition) return;
+          updatePreviewPosition(pendingDragPosition);
+        };
         const updatePositionFromPointer = (event) => {
           const rect = preview.getBoundingClientRect();
           if (!rect.width || !rect.height) return;
@@ -451,8 +458,8 @@
           const position = `${formatPercent(x)}% ${formatPercent(y)}%`;
           form.elements.position.value = position;
           form.elements.positionPreset.value = "custom";
-          updatePreviewPosition(position);
-          persistLocal();
+          pendingDragPosition = position;
+          if (!dragFrame) dragFrame = requestAnimationFrame(applyDragPosition);
           setStatus("位置を調整中");
         };
         preview.addEventListener("pointerdown", (event) => {
@@ -467,11 +474,21 @@
           updatePositionFromPointer(event);
         });
         preview.addEventListener("pointerup", (event) => {
+          if (dragFrame) {
+            cancelAnimationFrame(dragFrame);
+            applyDragPosition();
+          }
+          persistLocal();
           preview.classList.remove("is-dragging");
           preview.releasePointerCapture?.(event.pointerId);
           setStatus("位置を反映済み");
         });
         preview.addEventListener("pointercancel", (event) => {
+          if (dragFrame) {
+            cancelAnimationFrame(dragFrame);
+            applyDragPosition();
+          }
+          persistLocal();
           preview.classList.remove("is-dragging");
           preview.releasePointerCapture?.(event.pointerId);
         });
