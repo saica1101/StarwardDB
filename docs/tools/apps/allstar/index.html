@@ -605,19 +605,21 @@
     }
 
     function shuffleTeams() {
-      if (currentSelections.length < 4) {
-        document.getElementById("copy-status").textContent = "BAN PICK 4で使えます";
+      const candidates = allChars.filter((char) => char.enabled);
+      if (candidates.length < 8) {
+        document.getElementById("copy-status").textContent = "チーム分けは8キャラ以上必要です";
         return;
       }
-      const shuffled = [...currentSelections].sort(() => Math.random() - 0.5);
-      const teamA = shuffled.slice(0, 2).map((item) => item.char.name).join(" / ");
-      const teamB = shuffled.slice(2, 4).map((item) => item.char.name).join(" / ");
+      const picks = pickSelections(applyRecentExclusion(candidates, 8), 8);
+      const playerOne = picks.slice(0, 4).map((item) => item.char.name).join(" / ");
+      const playerTwo = picks.slice(4, 8).map((item) => item.char.name).join(" / ");
       const board = document.getElementById("team-board");
       board.innerHTML = `
-        <div class="team-box"><strong>TEAM A</strong><span>${teamA}</span></div>
-        <div class="team-box"><strong>TEAM B</strong><span>${teamB}</span></div>
+        <div class="team-box"><strong>1P 4キャラ</strong><span>${playerOne}</span></div>
+        <div class="team-box"><strong>2P 4キャラ</strong><span>${playerTwo}</span></div>
       `;
       board.classList.remove("hidden");
+      document.getElementById("copy-status").textContent = "8キャラを4/4で分けました";
     }
 
     function playFinishEffects() {
