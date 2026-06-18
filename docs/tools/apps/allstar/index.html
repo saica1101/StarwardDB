@@ -182,7 +182,6 @@
         <p>キャラ抽選、BAN PICK、覚醒込みの組み合わせ確認に使えるランダムツールです。</p>
         <div class="hero-actions">
           <button class="primary-action" type="button" onclick="openFilter()">抽選キャラを選ぶ</button>
-          <a class="button" href="../../image-audit.html">画像チェック</a>
         </div>
       </div>
       <div class="quick-stats">
@@ -530,23 +529,6 @@
           <small>COST ${item.char.cost} / ${item.kakusei.name}</small>
         </div>
       `).join("");
-    }
-
-    async function runImageAudit() {
-      const issues = [];
-      await Promise.all(allChars.map((char) => new Promise((resolve) => {
-        const img = new Image();
-        img.onload = resolve;
-        img.onerror = () => {
-          issues.push(`${char.name}: ${imageSrc(char)}`);
-          resolve();
-        };
-        img.src = imageSrc(char);
-      })));
-      const list = document.getElementById("issue-list");
-      list.innerHTML = issues.length
-        ? `<strong>画像切れ ${issues.length}件</strong><br>${issues.map((item) => `・${item}`).join("<br>")}`
-        : "画像切れは見つかりませんでした。";
     }
 
     init().catch((error) => {
