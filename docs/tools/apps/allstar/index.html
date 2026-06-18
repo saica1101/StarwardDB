@@ -252,6 +252,7 @@
     let activeCost = "30";
     let onlyDisabled = false;
     let filterRendered = false;
+    let spinSlots = [];
 
     function imageSrc(char) {
       return `../shared/characters/${char.cost}/${encodeURIComponent(char.file)}.png`;
@@ -432,18 +433,13 @@
       button.textContent = "STOP";
       button.classList.add("stop");
       document.getElementById("result-area").className = mode === 4 ? "mode-4" : "mode-1";
+      renderSpinShell(mode);
+      currentSelections = pickSelections(candidates, mode);
+      updateSpinShell();
       rouletteTimer = setInterval(() => {
-        currentSelections = [];
-        const tempCandidates = [...candidates];
-        for (let i = 0; i < mode; i += 1) {
-          const idx = Math.floor(Math.random() * tempCandidates.length);
-          currentSelections.push({
-            char: tempCandidates.splice(idx, 1)[0],
-            kakusei: kakuseiList[Math.floor(Math.random() * kakuseiList.length)]
-          });
-        }
-        renderCards(false);
-      }, 150);
+        currentSelections = pickSelections(candidates, mode);
+        updateSpinShell();
+      }, 55);
     }
 
     function stopRoulette() {
@@ -452,6 +448,7 @@
       const button = document.getElementById("main-btn");
       button.textContent = "START";
       button.classList.remove("stop");
+      spinSlots = [];
       renderCards(true);
     }
 
@@ -473,6 +470,52 @@
             : `<div class="spin-placeholder">SPINNING</div>`}
         </article>
       `).join("");
+    }
+
+    function pickSelections(candidates, mode) {
+      const result = [];
+      const tempCandidates = [...candidates];
+      for (let i = 0; i < mode; i += 1) {
+        const idx = Math.floor(Math.random() * tempCandidates.length);
+        result.push({
+          char: tempCandidates.splice(idx, 1)[0],
+          kakusei: kakuseiList[Math.floor(Math.random() * kakuseiList.length)]
+        });
+      }
+      return result;
+    }
+
+    function renderSpinShell(mode) {
+      const area = document.getElementById("result-area");
+      area.innerHTML = Array.from({ length: mode }, () => `
+        <article class="card">
+          <div class="card-header">
+            <span class="cost-badge">COST</span>
+            <span class="kakusei-badge">覚醒</span>
+          </div>
+          <div class="char-name">...</div>
+          <div class="spin-placeholder">SPINNING</div>
+        </article>
+      `).join("");
+      spinSlots = [...area.querySelectorAll(".card")].map((card) => ({
+        cost: card.querySelector(".cost-badge"),
+        kakusei: card.querySelector(".kakusei-badge"),
+        name: card.querySelector(".char-name"),
+      }));
+    }
+
+    function updateSpinShell() {
+      const isKakuseiVisible = document.getElementById("kakusei-toggle").checked;
+      currentSelections.forEach((item, index) => {
+        const slot = spinSlots[index];
+        if (!slot) return;
+        slot.cost.className = `cost-badge cost-${item.char.cost}`;
+        slot.cost.textContent = `COST ${item.char.cost}`;
+        slot.kakusei.className = `kakusei-badge ${isKakuseiVisible ? "" : "hidden"}`;
+        slot.kakusei.style.background = item.kakusei.c;
+        slot.kakusei.textContent = item.kakusei.name;
+        slot.name.textContent = item.char.name;
+      });
     }
 
     function updateHistoryDisplay() {
