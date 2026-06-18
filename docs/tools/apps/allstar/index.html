@@ -127,15 +127,17 @@
     .result-tools {
       display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; align-items: center;
     }
-    .team-board {
-      display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 12px;
-    }
+    .team-board { display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 14px; }
     .team-box {
-      min-height: 78px; padding: 12px; border: 1px solid rgba(104,220,255,.22);
-      border-radius: 12px; background: rgba(2,8,14,.48);
+      min-height: 92px; padding: 14px; border: 2px solid rgba(104,220,255,.46);
+      border-radius: 14px; background: rgba(2,8,14,.62);
     }
-    .team-box strong { display: block; color: var(--cyan); margin-bottom: 6px; font-size: 12px; letter-spacing: .08em; }
-    .team-box span { display: block; color: var(--text); font-weight: 900; line-height: 1.6; }
+    .team-box:nth-child(1) { border-color: rgba(85,230,255,.72); }
+    .team-box:nth-child(2) { border-color: rgba(145,255,210,.72); }
+    .team-box strong { display: block; margin-bottom: 8px; font-size: 13px; letter-spacing: .08em; }
+    .team-box:nth-child(1) strong { color: var(--cyan); }
+    .team-box:nth-child(2) strong { color: var(--mint); }
+    .team-box span { display: block; color: var(--text); font-size: 17px; font-weight: 1000; line-height: 1.7; }
     .flash-win { animation: flash-win .38s ease-out 1; }
     @keyframes flash-win {
       0% { outline: 0 solid rgba(85,230,255,0); }
@@ -625,8 +627,8 @@
       const playerOne = currentSelections.slice(0, 4).map((item) => item.char.name).join(" / ");
       const playerTwo = currentSelections.slice(4, 8).map((item) => item.char.name).join(" / ");
       board.innerHTML = `
-        <div class="team-box"><strong>1P 4キャラ</strong><span>${playerOne}</span></div>
-        <div class="team-box"><strong>2P 4キャラ</strong><span>${playerTwo}</span></div>
+        <div class="team-box"><strong>上: 1P 4キャラ</strong><span>${playerOne}</span></div>
+        <div class="team-box"><strong>下: 2P 4キャラ</strong><span>${playerTwo}</span></div>
       `;
       board.classList.remove("hidden");
     }
