@@ -153,6 +153,42 @@
           </form>
         </div>
 
+        <div class="notice-card background-manager" id="allstar-manager">
+          <p class="eyebrow">All Star Tool</p>
+          <h2>All Star キャラ追加</h2>
+          <p>コスト、名前、画像を入れると All Star ルーレット用JSONと画像へ反映します。画像はローカルサーバー側で長辺1600pxに軽量化して保存します。</p>
+          <form class="background-form" id="allstar-form">
+            <label>
+              コスト
+              <select name="cost">
+                <option value="30">30</option>
+                <option value="25">25</option>
+                <option value="20">20</option>
+                <option value="15">15</option>
+              </select>
+            </label>
+            <label>
+              表示名
+              <input name="name" type="text" placeholder="プリシュカ" />
+            </label>
+            <label>
+              ファイルID
+              <input name="file" type="text" placeholder="Prishka" />
+            </label>
+            <label class="wide">
+              キャラ画像
+              <input name="imageFile" type="file" accept="image/png,image/jpeg,image/webp" />
+            </label>
+            <div class="background-preview wide is-sidebar-preview" data-allstar-preview>画像プレビュー</div>
+            <div class="admin-form-actions wide">
+              <button class="button primary" type="submit">All Starへ追加/更新</button>
+              <button class="button ghost" type="button" id="allstar-refresh">登録一覧を再読込</button>
+              <span id="allstar-save-status">未保存</span>
+            </div>
+          </form>
+          <pre id="allstar-list-preview" class="code-preview"></pre>
+        </div>
+
         <div class="notice-card">
           <p class="eyebrow">Data Sync</p>
           <h2>公開JSON同期</h2>
@@ -165,6 +201,20 @@
           <h2>その他の編集</h2>
         </div>
         <div class="tool-grid">
+          <a class="tool-card" href="tools/apps/allstar/index.html">
+            <span class="tool-card-body">
+              <small>All Star</small>
+              <strong>All Star ルーレット</strong>
+              <span>キャラ抽選ツールを確認します。</span>
+            </span>
+          </a>
+          <a class="tool-card" href="tools/image-audit.html">
+            <span class="tool-card-body">
+              <small>Audit</small>
+              <strong>画像切れチェック</strong>
+              <span>主要データの画像リンク状態を確認します。</span>
+            </span>
+          </a>
           <a class="tool-card" href="editor.html?v=20260612cancel2">
             <span class="tool-card-body">
               <small>Character</small>
@@ -618,6 +668,116 @@
             applyForm(targetConfig());
             renderPreview();
           });
+      })();
+
+      (() => {
+        const form = document.querySelector("#allstar-form");
+        if (!form) return;
+        const status = document.querySelector("#allstar-save-status");
+        const preview = document.querySelector("[data-allstar-preview]");
+        const listPreview = document.querySelector("#allstar-list-preview");
+        const refresh = document.querySelector("#allstar-refresh");
+        let characters = [];
+        let imageDataUrl = "";
+
+        const apiUrl = (endpoint) => {
+          if (location.protocol === "file:") return `http://127.0.0.1:8766${endpoint}`;
+          return endpoint;
+        };
+        const setStatus = (text) => {
+          if (status) status.textContent = text;
+        };
+        const slugify = (value) => String(value || "")
+          .trim()
+          .normalize("NFKD")
+          .replace(/[^\w.-]+/g, "-")
+          .replace(/^-+|-+$/g, "")
+          || "character";
+        const renderList = () => {
+          const counts = characters.reduce((acc, char) => {
+            acc[char.cost] = (acc[char.cost] || 0) + 1;
+            return acc;
+          }, {});
+          listPreview.textContent = `登録数: ${characters.length}\n` +
+            ["30", "25", "20", "15"].map((cost) => `COST ${cost}: ${counts[cost] || 0}`).join("\n");
+        };
+        const loadCharacters = async () => {
+          try {
+            const response = await fetch(`tools/apps/allstar/allstar-characters.json?v=${Date.now()}`);
+            characters = response.ok ? await response.json() : [];
+            renderList();
+            setStatus("一覧読込済み");
+          } catch {
+            setStatus("一覧を読めませんでした");
+          }
+        };
+        form.elements.name.addEventListener("input", () => {
+          if (!form.elements.file.value.trim()) form.elements.file.value = slugify(form.elements.name.value);
+        });
+        form.elements.imageFile.addEventListener("change", async () => {
+          const file = form.elements.imageFile.files?.[0];
+          if (!file) return;
+          if (!/^image\//.test(file.type)) {
+            setStatus("画像ファイルを選んでください");
+            return;
+          }
+          imageDataUrl = await new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(String(reader.result || ""));
+            reader.onerror = () => reject(reader.error || new Error("read failed"));
+            reader.readAsDataURL(file);
+          });
+          preview.innerHTML = "";
+          const img = document.createElement("img");
+          img.src = imageDataUrl;
+          img.style.opacity = "1";
+          img.style.objectFit = "contain";
+          preview.append(img);
+          setStatus("画像読込済み");
+        });
+        form.addEventListener("submit", async (event) => {
+          event.preventDefault();
+          const cost = form.elements.cost.value;
+          const name = form.elements.name.value.trim();
+          const file = slugify(form.elements.file.value || name);
+          if (!cost || !name || !file) {
+            setStatus("コスト、表示名、ファイルIDを入れてください");
+            return;
+          }
+          setStatus("保存中...");
+          try {
+            let imagePath = "";
+            if (imageDataUrl) {
+              const upload = await fetch(apiUrl("/api/upload/allstar-character-image"), {
+                method: "POST",
+                headers: { "Content-Type": "application/json; charset=utf-8" },
+                body: JSON.stringify({ cost, file, dataUrl: imageDataUrl }),
+              });
+              const result = await upload.json().catch(() => ({}));
+              if (!upload.ok) throw new Error(result.error || `画像保存失敗 ${upload.status}`);
+              imagePath = result.path || "";
+            }
+            const next = characters.filter((char) => !(String(char.cost) === cost && char.file === file));
+            next.push({ cost, file, name });
+            next.sort((a, b) => Number(b.cost) - Number(a.cost) || String(a.name).localeCompare(String(b.name), "ja"));
+            const response = await fetch(apiUrl("/api/save/allstar-characters"), {
+              method: "POST",
+              headers: { "Content-Type": "application/json; charset=utf-8" },
+              body: JSON.stringify(next),
+            });
+            const result = await response.json().catch(() => ({}));
+            if (!response.ok) throw new Error(result.error || `JSON保存失敗 ${response.status}`);
+            characters = next;
+            localStorage.setItem("starward-allstar-characters-draft", JSON.stringify(next));
+            renderList();
+            setStatus(imagePath ? `保存済み: ${imagePath}` : "保存済み");
+          } catch (error) {
+            setStatus(`ローカルサーバーで開いて保存してください: ${error.message || error}`);
+            localStorage.setItem("starward-allstar-characters-draft", JSON.stringify(characters));
+          }
+        });
+        refresh?.addEventListener("click", loadCharacters);
+        loadCharacters();
       })();
 
       (() => {

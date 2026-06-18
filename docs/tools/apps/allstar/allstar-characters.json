@@ -1,0 +1,362 @@
+[
+  {
+    "cost": "30",
+    "file": "akatuki",
+    "name": "アカツキ"
+  },
+  {
+    "cost": "30",
+    "file": "Mumei",
+    "name": "無銘"
+  },
+  {
+    "cost": "30",
+    "file": "Akigumo",
+    "name": "秋雲"
+  },
+  {
+    "cost": "30",
+    "file": "Cammy",
+    "name": "キャミィ"
+  },
+  {
+    "cost": "30",
+    "file": "Cavalry",
+    "name": "キャバリー"
+  },
+  {
+    "cost": "30",
+    "file": "Cherub",
+    "name": "ケルビム"
+  },
+  {
+    "cost": "30",
+    "file": "Convallaria",
+    "name": "スズラン"
+  },
+  {
+    "cost": "30",
+    "file": "Elfin",
+    "name": "エルフィン"
+  },
+  {
+    "cost": "30",
+    "file": "Ether",
+    "name": "イーザー"
+  },
+  {
+    "cost": "30",
+    "file": "Griffin",
+    "name": "グリフィン"
+  },
+  {
+    "cost": "30",
+    "file": "Hikari",
+    "name": "ヒカリ"
+  },
+  {
+    "cost": "30",
+    "file": "Longinus·Beta",
+    "name": "ロンギヌスβ"
+  },
+  {
+    "cost": "30",
+    "file": "Prishka",
+    "name": "プリシュカ"
+  },
+  {
+    "cost": "30",
+    "file": "Qiuyu",
+    "name": "秋雨"
+  },
+  {
+    "cost": "30",
+    "file": "Rasiel",
+    "name": "ラジエル"
+  },
+  {
+    "cost": "30",
+    "file": "Rhine",
+    "name": "ライン"
+  },
+  {
+    "cost": "30",
+    "file": "Rota",
+    "name": "ロタ"
+  },
+  {
+    "cost": "30",
+    "file": "Shadow",
+    "name": "影"
+  },
+  {
+    "cost": "30",
+    "file": "Siren",
+    "name": "セイレン"
+  },
+  {
+    "cost": "30",
+    "file": "VoidSaber",
+    "name": "ヴォイドセイバー"
+  },
+  {
+    "cost": "25",
+    "file": "reki",
+    "name": "レキ"
+  },
+  {
+    "cost": "25",
+    "file": "Nora",
+    "name": "ノーラ"
+  },
+  {
+    "cost": "25",
+    "file": "sirogara-Photoroom",
+    "name": "白ガラハッド"
+  },
+  {
+    "cost": "25",
+    "file": "Skysaber",
+    "name": "スカイセーバー"
+  },
+  {
+    "cost": "25",
+    "file": "Aliz",
+    "name": "アリス"
+  },
+  {
+    "cost": "25",
+    "file": "Angelis",
+    "name": "アンジェリス"
+  },
+  {
+    "cost": "25",
+    "file": "baze",
+    "name": "バーゼ"
+  },
+  {
+    "cost": "25",
+    "file": "Cygnus",
+    "name": "シグナス"
+  },
+  {
+    "cost": "25",
+    "file": "doragu",
+    "name": "ドラグナー"
+  },
+  {
+    "cost": "25",
+    "file": "Ffreedo",
+    "name": "フリード"
+  },
+  {
+    "cost": "25",
+    "file": "gouraikai",
+    "name": "轟雷改"
+  },
+  {
+    "cost": "25",
+    "file": "haruka",
+    "name": "ハルカ"
+  },
+  {
+    "cost": "25",
+    "file": "Ine",
+    "name": "稲"
+  },
+  {
+    "cost": "25",
+    "file": "Iva",
+    "name": "エヴァ"
+  },
+  {
+    "cost": "25",
+    "file": "Kaze",
+    "name": "カゼ"
+  },
+  {
+    "cost": "25",
+    "file": "Lancelot",
+    "name": "ランスロット"
+  },
+  {
+    "cost": "25",
+    "file": "sanboruto",
+    "name": "サンダーボルト"
+  },
+  {
+    "cost": "25",
+    "file": "Sharp",
+    "name": "シャープ"
+  },
+  {
+    "cost": "25",
+    "file": "Valkia",
+    "name": "ヴァルキア"
+  },
+  {
+    "cost": "25",
+    "file": "Xiaoling",
+    "name": "シャオリン"
+  },
+  {
+    "cost": "25",
+    "file": "XVIII",
+    "name": "18号"
+  },
+  {
+    "cost": "25",
+    "file": "zyem",
+    "name": "ジェミィ"
+  },
+  {
+    "cost": "25",
+    "file": "BRS",
+    "name": "BRS"
+  },
+  {
+    "cost": "25",
+    "file": "DeadMaster",
+    "name": "デッドマスター"
+  },
+  {
+    "cost": "20",
+    "file": "fibi",
+    "name": "フィービー"
+  },
+  {
+    "cost": "20",
+    "file": "tatiana",
+    "name": "タチアナ"
+  },
+  {
+    "cost": "20",
+    "file": "kurisu",
+    "name": "クリスタ"
+  },
+  {
+    "cost": "20",
+    "file": "kuro",
+    "name": "黒ガラハッド"
+  },
+  {
+    "cost": "20",
+    "file": "Aida",
+    "name": "アイーダ"
+  },
+  {
+    "cost": "20",
+    "file": "Beta",
+    "name": "ベータ"
+  },
+  {
+    "cost": "20",
+    "file": "Borzoi",
+    "name": "ボルゾイ"
+  },
+  {
+    "cost": "20",
+    "file": "Breaker",
+    "name": "ブリーカー"
+  },
+  {
+    "cost": "20",
+    "file": "Darkstar",
+    "name": "ダークスター"
+  },
+  {
+    "cost": "20",
+    "file": "Deucalion",
+    "name": "デュカリオン"
+  },
+  {
+    "cost": "20",
+    "file": "Emika",
+    "name": "エミカ"
+  },
+  {
+    "cost": "20",
+    "file": "Franca",
+    "name": "フランカー"
+  },
+  {
+    "cost": "20",
+    "file": "Hibiki",
+    "name": "ヒビキ"
+  },
+  {
+    "cost": "20",
+    "file": "ice",
+    "name": "アイスリン"
+  },
+  {
+    "cost": "20",
+    "file": "Kitty",
+    "name": "キャッティ"
+  },
+  {
+    "cost": "20",
+    "file": "Pallas",
+    "name": "パラス"
+  },
+  {
+    "cost": "20",
+    "file": "Qingni",
+    "name": "チンニ"
+  },
+  {
+    "cost": "20",
+    "file": "Rem",
+    "name": "レム"
+  },
+  {
+    "cost": "20",
+    "file": "Seraph",
+    "name": "セラフ"
+  },
+  {
+    "cost": "20",
+    "file": "Scorpion",
+    "name": "スコーピオン"
+  },
+  {
+    "cost": "20",
+    "file": "suteko",
+    "name": "スティレット"
+  },
+  {
+    "cost": "20",
+    "file": "Virtues",
+    "name": "ヴァーチェ"
+  },
+  {
+    "cost": "20",
+    "file": "Zakharova",
+    "name": "ザハロワ"
+  },
+  {
+    "cost": "15",
+    "file": "Katerina",
+    "name": "カタリナ"
+  },
+  {
+    "cost": "15",
+    "file": "Orchid",
+    "name": "オーキッド"
+  },
+  {
+    "cost": "15",
+    "file": "Roland",
+    "name": "ローランド"
+  },
+  {
+    "cost": "15",
+    "file": "Snowowl",
+    "name": "スノーウォル"
+  },
+  {
+    "cost": "15",
+    "file": "Yammyn",
+    "name": "ヤミン"
+  }
+]

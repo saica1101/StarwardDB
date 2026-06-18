@@ -3,6 +3,7 @@ from pathlib import Path
 from urllib.parse import parse_qs, quote, urlparse
 from urllib.request import Request, urlopen
 import base64
+import io
 import json
 import os
 import re
@@ -20,6 +21,7 @@ class GuideHandler(SimpleHTTPRequestHandler):
         "/api/save/site-order": "site-order-data.json",
         "/api/save/background": "background-media-data.json",
         "/api/save/background-media": "background-media-data.json",
+        "/api/save/allstar-characters": "tools/apps/allstar/allstar-characters.json",
     }
 
     def do_GET(self):
@@ -51,6 +53,9 @@ class GuideHandler(SimpleHTTPRequestHandler):
             return
         if parsed.path == "/api/upload/background-media":
             self.handle_upload_background_media()
+            return
+        if parsed.path == "/api/upload/allstar-character-image":
+            self.handle_upload_allstar_character_image()
             return
         self.write_json({"ok": False, "error": "not found"}, status=404)
 
@@ -106,6 +111,10 @@ class GuideHandler(SimpleHTTPRequestHandler):
         elif path in ("/api/save/background", "/api/save/background-media"):
             if not isinstance(payload, dict):
                 self.write_json({"ok": False, "error": "expected background media config"}, status=400)
+                return
+        elif path == "/api/save/allstar-characters":
+            if not isinstance(payload, list) or not all(is_valid_allstar_character(item) for item in payload):
+                self.write_json({"ok": False, "error": "expected allstar character list"}, status=400)
                 return
 
         filename = self.SAVE_TARGETS[path]
@@ -253,6 +262,65 @@ class GuideHandler(SimpleHTTPRequestHandler):
             "path": str(relative).replace("\\", "/"),
             "bytes": len(data),
             "type": media_type,
+        })
+
+    def handle_upload_allstar_character_image(self):
+        length = int(self.headers.get("Content-Length", "0") or "0")
+        if length <= 0 or length > 35 * 1024 * 1024:
+            self.write_json({"ok": False, "error": "invalid body size"}, status=400)
+            return
+
+        try:
+            payload = json.loads(self.rfile.read(length).decode("utf-8"))
+        except Exception:
+            self.write_json({"ok": False, "error": "invalid json"}, status=400)
+            return
+
+        cost = str(payload.get("cost", "")).strip()
+        file_id = sanitize_allstar_file_id(str(payload.get("file", "")))
+        data_url = str(payload.get("dataUrl", ""))
+        if cost not in {"30", "25", "20", "15"} or not file_id:
+            self.write_json({"ok": False, "error": "invalid cost or file id"}, status=400)
+            return
+        match = re.match(r"^data:image/(png|jpeg|webp);base64,(.+)$", data_url, re.S)
+        if not match:
+            self.write_json({"ok": False, "error": "invalid image data url"}, status=400)
+            return
+        try:
+            data = base64.b64decode(match.group(2), validate=True)
+        except Exception:
+            self.write_json({"ok": False, "error": "invalid base64"}, status=400)
+            return
+        if not data or len(data) > 25 * 1024 * 1024:
+            self.write_json({"ok": False, "error": "image too large"}, status=400)
+            return
+
+        try:
+            from PIL import Image
+            image = Image.open(io.BytesIO(data)).convert("RGBA")
+            image.thumbnail((1600, 1600), Image.Resampling.LANCZOS)
+            out = io.BytesIO()
+            image.save(out, format="PNG", optimize=True, compress_level=9)
+            data = out.getvalue()
+        except Exception:
+            pass
+
+        root = Path(__file__).resolve().parent
+        relative = Path("tools") / "apps" / "shared" / "characters" / cost / f"{file_id}.png"
+        target = root / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(data)
+
+        docs_root = root / "docs"
+        if docs_root.exists():
+            docs_target = docs_root / relative
+            docs_target.parent.mkdir(parents=True, exist_ok=True)
+            docs_target.write_bytes(data)
+
+        self.write_json({
+            "ok": True,
+            "path": str(relative).replace("\\", "/"),
+            "bytes": len(data),
         })
 
     def handle_save_update_edits(self):
@@ -424,6 +492,21 @@ def normalize_page_edits(edits):
         "hidden": edits.get("hidden") if isinstance(edits.get("hidden"), dict) else {},
         "added": edits.get("added") if isinstance(edits.get("added"), list) else [],
     }
+
+
+def sanitize_allstar_file_id(value):
+    value = str(value or "").strip()
+    value = re.sub(r"[^\w.\-·]+", "-", value, flags=re.UNICODE).strip(".-")
+    return value[:80]
+
+
+def is_valid_allstar_character(item):
+    if not isinstance(item, dict):
+        return False
+    cost = str(item.get("cost", "")).strip()
+    file_id = sanitize_allstar_file_id(item.get("file", ""))
+    name = str(item.get("name", "")).strip()
+    return cost in {"30", "25", "20", "15"} and bool(file_id) and bool(name)
 
 
 def extract_latest_video(text):
