@@ -103,6 +103,7 @@
     #result-area { display: grid; gap: 14px; justify-content: center; }
     #result-area.mode-1 { grid-template-columns: minmax(260px, 340px); }
     #result-area.mode-4 { grid-template-columns: repeat(2, minmax(220px, 300px)); }
+    #result-area.mode-8 { grid-template-columns: repeat(4, minmax(170px, 1fr)); }
     .ready { min-height: 360px; display: grid; place-items: center; color: rgba(237,248,255,.35); font-size: 26px; font-weight: 1000; border: 1px dashed rgba(104,220,255,.22); border-radius: 16px; }
     .card {
       overflow: hidden; border-radius: 16px; color: var(--text);
@@ -182,6 +183,7 @@
       .draw-btn { width: 100%; }
       .history-area { position: static; }
       #result-area.mode-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      #result-area.mode-8 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .filter-actions { grid-template-columns: 1fr; }
       .team-board { grid-template-columns: 1fr; }
     }
@@ -217,6 +219,7 @@
         </div>
         <label class="check"><input type="checkbox" id="kakusei-toggle" checked onchange="saveOptions(); updateDisplayAfterToggle();"> 覚醒表示</label>
         <label class="check"><input type="checkbox" id="exclude-toggle" checked onchange="saveOptions()"> 直近除外</label>
+        <label class="check"><input type="checkbox" id="team-toggle" onchange="saveOptions(); updateDisplayAfterToggle();"> チーム分け</label>
         <label class="check"><input type="checkbox" id="fx-toggle" onchange="saveOptions()"> 演出/SE</label>
         <button class="button" type="button" onclick="openFilter()">抽選キャラを選ぶ</button>
       </div>
@@ -229,7 +232,6 @@
         <div id="result-area" class="mode-1"><div class="ready">READY</div></div>
         <div class="result-tools">
           <button class="button" type="button" onclick="copyResult()">結果コピー</button>
-          <button class="button" type="button" onclick="shuffleTeams()">チーム分け</button>
           <span id="copy-status" class="footer-note"></span>
         </div>
         <div id="team-board" class="team-board hidden"></div>
@@ -330,6 +332,7 @@
       if (!options) return;
       document.getElementById("kakusei-toggle").checked = options.kakusei !== false;
       document.getElementById("exclude-toggle").checked = options.excludeRecent !== false;
+      document.getElementById("team-toggle").checked = options.teamMode === true;
       document.getElementById("fx-toggle").checked = options.fx === true;
       const mode = document.querySelector(`input[name="play-mode"][value="${options.mode || "1"}"]`);
       if (mode) mode.checked = true;
@@ -429,6 +432,7 @@
       localStorage.setItem("roulette_options", JSON.stringify({
         kakusei: document.getElementById("kakusei-toggle").checked,
         excludeRecent: document.getElementById("exclude-toggle").checked,
+        teamMode: document.getElementById("team-toggle").checked,
         fx: document.getElementById("fx-toggle").checked,
         mode: modeInput ? modeInput.value : "1"
       }));
@@ -460,7 +464,8 @@
     function startRoulette() {
       const candidates = allChars.filter((char) => char.enabled);
       const modeInput = document.querySelector("input[name='play-mode']:checked");
-      const mode = modeInput ? parseInt(modeInput.value, 10) : 1;
+      const teamMode = document.getElementById("team-toggle").checked;
+      const mode = teamMode ? 8 : (modeInput ? parseInt(modeInput.value, 10) : 1);
       if (candidates.length < mode) {
         alert(`キャラを${mode}体以上選択してください`);
         return;
@@ -471,7 +476,7 @@
       const button = document.getElementById("main-btn");
       button.textContent = "STOP";
       button.classList.add("stop");
-      document.getElementById("result-area").className = mode === 4 ? "mode-4" : "mode-1";
+      document.getElementById("result-area").className = mode === 8 ? "mode-8" : (mode === 4 ? "mode-4" : "mode-1");
       renderSpinShell(mode);
       currentSelections = pickSelections(applyRecentExclusion(candidates, mode), mode);
       updateSpinShell();
@@ -489,12 +494,14 @@
       button.classList.remove("stop");
       spinSlots = [];
       renderCards(true);
+      renderTeamBoard();
       rememberRecentSelections();
       playFinishEffects();
     }
 
     function updateDisplayAfterToggle() {
       if (currentSelections.length > 0) renderCards();
+      renderTeamBoard();
     }
 
     function renderCards(showImages = true) {
@@ -587,6 +594,11 @@
     }
 
     function resultText() {
+      if (document.getElementById("team-toggle").checked && currentSelections.length >= 8) {
+        const one = currentSelections.slice(0, 4).map((item) => item.char.name).join(" / ");
+        const two = currentSelections.slice(4, 8).map((item) => item.char.name).join(" / ");
+        return `1P: ${one}\n2P: ${two}`;
+      }
       return currentSelections.map((item) => {
         const kakusei = document.getElementById("kakusei-toggle").checked ? ` / ${item.kakusei.name}` : "";
         return `${item.char.name}（COST ${item.char.cost}${kakusei}）`;
@@ -604,22 +616,19 @@
       }
     }
 
-    function shuffleTeams() {
-      const candidates = allChars.filter((char) => char.enabled);
-      if (candidates.length < 8) {
-        document.getElementById("copy-status").textContent = "チーム分けは8キャラ以上必要です";
+    function renderTeamBoard() {
+      const board = document.getElementById("team-board");
+      if (!document.getElementById("team-toggle").checked || currentSelections.length < 8) {
+        board.classList.add("hidden");
         return;
       }
-      const picks = pickSelections(applyRecentExclusion(candidates, 8), 8);
-      const playerOne = picks.slice(0, 4).map((item) => item.char.name).join(" / ");
-      const playerTwo = picks.slice(4, 8).map((item) => item.char.name).join(" / ");
-      const board = document.getElementById("team-board");
+      const playerOne = currentSelections.slice(0, 4).map((item) => item.char.name).join(" / ");
+      const playerTwo = currentSelections.slice(4, 8).map((item) => item.char.name).join(" / ");
       board.innerHTML = `
         <div class="team-box"><strong>1P 4キャラ</strong><span>${playerOne}</span></div>
         <div class="team-box"><strong>2P 4キャラ</strong><span>${playerTwo}</span></div>
       `;
       board.classList.remove("hidden");
-      document.getElementById("copy-status").textContent = "8キャラを4/4で分けました";
     }
 
     function playFinishEffects() {
