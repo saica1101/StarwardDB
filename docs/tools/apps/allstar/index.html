@@ -123,6 +123,24 @@
       color: rgba(237,248,255,.38); font-weight: 1000; letter-spacing: .12em;
       background: rgba(0,0,0,.28);
     }
+    .result-tools {
+      display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; align-items: center;
+    }
+    .team-board {
+      display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 12px;
+    }
+    .team-box {
+      min-height: 78px; padding: 12px; border: 1px solid rgba(104,220,255,.22);
+      border-radius: 12px; background: rgba(2,8,14,.48);
+    }
+    .team-box strong { display: block; color: var(--cyan); margin-bottom: 6px; font-size: 12px; letter-spacing: .08em; }
+    .team-box span { display: block; color: var(--text); font-weight: 900; line-height: 1.6; }
+    .flash-win { animation: flash-win .38s ease-out 1; }
+    @keyframes flash-win {
+      0% { outline: 0 solid rgba(85,230,255,0); }
+      35% { outline: 6px solid rgba(85,230,255,.42); }
+      100% { outline: 0 solid rgba(85,230,255,0); }
+    }
     .history-area { padding: 16px; position: sticky; top: 16px; }
     .history-title { color: var(--cyan); font-weight: 1000; margin-bottom: 12px; }
     .history-item { margin-bottom: 9px; padding: 11px; border-radius: 11px; background: rgba(2,8,14,.5); border-left: 4px solid rgba(255,255,255,.2); }
@@ -165,6 +183,7 @@
       .history-area { position: static; }
       #result-area.mode-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .filter-actions { grid-template-columns: 1fr; }
+      .team-board { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -197,6 +216,8 @@
           <label><input type="radio" name="play-mode" value="4" onchange="saveOptions()">BAN PICK 4</label>
         </div>
         <label class="check"><input type="checkbox" id="kakusei-toggle" checked onchange="saveOptions(); updateDisplayAfterToggle();"> 覚醒表示</label>
+        <label class="check"><input type="checkbox" id="exclude-toggle" checked onchange="saveOptions()"> 直近除外</label>
+        <label class="check"><input type="checkbox" id="fx-toggle" onchange="saveOptions()"> 演出/SE</label>
         <button class="button" type="button" onclick="openFilter()">抽選キャラを選ぶ</button>
       </div>
       <button id="main-btn" class="draw-btn" type="button" onclick="toggleRoulette()">START</button>
@@ -206,6 +227,12 @@
       <div class="panel result-wrap">
         <p class="section-label">CURRENT SELECTION</p>
         <div id="result-area" class="mode-1"><div class="ready">READY</div></div>
+        <div class="result-tools">
+          <button class="button" type="button" onclick="copyResult()">結果コピー</button>
+          <button class="button" type="button" onclick="shuffleTeams()">チーム分け</button>
+          <span id="copy-status" class="footer-note"></span>
+        </div>
+        <div id="team-board" class="team-board hidden"></div>
         <div id="issue-list" class="issue-list"></div>
       </div>
       <aside class="panel history-area">
@@ -252,6 +279,8 @@
     let onlyDisabled = false;
     let filterRendered = false;
     let spinSlots = [];
+    let recentCharacterIds = [];
+    let audioContext = null;
 
     function imageSrc(char) {
       return `../shared/characters/${char.cost}/${encodeURIComponent(char.file)}.png`;
@@ -293,8 +322,15 @@
 
     function restoreOptions() {
       const options = JSON.parse(localStorage.getItem("roulette_options") || "null");
+      try {
+        recentCharacterIds = JSON.parse(localStorage.getItem("roulette_recent_ids") || "[]").filter(Boolean).slice(0, 8);
+      } catch {
+        recentCharacterIds = [];
+      }
       if (!options) return;
       document.getElementById("kakusei-toggle").checked = options.kakusei !== false;
+      document.getElementById("exclude-toggle").checked = options.excludeRecent !== false;
+      document.getElementById("fx-toggle").checked = options.fx === true;
       const mode = document.querySelector(`input[name="play-mode"][value="${options.mode || "1"}"]`);
       if (mode) mode.checked = true;
     }
@@ -392,6 +428,8 @@
       const modeInput = document.querySelector("input[name='play-mode']:checked");
       localStorage.setItem("roulette_options", JSON.stringify({
         kakusei: document.getElementById("kakusei-toggle").checked,
+        excludeRecent: document.getElementById("exclude-toggle").checked,
+        fx: document.getElementById("fx-toggle").checked,
         mode: modeInput ? modeInput.value : "1"
       }));
     }
@@ -427,16 +465,18 @@
         alert(`キャラを${mode}体以上選択してください`);
         return;
       }
+      document.getElementById("team-board").classList.add("hidden");
+      document.getElementById("copy-status").textContent = "";
       isRunning = true;
       const button = document.getElementById("main-btn");
       button.textContent = "STOP";
       button.classList.add("stop");
       document.getElementById("result-area").className = mode === 4 ? "mode-4" : "mode-1";
       renderSpinShell(mode);
-      currentSelections = pickSelections(candidates, mode);
+      currentSelections = pickSelections(applyRecentExclusion(candidates, mode), mode);
       updateSpinShell();
       rouletteTimer = setInterval(() => {
-        currentSelections = pickSelections(candidates, mode);
+        currentSelections = pickSelections(applyRecentExclusion(candidates, mode), mode);
         updateSpinShell();
       }, 55);
     }
@@ -449,6 +489,8 @@
       button.classList.remove("stop");
       spinSlots = [];
       renderCards(true);
+      rememberRecentSelections();
+      playFinishEffects();
     }
 
     function updateDisplayAfterToggle() {
@@ -482,6 +524,19 @@
         });
       }
       return result;
+    }
+
+    function applyRecentExclusion(candidates, mode) {
+      if (!document.getElementById("exclude-toggle").checked || recentCharacterIds.length === 0) return candidates;
+      const blocked = new Set(recentCharacterIds);
+      const filtered = candidates.filter((char) => !blocked.has(char.id));
+      return filtered.length >= mode ? filtered : candidates;
+    }
+
+    function rememberRecentSelections() {
+      const ids = currentSelections.map((item) => item.char.id);
+      recentCharacterIds = [...ids, ...recentCharacterIds.filter((id) => !ids.includes(id))].slice(0, 8);
+      localStorage.setItem("roulette_recent_ids", JSON.stringify(recentCharacterIds));
     }
 
     function renderSpinShell(mode) {
@@ -529,6 +584,65 @@
           <small>COST ${item.char.cost} / ${item.kakusei.name}</small>
         </div>
       `).join("");
+    }
+
+    function resultText() {
+      return currentSelections.map((item) => {
+        const kakusei = document.getElementById("kakusei-toggle").checked ? ` / ${item.kakusei.name}` : "";
+        return `${item.char.name}（COST ${item.char.cost}${kakusei}）`;
+      }).join(" / ");
+    }
+
+    async function copyResult() {
+      if (!currentSelections.length) return;
+      const text = resultText();
+      try {
+        await navigator.clipboard.writeText(text);
+        document.getElementById("copy-status").textContent = "コピーしました";
+      } catch {
+        document.getElementById("copy-status").textContent = text;
+      }
+    }
+
+    function shuffleTeams() {
+      if (currentSelections.length < 4) {
+        document.getElementById("copy-status").textContent = "BAN PICK 4で使えます";
+        return;
+      }
+      const shuffled = [...currentSelections].sort(() => Math.random() - 0.5);
+      const teamA = shuffled.slice(0, 2).map((item) => item.char.name).join(" / ");
+      const teamB = shuffled.slice(2, 4).map((item) => item.char.name).join(" / ");
+      const board = document.getElementById("team-board");
+      board.innerHTML = `
+        <div class="team-box"><strong>TEAM A</strong><span>${teamA}</span></div>
+        <div class="team-box"><strong>TEAM B</strong><span>${teamB}</span></div>
+      `;
+      board.classList.remove("hidden");
+    }
+
+    function playFinishEffects() {
+      if (!document.getElementById("fx-toggle").checked) return;
+      const area = document.getElementById("result-area");
+      area.classList.remove("flash-win");
+      void area.offsetWidth;
+      area.classList.add("flash-win");
+      playBeep();
+    }
+
+    function playBeep() {
+      try {
+        audioContext = audioContext || new (window.AudioContext || window.webkitAudioContext)();
+        const osc = audioContext.createOscillator();
+        const gain = audioContext.createGain();
+        osc.type = "sine";
+        osc.frequency.value = 740;
+        gain.gain.setValueAtTime(0.0001, audioContext.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.05, audioContext.currentTime + 0.01);
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioContext.currentTime + 0.14);
+        osc.connect(gain).connect(audioContext.destination);
+        osc.start();
+        osc.stop(audioContext.currentTime + 0.15);
+      } catch {}
     }
 
     init().catch((error) => {
