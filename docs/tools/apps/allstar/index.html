@@ -28,11 +28,7 @@
       min-height: 100vh;
       color: var(--text);
       font-family: "Segoe UI", "Noto Sans JP", system-ui, sans-serif;
-      background:
-        radial-gradient(circle at 18% 12%, rgba(85, 230, 255, .18), transparent 28rem),
-        radial-gradient(circle at 88% 20%, rgba(145, 255, 210, .13), transparent 26rem),
-        linear-gradient(rgba(2, 8, 14, .72), rgba(2, 8, 14, .86)),
-        url("bak.webp") center / cover;
+      background: linear-gradient(rgba(2, 8, 14, .76), rgba(2, 8, 14, .9)), url("bak.webp") center / cover;
       overflow-x: hidden;
     }
     body::before {
@@ -40,11 +36,7 @@
       position: fixed;
       inset: 0;
       pointer-events: none;
-      background-image:
-        linear-gradient(rgba(104, 220, 255, .045) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(104, 220, 255, .045) 1px, transparent 1px);
-      background-size: 48px 48px;
-      mask-image: linear-gradient(to bottom, rgba(0,0,0,.9), transparent 88%);
+      background: rgba(3, 12, 20, .18);
     }
     button, input { font: inherit; }
     button { cursor: pointer; }
@@ -55,15 +47,14 @@
       display: inline-flex; align-items: center; gap: 8px; min-height: 40px;
       padding: 10px 13px; border: 1px solid var(--line); border-radius: 10px;
       color: var(--text); text-decoration: none; background: rgba(6, 18, 29, .74);
-      box-shadow: 0 12px 32px rgba(0,0,0,.24);
+      box-shadow: 0 8px 20px rgba(0,0,0,.18);
     }
     .version-pill { color: var(--muted); font-size: 12px; letter-spacing: .08em; }
     .hero {
       display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 18px; align-items: end;
       padding: 28px; border: 1px solid var(--line); border-radius: 18px;
       background: linear-gradient(135deg, rgba(6, 18, 30, .9), rgba(12, 34, 48, .68));
-      box-shadow: 0 22px 70px rgba(0,0,0,.34);
-      backdrop-filter: blur(16px);
+      box-shadow: 0 12px 34px rgba(0,0,0,.24);
     }
     .eyebrow { margin: 0 0 8px; color: var(--cyan); font-weight: 900; letter-spacing: .12em; font-size: 12px; }
     h1 { margin: 0; font-size: clamp(38px, 8vw, 82px); line-height: .95; letter-spacing: 0; }
@@ -72,7 +63,7 @@
     .primary-action {
       min-height: 48px; border: 0; border-radius: 12px; padding: 12px 18px;
       color: #04111a; background: linear-gradient(135deg, var(--cyan), var(--mint));
-      font-weight: 1000; box-shadow: 0 14px 32px rgba(85,230,255,.22);
+      font-weight: 1000;
     }
     .quick-stats { display: grid; grid-template-columns: repeat(2, 110px); gap: 10px; }
     .stat {
@@ -87,7 +78,7 @@
     }
     .panel {
       border: 1px solid var(--line); border-radius: 16px; background: var(--panel);
-      box-shadow: 0 18px 54px rgba(0,0,0,.26); backdrop-filter: blur(14px);
+      box-shadow: 0 10px 28px rgba(0,0,0,.22);
     }
     .settings { padding: 16px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
     .segmented { display: inline-grid; grid-template-columns: repeat(2, minmax(120px, 1fr)); gap: 6px; padding: 5px; border: 1px solid rgba(104,220,255,.22); border-radius: 12px; background: rgba(2,8,14,.55); }
@@ -103,7 +94,7 @@
     .draw-btn {
       min-width: 210px; min-height: 74px; border: 0; border-radius: 16px;
       color: #031018; background: linear-gradient(135deg, var(--cyan), var(--gold));
-      font-size: 24px; font-weight: 1000; box-shadow: 0 18px 44px rgba(85,230,255,.25);
+      font-size: 24px; font-weight: 1000;
     }
     .draw-btn.stop { background: linear-gradient(135deg, var(--pink), #7db5ff); color: #fff; }
     .main-grid { margin-top: 18px; display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 18px; align-items: start; }
@@ -116,7 +107,7 @@
     .card {
       overflow: hidden; border-radius: 16px; color: var(--text);
       border: 1px solid rgba(104,220,255,.3); background: rgba(5, 13, 22, .82);
-      box-shadow: 0 18px 45px rgba(0,0,0,.34);
+      box-shadow: 0 10px 28px rgba(0,0,0,.28);
     }
     .card-header { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 12px 12px 8px; }
     .cost-badge, .kakusei-badge { padding: 5px 10px; border-radius: 999px; font-size: 11px; font-weight: 1000; }
@@ -125,12 +116,12 @@
     .cost-20 { background: var(--cost-20); color: #06101b; }
     .cost-15 { background: var(--cost-15); color: #06101b; }
     .char-name { padding: 0 12px 12px; font-size: 20px; font-weight: 1000; }
-    .image-container { height: 330px; display: grid; place-items: center; background: radial-gradient(circle at 50% 28%, rgba(85,230,255,.13), rgba(0,0,0,.76)); }
+    .image-container { height: 330px; display: grid; place-items: center; background: rgba(0,0,0,.46); }
     .image-container img { width: 100%; height: 100%; object-fit: contain; }
     .spin-placeholder {
       height: 220px; display: grid; place-items: center; margin-top: 8px;
       color: rgba(237,248,255,.38); font-weight: 1000; letter-spacing: .12em;
-      background: radial-gradient(circle at 50% 28%, rgba(85,230,255,.1), rgba(0,0,0,.42));
+      background: rgba(0,0,0,.28);
     }
     .history-area { padding: 16px; position: sticky; top: 16px; }
     .history-title { color: var(--cyan); font-weight: 1000; margin-bottom: 12px; }
@@ -141,7 +132,7 @@
     .hist-15 { border-left-color: var(--cost-15); }
     .filter-panel { display: none; position: fixed; inset: 0; z-index: 1000; overflow: auto; padding: 18px; background: rgba(2,8,14,.96); }
     .filter-shell { width: min(1120px, 100%); margin: 0 auto; }
-    .filter-top { position: sticky; top: 0; z-index: 10; padding: 14px; border-radius: 16px; background: rgba(6,18,29,.96); border: 1px solid var(--line); backdrop-filter: blur(14px); }
+    .filter-top { position: sticky; top: 0; z-index: 10; padding: 14px; border-radius: 16px; background: #06121d; border: 1px solid var(--line); }
     .filter-actions { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 10px; align-items: center; }
     .search-input {
       width: 100%; min-height: 44px; border-radius: 12px; border: 1px solid rgba(104,220,255,.28);
@@ -191,7 +182,7 @@
         <p>キャラ抽選、BAN PICK、覚醒込みの組み合わせ確認に使えるランダムツールです。</p>
         <div class="hero-actions">
           <button class="primary-action" type="button" onclick="openFilter()">抽選キャラを選ぶ</button>
-          <button class="button" type="button" onclick="runImageAudit()">画像チェック</button>
+          <a class="button" href="../../image-audit.html">画像チェック</a>
         </div>
       </div>
       <div class="quick-stats">
@@ -258,7 +249,7 @@
     let rouletteTimer = null;
     let isRunning = false;
     let currentSelections = [];
-    let activeCost = "all";
+    let activeCost = "30";
     let onlyDisabled = false;
     let filterRendered = false;
 
@@ -310,7 +301,7 @@
 
     function renderCostTabs() {
       const wrap = document.getElementById("cost-tabs");
-      wrap.innerHTML = [{ label: "ALL", value: "all" }, ...COSTS.map((cost) => ({ label: `COST ${cost}`, value: cost }))]
+      wrap.innerHTML = COSTS.map((cost) => ({ label: `COST ${cost}`, value: cost }))
         .map((item) => `<button class="button ${activeCost === item.value ? "active" : ""}" type="button" onclick="setActiveCost('${item.value}')">${item.label}</button>`)
         .join("");
     }
@@ -330,8 +321,7 @@
       const query = document.getElementById("filter-search")?.value.trim().toLowerCase() || "";
       const wrap = document.getElementById("filter-content");
       wrap.innerHTML = "";
-      COSTS.forEach((cost) => {
-        if (activeCost !== "all" && activeCost !== cost) return;
+      [activeCost].forEach((cost) => {
         const chars = allChars.filter((char) => {
           if (char.cost !== cost) return false;
           if (onlyDisabled && char.enabled) return false;
