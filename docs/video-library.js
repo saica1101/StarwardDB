@@ -405,6 +405,7 @@
     const patterns = [
       /views\s*•\s*([A-Z][a-z]{2}\s+\d{1,2},\s+\d{4})\s*•/,
       /(?:Premiered|Streamed live on|Published on|Released on)\s+([A-Z][a-z]{2}\s+\d{1,2},\s+\d{4})/i,
+      /(?:datePublished|uploadDate)"\s+content="([^"]+)"/,
       /"publishDate"\s*:\s*"(\d{4}-\d{2}-\d{2})"/,
       /"uploadDate"\s*:\s*"(\d{4}-\d{2}-\d{2})"/,
     ];
