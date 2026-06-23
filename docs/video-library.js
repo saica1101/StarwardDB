@@ -287,6 +287,9 @@
   }
 
   function iconFor(char) {
+    if (char.slug === "prishka") {
+      return "tools/apps/shared/character-thumbs/30/Prishka.webp";
+    }
     const aliases = {
       "ベータ-ロンギヌス": "ロンギヌス‐ベータ",
     };

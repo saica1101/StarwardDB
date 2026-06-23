@@ -1,12 +1,12 @@
 {
   "sidebar": {
     "enabled": true,
-    "type": "video",
-    "src": "assets/background-media/4d5a183f1450accb58e6d82527e1bda4.mp4",
+    "type": "image",
+    "src": "assets/background-media/item_namecard_bg_large_new_20010044.png",
     "fallbackSrc": "",
-    "opacity": 0.51,
+    "opacity": 0.27,
     "loop": true,
-    "position": "29.2% 31.3%"
+    "position": "37.3% 50.3%"
   },
   "headers": {
     "home": {

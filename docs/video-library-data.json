@@ -210,6 +210,15 @@
     ],
     "seiren": [
       {
+        "id": "1782174805442-69v6yx",
+        "title": "【星の翼】新キャラ｢プリシュカ｣に対してかなり相性が良さそうな女【セイレン 銘刻30】",
+        "url": "https://www.youtube.com/watch?v=NtaxI0DODVI",
+        "note": "",
+        "publishedAt": "",
+        "channelId": "1780303334803-8i4xua",
+        "createdAt": "2026-06-23T00:33:25.442Z"
+      },
+      {
         "id": "1780308618197-xtmc2d",
         "title": "【星の翼】バグ修正が思ったよりも大きかった女【セイレン 銘刻30】",
         "url": "https://www.youtube.com/watch?v=nARzK-tXrh0",
@@ -224,14 +233,6 @@
         "note": "",
         "channelId": "1780303334803-8i4xua",
         "createdAt": "2026-06-01T08:58:30.868Z"
-      },
-      {
-        "id": "1780304282198-x24wbs",
-        "title": "【星の翼】変なマップと変なキャラに対して妙に強い女【セイレン 銘刻30】",
-        "url": "https://www.youtube.com/watch?v=yAjkjPx8FCg",
-        "note": "",
-        "channelId": "1780303334803-8i4xua",
-        "createdAt": "2026-06-01T08:58:02.198Z"
       }
     ],
     "cammy": [
@@ -664,6 +665,17 @@
         "channelId": "1780557658907-gnkmjh",
         "createdAt": "2026-06-04T07:20:45.600Z",
         "updatedAt": "2026-06-04T07:21:05.779Z"
+      }
+    ],
+    "prishka": [
+      {
+        "id": "1782174748839-gnh6c0",
+        "title": "【星の翼】プリシュカ視点　大会7連続入賞者視点　【makipon】",
+        "url": "https://www.youtube.com/watch?v=541sOwN26AM",
+        "note": "",
+        "publishedAt": "",
+        "channelId": "1780305502713-1fd1pg",
+        "createdAt": "2026-06-23T00:32:28.839Z"
       }
     ]
   }
