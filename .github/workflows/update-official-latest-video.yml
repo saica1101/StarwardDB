@@ -101,20 +101,20 @@ jobs:
                           <span>このサイトで再生</span>
                         </a>
                       </div>
-                      <p id="official-latest-card-title">${escHtml(latestVideo.title)}</p>`;
+                      <p id="official-latest-card-title" data-edit-key="official-latest-card-title">${escHtml(latestVideo.title)}</p>`;
           const shortBlock = `<div class="latest-video-frame compact" id="official-latest-short-card">
                         <a class="latest-video-card-link" href="${escHtml(latestShort.url)}" data-youtube-id="${escHtml(latestShort.id)}" data-youtube-title="${escHtml(latestShort.title)}">
                           <img src="https://i.ytimg.com/vi/${escHtml(latestShort.id)}/maxresdefault.jpg" data-fallback-src="https://i.ytimg.com/vi/${escHtml(latestShort.id)}/hqdefault.jpg" alt="" loading="lazy" decoding="async" fetchpriority="low" />
                           <span>このサイトで再生</span>
                         </a>
                       </div>
-                      <p id="official-latest-short-title">${escHtml(latestShort.title)}</p>`;
+                      <p id="official-latest-short-title" data-edit-key="official-latest-short-title">${escHtml(latestShort.title)}</p>`;
           html = html.replace(
-            /<div class="latest-video-frame compact" id="official-latest-video-card">[\s\S]*?<\/div>\s*<p id="official-latest-card-title">[\s\S]*?<\/p>/,
+            /<div class="latest-video-frame compact" id="official-latest-video-card">[\s\S]*?<\/div>\s*<p id="official-latest-card-title"[^>]*>[\s\S]*?<\/p>/,
             videoBlock
           );
           html = html.replace(
-            /<div class="latest-video-frame compact" id="official-latest-short-card">[\s\S]*?<\/div>\s*<p id="official-latest-short-title">[\s\S]*?<\/p>/,
+            /<div class="latest-video-frame compact" id="official-latest-short-card">[\s\S]*?<\/div>\s*<p id="official-latest-short-title"[^>]*>[\s\S]*?<\/p>/,
             shortBlock
           );
           fs.writeFileSync(indexPath, html, "utf8");
