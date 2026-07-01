@@ -963,6 +963,13 @@ const setupPersonalMatchupNotes = async () => {
   const slug = currentCharacterSlug();
   const section = document.querySelector("#matchup");
   if (!slug || !section || document.querySelector(".personal-matchup-panel")) return;
+  const publicNotes = [...section.querySelectorAll(".matchup-grid li")];
+  const hasPublicNotes = publicNotes.some((item) => item.textContent.trim() !== "未入力");
+  if (!hasPublicNotes) {
+    section.hidden = true;
+    document.querySelector('a[href="#matchup"]')?.remove();
+    return;
+  }
   const characters = await loadCharacterData();
   const storageKey = `starward-personal-matchup:${slug}`;
   const loadNotes = () => {
