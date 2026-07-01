@@ -21,11 +21,13 @@ jobs:
       - name: Fetch latest official YouTube video
         run: |
           node <<'NODE'
-          const fs = require("fs");
-          const path = require("path");
+          import fs from "node:fs";
 
           const channelId = "UCFLnYX_2SXJvEJRwVnGxlnQ";
-          const feedUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`;
+          const feedUrls = [
+            `https://youtube.com/feeds/videos.xml?channel_id=${channelId}`,
+            `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`,
+          ];
           const escXml = (value) => String(value ?? "")
             .replace(/&amp;/g, "&")
             .replace(/&lt;/g, "<")
@@ -56,8 +58,24 @@ jobs:
             return null;
           };
 
-          const response = await fetch(feedUrl);
-          if (!response.ok) throw new Error(`YouTube RSS ${response.status}`);
+          let response = null;
+          for (let attempt = 0; attempt < 3 && !response?.ok; attempt += 1) {
+            for (const feedUrl of feedUrls) {
+              const candidate = await fetch(feedUrl);
+              if (candidate.ok) {
+                response = candidate;
+                break;
+              }
+              console.warn(`YouTube RSS ${candidate.status}: ${feedUrl}`);
+            }
+            if (!response?.ok && attempt < 2) {
+              await new Promise((resolve) => setTimeout(resolve, 2000));
+            }
+          }
+          if (!response?.ok) {
+            console.warn("YouTube RSS is temporarily unavailable; keeping the current data.");
+            process.exit(0);
+          }
           const xml = await response.text();
           const latestVideo = parseLatest(xml, (url) => !url.includes("/shorts/"));
           const latestShort = parseLatest(xml, (url) => url.includes("/shorts/"));
@@ -78,19 +96,19 @@ jobs:
           const indexPath = "docs/index.html";
           let html = fs.readFileSync(indexPath, "utf8");
           const videoBlock = `<div class="latest-video-frame compact" id="official-latest-video-card">
-              <a class="latest-video-card-link" href="${escHtml(latestVideo.url)}" data-youtube-id="${escHtml(latestVideo.id)}" data-youtube-title="${escHtml(latestVideo.title)}">
-                <img src="https://i.ytimg.com/vi/${escHtml(latestVideo.id)}/maxresdefault.jpg" data-fallback-src="https://i.ytimg.com/vi/${escHtml(latestVideo.id)}/hqdefault.jpg" alt="" loading="lazy" decoding="async" fetchpriority="low" />
-                <span>このサイトで再生</span>
-              </a>
-            </div>
-            <p id="official-latest-card-title">${escHtml(latestVideo.title)}</p>`;
+                        <a class="latest-video-card-link" href="${escHtml(latestVideo.url)}" data-youtube-id="${escHtml(latestVideo.id)}" data-youtube-title="${escHtml(latestVideo.title)}">
+                          <img src="https://i.ytimg.com/vi/${escHtml(latestVideo.id)}/maxresdefault.jpg" data-fallback-src="https://i.ytimg.com/vi/${escHtml(latestVideo.id)}/hqdefault.jpg" alt="" loading="lazy" decoding="async" fetchpriority="low" />
+                          <span>このサイトで再生</span>
+                        </a>
+                      </div>
+                      <p id="official-latest-card-title">${escHtml(latestVideo.title)}</p>`;
           const shortBlock = `<div class="latest-video-frame compact" id="official-latest-short-card">
-              <a class="latest-video-card-link" href="${escHtml(latestShort.url)}" data-youtube-id="${escHtml(latestShort.id)}" data-youtube-title="${escHtml(latestShort.title)}">
-                <img src="https://i.ytimg.com/vi/${escHtml(latestShort.id)}/maxresdefault.jpg" data-fallback-src="https://i.ytimg.com/vi/${escHtml(latestShort.id)}/hqdefault.jpg" alt="" loading="lazy" decoding="async" fetchpriority="low" />
-                <span>このサイトで再生</span>
-              </a>
-            </div>
-            <p id="official-latest-short-title">${escHtml(latestShort.title)}</p>`;
+                        <a class="latest-video-card-link" href="${escHtml(latestShort.url)}" data-youtube-id="${escHtml(latestShort.id)}" data-youtube-title="${escHtml(latestShort.title)}">
+                          <img src="https://i.ytimg.com/vi/${escHtml(latestShort.id)}/maxresdefault.jpg" data-fallback-src="https://i.ytimg.com/vi/${escHtml(latestShort.id)}/hqdefault.jpg" alt="" loading="lazy" decoding="async" fetchpriority="low" />
+                          <span>このサイトで再生</span>
+                        </a>
+                      </div>
+                      <p id="official-latest-short-title">${escHtml(latestShort.title)}</p>`;
           html = html.replace(
             /<div class="latest-video-frame compact" id="official-latest-video-card">[\s\S]*?<\/div>\s*<p id="official-latest-card-title">[\s\S]*?<\/p>/,
             videoBlock
