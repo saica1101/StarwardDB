@@ -273,6 +273,12 @@
     "url": "https://starward.wikiru.jp/?デッドマスター"
   },
   {
+    "name": "レミエル",
+    "cost": "2.5",
+    "slug": "remiel",
+    "url": "https://starward.wikiru.jp/?レミエル"
+  },
+  {
     "name": "ベータ",
     "cost": "2.0",
     "slug": "beta",
