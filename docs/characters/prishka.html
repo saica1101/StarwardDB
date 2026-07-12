@@ -35,7 +35,7 @@
           <div class="hero-actions">
             <a class="button primary" href="#guide">基本データ</a>
             <a class="button ghost" href="#moves">武装表</a>
-            <a class="button ghost" href="#matchup">対策メモ</a>
+            
             <a class="button ghost" href="#reference-videos">参考動画</a>
             <a class="button ghost" href="https://www.youtube.com/results?search_query=%E6%98%9F%E3%81%AE%E7%BF%BC%20%E3%83%97%E3%83%AA%E3%82%B7%E3%83%A5%E3%82%AB" target="_blank" rel="noreferrer">動画検索</a>
           </div>
@@ -51,25 +51,20 @@
             <h2>基本データ</h2>
             <dl class="spec-list">
               <div><dt>コスト</dt><dd>3.0</dd></div>
-              <div><dt>体力</dt><dd>2850</dd></div>
-              <div><dt>赤ロック</dt><dd>33</dd></div>
-              <div><dt>タイプ</dt><dd>遠</dd></div>
-              <div><dt>移動</dt><dd>通常 / BD回数8</dd></div>
+              <div><dt>体力</dt><dd>-</dd></div>
+              <div><dt>赤ロック</dt><dd>-</dd></div>
               <div><dt>動画</dt><dd><a href="https://www.youtube.com/results?search_query=%E6%98%9F%E3%81%AE%E7%BF%BC%20%E3%83%97%E3%83%AA%E3%82%B7%E3%83%A5%E3%82%AB" target="_blank" rel="noreferrer">YouTube検索</a></dd></div>
             </dl>
           </article>
           <article class="detail-panel constellation-panel">
             <h2>凸効果</h2>
             <ol class="constellation-list">
-              <li><strong>1凸</strong><span>装備中【サブ射撃】弾薬+1</span></li>
-<li><strong>2凸</strong><span>装備解除中【ガード副弾薬】リロード速度上昇</span></li>
-<li><strong>3凸</strong><span>装備中【メイン格闘サブ射撃派生】解禁</span></li>
-<li><strong>4凸</strong><span>装備中【メイン射撃】弾薬+2</span></li>
-<li><strong>5凸</strong><span>【後バーストアタック】射撃系バーストアタックの解禁</span></li>
+              <li><strong>-</strong><span>未入力</span></li>
             </ol>
           </article>
         </div>
       </section>
+
 
       <section class="section tight" id="moves">
         <div class="section-heading">
@@ -78,25 +73,32 @@
         </div>
         <div class="move-table-panel">
           <div class="move-form-tabs" data-move-form-tabs aria-label="プリシュカの形態切り替え">
-            <button type="button" class="form-tab is-active" data-move-form="all" aria-pressed="true">すべて</button>
-            <button type="button" class="form-tab" data-move-form="装備中" aria-pressed="false">装備中</button>
-            <button type="button" class="form-tab" data-move-form="巡航モード中" aria-pressed="false">巡航モード中</button>
-          </div>
+          <button type="button" class="form-tab is-active" data-move-form="all" aria-pressed="true">すべて</button>
+          <button type="button" class="form-tab" data-move-form="装備中" aria-pressed="false">装備中</button><button type="button" class="form-tab" data-move-form="巡航モード中" aria-pressed="false">巡航モード中</button>
+        </div>
           <div class="move-table-wrap" aria-label="プリシュカの武装表">
           <table class="move-table">
-            <thead><tr><th scope="col">射撃</th><th scope="col">名称</th><th scope="col">弾数</th><th scope="col">威力</th><th scope="col">備考</th></tr></thead>
+            <thead>
+              <tr>
+                <th scope="col">射撃</th>
+                <th scope="col">名称</th>
+                <th scope="col">弾数</th>
+                <th scope="col">威力</th>
+                <th scope="col">備考</th>
+              </tr>
+            </thead>
             <tbody>
-              <tr data-form-row data-form="装備中"><th scope="row">メイン射撃</th><td>RADS-213 ウィングドユサール・キャノン</td><td>8(4凸時10)</td><td>210</td><td>標準的BR</td></tr>
-<tr data-form-row data-form="装備中"><th scope="row">サブ射撃</th><td>RADS-215 ワイバーンドローン</td><td>1(1凸時2)</td><td>315</td><td>足を止めて射撃</td></tr>
-<tr data-form-row data-form="装備中"><th scope="row">後サブ射撃</th><td>RADS-213 ウイングドユサール・キャノン最大出力</td><td>1</td><td>700</td><td>照射ビーム</td></tr>
-<tr data-form-row data-form="装備中"><th scope="row">横サブ射撃</th><td>連携射撃</td><td>1</td><td>615</td><td>3Way照射</td></tr>
-<tr data-form-row data-form="装備中"><th scope="row">後格闘</th><td>ミサイル斉射</td><td>1</td><td>393</td><td>多数のミサイルを一斉発射</td></tr>
+              <tr data-form-row data-form="装備中"><th scope="row">メイン射撃</th><td>RADS-213 ウィングドユサール・キャノン</td><td>8(凸4時10)</td><td>210</td><td>標準的ビームライフル</td></tr>
+<tr data-form-row data-form="装備中"><th scope="row">サブ射撃</th><td>RADS-215 ワイバーンドローン</td><td>1(1凸時2)</td><td>315</td><td>静止して撃つ</td></tr>
+<tr data-form-row data-form="装備中"><th scope="row">後サブ射撃</th><td>RADS-213 ウイングドユサール・キャノン最大出力</td><td>1</td><td>700</td><td>照射系ビーム</td></tr>
+<tr data-form-row data-form="装備中"><th scope="row">横サブ射撃</th><td>連携射撃</td><td>1</td><td>615</td><td>3Way照射系</td></tr>
+<tr data-form-row data-form="装備中"><th scope="row">後格闘</th><td>ミサイル斉射</td><td>1</td><td>393</td><td>多数のミサイルをまとめて射出</td></tr>
 <tr data-form-row data-form="装備中"><th scope="row">後サブ格闘</th><td>RADS-215/3 ワイバーンIIIドローン・射撃</td><td>1</td><td>454</td><td>2機のアシストがビーム3連射</td></tr>
 <tr data-form-row data-form="装備中"><th scope="row">ガード+後サブ格闘</th><td>強制パージ</td><td>1</td><td>673</td><td>装備解除しつつパーツを特攻</td></tr>
-<tr data-form-row data-form="装備中"><th scope="row">N/横サブ格闘</th><td>巡航モード</td><td>1</td><td>360</td><td>変形状態で突撃する特殊移動。専用派生豊富</td></tr>
-<tr data-form-row data-form="巡航モード中"><th scope="row">巡航モード中メイン射撃</th><td>RADS-213 ウィングドユサール・キャノン</td><td>∞</td><td>486</td><td>旋回可能な照射ビーム</td></tr>
+<tr data-form-row data-form="装備中"><th scope="row">N/横サブ格闘</th><td>巡航モード</td><td>1</td><td>360</td><td>変形状態で突撃する移動技。専用派生豊富</td></tr>
+<tr data-form-row data-form="巡航モード中"><th scope="row">巡航モード中メイン射撃</th><td>RADS-213 ウィングドユサール・キャノン</td><td>∞</td><td>486</td><td>旋回できる照射系ビーム</td></tr>
 <tr data-form-row data-form="巡航モード中"><th scope="row">巡航モード中サブ射撃</th><td>RADS-215 ワイバーンドローン</td><td>1(2)</td><td>536</td><td>モードを解除して連射</td></tr>
-<tr data-form-row data-form="巡航モード中"><th scope="row">巡航モード中後サブ射撃</th><td>RADS-213 ウイングドユサール・キャノン最大出力</td><td>1</td><td>700</td><td>曲げ撃ち可能</td></tr>
+<tr data-form-row data-form="巡航モード中"><th scope="row">巡航モード中後サブ射撃</th><td>RADS-213 ウイングドユサール・キャノン最大出力</td><td>1</td><td>700</td><td>曲げ撃ちできる</td></tr>
 <tr data-form-row data-form="巡航モード中"><th scope="row">巡航モード中横サブ射撃</th><td>連携射撃</td><td>1</td><td>615</td><td>通常よりも範囲が狭い</td></tr>
 <tr data-form-row data-form="巡航モード中"><th scope="row">巡航モード中後格闘</th><td>ミサイル斉射</td><td>1</td><td>393</td><td>慣性移動しつつ連射</td></tr>
 <tr data-form-row data-form="巡航モード中"><th scope="row">巡航モード中サブ格闘</th><td>燃料タンク射出</td><td>-</td><td>357</td><td>宙返りしつつ実弾2連射</td></tr>
@@ -104,56 +106,66 @@
             </tbody>
           </table>
           <table class="move-table">
-            <thead><tr><th scope="col">格闘</th><th scope="col">名称</th><th scope="col">入力</th><th scope="col">弾数</th><th scope="col">威力</th><th scope="col">備考</th></tr></thead>
+            <thead>
+              <tr>
+                <th scope="col">格闘</th>
+                <th scope="col">名称</th>
+                <th scope="col">入力</th>
+                <th scope="col">弾数</th>
+                <th scope="col">威力</th>
+                <th scope="col">備考</th>
+              </tr>
+            </thead>
             <tbody>
-              <tr data-form-row data-form="装備中"><th scope="row">メイン格闘</th><td>ウイングドユサール専用格闘プログラム</td><td>NN</td><td>-</td><td>447</td><td>手早く吹き飛ばす</td></tr>
-<tr data-form-row data-form="装備中"><th scope="row">メイン格闘</th><td>サブ射撃派生 ウイングドユサール専用格闘プログラム・追撃</td><td>N→サ射 / NN→サ射</td><td>-</td><td>717 / 802</td><td>3凸で解禁。大車輪</td></tr>
+              <tr data-form-row data-form="装備中"><th scope="row">メイン格闘</th><td>ウイングドユサール専用格闘プログラム</td><td>NN</td><td>-</td><td>447</td><td>短時間で吹き飛ばす</td></tr>
+<tr data-form-row data-form="装備中"><th scope="row">メイン格闘</th><td>サブ射撃派生 ウイングドユサール専用格闘プログラム・追撃</td><td>N→サ射 NN→サ射</td><td>-</td><td>717 802</td><td>3凸で使用できる。大車輪</td></tr>
 <tr data-form-row data-form="装備中"><th scope="row">横格闘</th><td>ウイングドユサール専用格闘プログラム</td><td>横N</td><td>-</td><td>484</td><td></td></tr>
-<tr data-form-row data-form="装備中"><th scope="row">横格闘</th><td>サブ射撃派生 ウイングドユサール専用格闘プログラム・追撃</td><td>横→サ射 / 横N→サ射</td><td>-</td><td>734 / 837</td><td>N格と同様</td></tr>
-<tr data-form-row data-form="装備中"><th scope="row">前格闘</th><td>ウイングドユサール専用格闘プログラム</td><td>前</td><td>-</td><td>484</td><td>バウンドさせるフワ格</td></tr>
-<tr data-form-row data-form="巡航モード中"><th scope="row">巡航モード中N格闘</th><td>追狩</td><td>N</td><td>-</td><td>792</td><td>斬り抜けとミサイルの複合攻撃。ダメージがブレやすい</td></tr>
+<tr data-form-row data-form="装備中"><th scope="row">横格闘</th><td>サブ射撃派生 ウイングドユサール専用格闘プログラム・追撃</td><td>横→サ射 横N→サ射</td><td>-</td><td>734 837</td><td>通常格闘からの派生と同じ動作</td></tr>
+<tr data-form-row data-form="装備中"><th scope="row">前格闘</th><td>ウイングドユサール専用格闘プログラム</td><td>前</td><td>-</td><td>484</td><td>バウンドさせるフワ格系</td></tr>
+<tr data-form-row data-form="巡航モード中"><th scope="row">巡航モード中N格闘</th><td>追狩</td><td>N</td><td>-</td><td>792</td><td>斬り抜けるとミサイルの複合攻撃。ダメージがブレやすい</td></tr>
             </tbody>
           </table>
           <table class="move-table burst-table">
-            <thead><tr><th scope="col">バーストアタック</th><th scope="col">名称</th><th scope="col">威力</th><th scope="col">備考</th></tr></thead>
+            <thead>
+              <tr>
+                <th scope="col">バーストアタック</th>
+                <th scope="col">名称</th>
+                <th scope="col">威力</th>
+                <th scope="col">備考</th>
+              </tr>
+            </thead>
             <tbody>
-              <tr data-form-row data-form="装備中"><th scope="row">バーストアタック</th><td>ウイングドユサール・アサルト</td><td>//900/817</td><td>乱舞から照射</td></tr>
-<tr data-form-row data-form="装備中"><th scope="row">後バーストアタック</th><td>ウイングドユサール・バースト</td><td>//847/771</td><td>5凸で解禁。曲げ打ち爆風つき照射+ミサイルカーニバル</td></tr>
+              <tr data-form-row data-form="装備中"><th scope="row">バーストアタック</th><td>ウイングドユサール・アサルト</td><td>//900/817</td><td>連撃からの照射へつなぐ覚醒技</td></tr>
+<tr data-form-row data-form="装備中"><th scope="row">後バーストアタック</th><td>ウイングドユサール・バースト</td><td>//847/771</td><td>5凸で使用できる。曲げ撃ち爆風つき照射+ミサイルカーニバル</td></tr>
             </tbody>
           </table>
           <table class="move-table cancel-route-table">
-            <thead><tr><th scope="col">始動</th><th scope="col">キャンセル先</th><th scope="col">降りテク</th><th scope="col">備考</th></tr></thead>
+            <thead>
+              <tr>
+                <th scope="col">始動</th>
+                <th scope="col">キャンセル先</th>
+                <th scope="col">降りテク</th>
+                <th scope="col">備考</th>
+              </tr>
+            </thead>
             <tbody>
-              <tr><th scope="row">メイン射撃</th><td>各サブ射撃、後格闘、各サブ格闘</td><td>×</td><td>通常時</td></tr>
-<tr><th scope="row">サブ射撃</th><td>各サブ射撃、後格闘、各サブ格闘</td><td>×</td><td>通常時</td></tr>
-<tr><th scope="row">各サブ射撃</th><td>後格闘、各サブ格闘</td><td>×</td><td>通常時</td></tr>
-<tr><th scope="row">後格闘</th><td>各サブ射撃、各サブ格闘</td><td>×</td><td>通常時</td></tr>
-<tr><th scope="row">後サブ格闘</th><td>ガード+後サブ格闘</td><td>○</td><td>メインで落下可能</td></tr>
-<tr><th scope="row">ガード+後サブ格闘</th><td>装備解除へ移行</td><td>×</td><td>通常時</td></tr>
-<tr><th scope="row">巡航モード中メイン射撃</th><td>巡航モード中格闘、各サブ射撃、各サブ格闘</td><td>×</td><td>巡航モード中</td></tr>
-<tr><th scope="row">巡航モード中サブ射撃</th><td>各サブ格闘</td><td>×</td><td>巡航モード中</td></tr>
-<tr><th scope="row">巡航モード中後/横サブ射撃</th><td>各サブ格闘</td><td>×</td><td>巡航モード中</td></tr>
-<tr><th scope="row">巡航モード中サブ格闘</th><td>メイン射撃</td><td>○</td><td>燃料タンク射出からメインで落下可能</td></tr>
-<tr><th scope="row">巡航モード中後サブ格闘</th><td>巡航モード中サブ格闘</td><td>×</td><td>緊急上昇から燃料タンク射出へ</td></tr>
+              <tr><th scope="row">メイン射撃</th><td>各サブ射撃、後格闘、各サブ格闘</td><td>×</td><td></td></tr>
+<tr><th scope="row">サブ射撃</th><td>各サブ射撃、後格闘、各サブ格闘</td><td>×</td><td></td></tr>
+<tr><th scope="row">各サブ射撃</th><td>後格闘、各サブ格闘</td><td>×</td><td></td></tr>
+<tr><th scope="row">後格闘</th><td>各サブ射撃、各サブ格闘</td><td>×</td><td></td></tr>
+<tr><th scope="row">後サブ格闘</th><td>ガード+後サブ格闘</td><td>○</td><td>メインで落下できる</td></tr>
+<tr><th scope="row">ガード+後サブ格闘</th><td>装備解除へ移行</td><td>×</td><td></td></tr>
+<tr><th scope="row">巡航モード中メイン射撃</th><td>巡航モード中格闘、各サブ射撃、各サブ格闘</td><td>×</td><td></td></tr>
+<tr><th scope="row">巡航モード中サブ射撃</th><td>各サブ格闘</td><td>×</td><td></td></tr>
+<tr><th scope="row">巡航モード中後/横サブ射撃</th><td>各サブ格闘</td><td>×</td><td></td></tr>
+<tr><th scope="row">巡航モード中サブ格闘</th><td>メイン射撃</td><td>○</td><td>燃料タンク射出からメインで落下できる</td></tr>
+<tr><th scope="row">巡航モード中後サブ格闘</th><td>巡航モード中サブ格闘</td><td>×</td><td></td></tr>
             </tbody>
           </table>
           </div>
         </div>
       </section>
 
-      <section class="section tight" id="matchup">
-        <div class="section-heading">
-          <p class="eyebrow">Matchup Notes</p>
-          <h2>相性・対策メモ</h2>
-          <p class="section-copy">まだ下書き枠です。matchup-notes-data.json に追記するとこの欄に反映されます。</p>
-        </div>
-        <div class="note-grid matchup-grid">
-          <article class="note"><h3>有利を取りやすい相手</h3><ul><li>未入力</li></ul></article>
-          <article class="note"><h3>苦手・注意相手</h3><ul><li>未入力</li></ul></article>
-          <article class="note"><h3>対面で見るポイント</h3><ul><li>未入力</li></ul></article>
-          <article class="note"><h3>よくある負け筋</h3><ul><li>未入力</li></ul></article>
-        </div>
-      </section>
 
       <section class="section tight" id="reference-videos">
         <div class="section-heading">
@@ -163,15 +175,16 @@
         </div>
         <div class="guide-card-grid">
           <article class="guide-mini-card">
-            <span class="tag">YouTube</span>
-            <h3>プリシュカの参考動画を検索</h3>
-            <p>キャラ別の登録動画が追加されるまで、検索リンクを表示します。</p>
-            <a href="https://www.youtube.com/results?search_query=%E6%98%9F%E3%81%AE%E7%BF%BC%20%E3%83%97%E3%83%AA%E3%82%B7%E3%83%A5%E3%82%AB" target="_blank" rel="noreferrer">動画を開く</a>
+            <span class="tag">makipon</span>
+            <h3>【星の翼】プリシュカ視点　大会7連続入賞者視点　【makipon】</h3>
+            <p>2026-06-19 / キャラ別の参考動画です。</p>
+            <a href="https://www.youtube.com/watch?v=541sOwN26AM" target="_blank" rel="noreferrer">動画を開く</a>
           </article></div>
       </section>
     </main>
 
-    <footer class="site-footer">
+
+    <footer class="footer">
       <a href="#top">上へ戻る</a>
     </footer>
     <script src="../script.js?v=20260614bgmedia1"></script>
