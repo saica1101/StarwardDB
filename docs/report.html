@@ -3,22 +3,16 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="refresh" content="0; url=https://docs.google.com/forms/d/e/1FAIpQLScLqwbAmdwYDaCKVaumKIi0TKlnPIJyGs8xmgV2vtO6VqRlEg/viewform?usp=publish-editor" />
     <title>報告フォーム | 星の翼ガイド</title>
-    <meta name="description" content="星の翼ガイドの誤字、データ違い、リンク切れなどを報告するフォームです。" />
+    <meta name="description" content="星の翼ガイドの誤字、データ違い、リンク切れなどを報告するGoogleフォームです。" />
     <link rel="icon" href="assets/brand/hp-icon-64.png" type="image/png" />
     <link rel="stylesheet" href="styles.css?v=20260614bgmedia1" />
     <style>
-      .report-shell { max-width: 920px; margin: 0 auto; }
-      .report-panel { border: 1px solid rgba(74, 222, 255, 0.32); background: rgba(6, 16, 31, 0.76); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.24); padding: clamp(18px, 3vw, 28px); }
-      .report-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
-      .report-field, .report-actions { display: grid; gap: 8px; }
-      .report-field.full, .report-actions { grid-column: 1 / -1; }
-      .report-field label { color: #d8f6ff; font-weight: 700; }
-      .report-field input, .report-field select, .report-field textarea { width: 100%; border: 1px solid rgba(132, 211, 255, 0.36); background: rgba(2, 10, 22, 0.82); color: #f3fbff; border-radius: 8px; padding: 12px 13px; font: inherit; }
-      .report-field textarea { min-height: 180px; resize: vertical; }
-      .report-hint { color: #9fc0d0; font-size: 0.92rem; line-height: 1.7; }
-      .report-error { min-height: 1.5em; color: #ffb4b4; font-weight: 700; }
-      @media (max-width: 720px) { .report-grid { grid-template-columns: 1fr; } }
+      .report-shell { max-width: 760px; margin: 0 auto; }
+      .report-panel { border: 1px solid rgba(74, 222, 255, 0.32); background: rgba(6, 16, 31, 0.76); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.24); padding: clamp(18px, 3vw, 28px); display: grid; gap: 16px; }
+      .report-panel p { margin: 0; color: #d8f6ff; line-height: 1.8; }
+      .report-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
     </style>
   </head>
   <body>
@@ -44,53 +38,19 @@
         <div class="page-hero-inner">
           <p class="eyebrow">Report</p>
           <h1>報告フォーム</h1>
-          <p>誤字、データ違い、リンク切れ、表示崩れなどを送れます。</p>
+          <p>Googleフォームを開きます。</p>
         </div>
       </section>
 
       <section class="section tight">
         <div class="report-shell">
-          <form class="report-panel" id="report-form">
-            <div class="report-grid">
-              <div class="report-field">
-                <label for="report-type">種類</label>
-                <select id="report-type" name="type" required>
-                  <option value="データ違い">データ違い</option>
-                  <option value="誤字・表記">誤字・表記</option>
-                  <option value="リンク切れ">リンク切れ</option>
-                  <option value="表示崩れ">表示崩れ</option>
-                  <option value="要望">要望</option>
-                  <option value="その他">その他</option>
-                </select>
-              </div>
-
-              <div class="report-field">
-                <label for="report-character">キャラ名</label>
-                <input id="report-character" name="character" type="text" placeholder="例: ラジエル" />
-              </div>
-
-              <div class="report-field full">
-                <label for="report-page">対象ページ</label>
-                <input id="report-page" name="page" type="url" placeholder="https://syuna05.github.io/StarwardDB/..." />
-              </div>
-
-              <div class="report-field full">
-                <label for="report-detail">内容</label>
-                <textarea id="report-detail" name="detail" required placeholder="どこがどう違うか、分かる範囲で書いてください。"></textarea>
-              </div>
-
-              <div class="report-field full">
-                <label for="report-contact">連絡先</label>
-                <input id="report-contact" name="contact" type="text" placeholder="任意" />
-                <p class="report-hint">送信するとGitHubのIssue作成画面が開きます。内容を確認して、そのまま投稿できます。</p>
-              </div>
-
-              <div class="report-actions">
-                <p class="report-error" id="report-error" aria-live="polite"></p>
-                <button class="button primary" type="submit">報告内容を作成</button>
-              </div>
+          <div class="report-panel">
+            <p>自動でGoogleフォームへ移動しない場合は、下のボタンから開いてください。</p>
+            <div class="report-actions">
+              <a class="button primary" href="https://docs.google.com/forms/d/e/1FAIpQLScLqwbAmdwYDaCKVaumKIi0TKlnPIJyGs8xmgV2vtO6VqRlEg/viewform?usp=publish-editor">Googleフォームを開く</a>
+              <a class="button" href="index.html">トップへ戻る</a>
             </div>
-          </form>
+          </div>
         </div>
       </section>
     </main>
@@ -98,40 +58,5 @@
     <footer class="footer">
       <a href="#top">上へ戻る</a>
     </footer>
-
-    <script>
-      const form = document.querySelector("#report-form");
-      const pageInput = document.querySelector("#report-page");
-      const error = document.querySelector("#report-error");
-      const repoIssueUrl = "https://github.com/Syuna05/StarwardDB/issues/new";
-      const params = new URLSearchParams(window.location.search);
-      const from = params.get("page") || document.referrer || "";
-      if (from) pageInput.value = from;
-      form.addEventListener("submit", (event) => {
-        event.preventDefault();
-        const data = new FormData(form);
-        const type = String(data.get("type") || "").trim();
-        const character = String(data.get("character") || "").trim();
-        const page = String(data.get("page") || "").trim();
-        const detail = String(data.get("detail") || "").trim();
-        const contact = String(data.get("contact") || "").trim();
-        if (!detail) {
-          error.textContent = "内容を入力してください。";
-          return;
-        }
-        const titleParts = [type || "報告", character].filter(Boolean);
-        const title = `[報告] ${titleParts.join(" / ")}`;
-        const body = [
-          "## 種類", type || "未選択", "",
-          "## キャラ名", character || "未入力", "",
-          "## 対象ページ", page || "未入力", "",
-          "## 内容", detail, "",
-          "## 連絡先", contact || "未入力",
-        ].join("\n");
-        const issueUrl = `${repoIssueUrl}?title=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}`;
-        window.open(issueUrl, "_blank", "noopener,noreferrer");
-        error.textContent = "";
-      });
-    </script>
   </body>
 </html>
