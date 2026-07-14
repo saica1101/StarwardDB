@@ -3330,3 +3330,9 @@ body.page-editing .page-edit-block:hover {
     flex: 1 1 88px;
   }
 }
+
+/* Temporary hide: video library entry */
+.nav a[href$="videos.html"],
+.home-dashboard a[href="videos.html"] {
+  display: none;
+}
