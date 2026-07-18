@@ -354,8 +354,27 @@ a {
   height: 24px;
   min-height: 24px;
   padding: 0;
-  border-radius: 999px;
+  border-radius: 50%px;
   background: rgba(5, 12, 24, 0.88);
+}
+
+.favorite-icon-card button::before,
+.favorite-icon-card button::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 12px;
+  height: 2px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.favorite-icon-card button::before {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.favorite-icon-card button::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
 }
 
 .empty-text {

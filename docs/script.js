@@ -752,7 +752,7 @@ const setupFavoriteCharacters = async () => {
                   <img src="${escapeHtml(characterIcon(character))}" alt="${escapeHtml(character.name)}" loading="lazy" decoding="async">
                   <span>${escapeHtml(character.name)}</span>
                 </a>
-                <button type="button" data-favorite-remove="${escapeHtml(character.slug)}" aria-label="${escapeHtml(character.name)}を外す">×</button>
+                <button type="button" data-favorite-remove="${escapeHtml(character.slug)}" aria-label="${escapeHtml(character.name)}を外す"></button>
               </span>
             `).join("")}
           </div>
