@@ -360,6 +360,7 @@ a {
 
 .favorite-icon-card button::before,
 .favorite-icon-card button::after {
+  content: "";
   position: absolute;
   top: 50%;
   left: 50%;
